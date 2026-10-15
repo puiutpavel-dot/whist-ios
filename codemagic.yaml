@@ -53,6 +53,60 @@ definitions:
         done
         mkdir -p "$CM_BUILD_DIR/screenshots" && cp "$OUT/ro/"*.png "$CM_BUILD_DIR/screenshots/"
 
+    - &asc_key
+      name: Cheie App Store Connect + fastlane
+      script: |
+        set -e
+        for V in APP_STORE_CONNECT_KEY_IDENTIFIER APP_STORE_CONNECT_ISSUER_ID APP_STORE_CONNECT_PRIVATE_KEY; do
+          if [ -z "${!V}" ]; then echo "Lipsește $V din integrarea App Store Connect"; exit 1; fi
+        done
+        python3 - <<'PY'
+        import base64, json, os, re, textwrap
+        raw = os.environ["APP_STORE_CONNECT_PRIVATE_KEY"].replace("\\n", "\n").strip()
+        if "BEGIN" not in raw:
+            try:
+                dec = base64.b64decode(raw).decode()
+                if "BEGIN" in dec:
+                    raw = dec
+            except Exception:
+                pass
+        print("Format cheie:", "PEM" if "BEGIN" in raw else "fără antet PEM")
+        body = re.sub(r"-----(BEGIN|END) [A-Z ]+-----", "", raw)
+        body = re.sub(r"\s+", "", body)
+        pem = "-----BEGIN PRIVATE KEY-----\n" + "\n".join(textwrap.wrap(body, 64)) + "\n-----END PRIVATE KEY-----\n"
+        print("Cheie normalizată:", len(body), "caractere base64")
+        json.dump({
+            "key_id": os.environ["APP_STORE_CONNECT_KEY_IDENTIFIER"],
+            "issuer_id": os.environ["APP_STORE_CONNECT_ISSUER_ID"],
+            "key": base64.b64encode(pem.encode()).decode(),
+            "is_key_content_base64": True,
+            "in_house": False,
+        }, open("/tmp/asc_key.json", "w"))
+        PY
+        gem install fastlane -N --no-document >/dev/null 2>&1 || gem install fastlane -N
+        FL_VER=$(gem list fastlane --exact | sed -E 's/.*\(([0-9.]+).*/\1/')
+        echo "fastlane $FL_VER"
+        fastlane _${FL_VER}_ run app_store_connect_api_key key_id:"$APP_STORE_CONNECT_KEY_IDENTIFIER" issuer_id:"$APP_STORE_CONNECT_ISSUER_ID" key_content:"$(python3 -c 'import json;print(json.load(open("/tmp/asc_key.json"))["key"])')" is_key_content_base64:true
+        echo "$FL_VER" > /tmp/fl_ver
+
+    - &listing
+      name: Fișa din App Store (texte + capturi)
+      script: |
+        set -e
+        FL_VER=$(cat /tmp/fl_ver)
+        fastlane _${FL_VER}_ deliver \
+          --api_key_path /tmp/asc_key.json \
+          --app_identifier "$BUNDLE_ID" \
+          --app_version "1.0" \
+          --platform ios \
+          --metadata_path "$CM_BUILD_DIR/fastlane/metadata" \
+          --screenshots_path "$CM_BUILD_DIR/fastlane/screenshots" \
+          --skip_binary_upload true \
+          --overwrite_screenshots true \
+          --submit_for_review false \
+          --run_precheck_before_submit false \
+          --force true
+
 workflows:
   ios-build:
     name: Whist — verificare build (simulator)
@@ -162,6 +216,21 @@ workflows:
         auth: integration
         submit_to_testflight: true
 
+  ios-listing:
+    name: Whist — fișa App Store (texte + capturi, fără build)
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment: *env
+    scripts:
+      - *asc_key
+      - *sim_build
+      - *screenshots
+      - *listing
+    artifacts:
+      - screenshots/*.png
+
   ios-appstore:
     name: Whist — App Store (build + fișă + capturi)
     instance_type: mac_mini_m2
@@ -180,47 +249,10 @@ workflows:
         script: xcode-project use-profiles --project "$XCODE_PROJECT"
       - *build_number
       - *build_ipa
-      - name: Fișa din App Store (texte + capturi)
-        script: |
-          set -e
-          for V in APP_STORE_CONNECT_KEY_IDENTIFIER APP_STORE_CONNECT_ISSUER_ID APP_STORE_CONNECT_PRIVATE_KEY; do
-            if [ -z "${!V}" ]; then echo "Lipsește $V din integrarea App Store Connect"; exit 1; fi
-          done
-          python3 - <<'PY'
-          import base64, json, os, re, textwrap
-          raw = os.environ["APP_STORE_CONNECT_PRIVATE_KEY"].replace("\\n", "\n").strip()
-          if "BEGIN" not in raw:
-              try:
-                  dec = base64.b64decode(raw).decode()
-                  if "BEGIN" in dec:
-                      raw = dec
-              except Exception:
-                  pass
-          print("Format cheie:", "PEM" if "BEGIN" in raw else "fără antet PEM")
-          body = re.sub(r"-----(BEGIN|END) [A-Z ]+-----", "", raw)
-          body = re.sub(r"\s+", "", body)
-          pem = "-----BEGIN PRIVATE KEY-----\n" + "\n".join(textwrap.wrap(body, 64)) + "\n-----END PRIVATE KEY-----\n"
-          print("Cheie normalizată:", len(body), "caractere base64")
-          json.dump({
-              "key_id": os.environ["APP_STORE_CONNECT_KEY_IDENTIFIER"],
-              "issuer_id": os.environ["APP_STORE_CONNECT_ISSUER_ID"],
-              "key": base64.b64encode(pem.encode()).decode(),
-              "is_key_content_base64": True,
-              "in_house": False,
-          }, open("/tmp/asc_key.json", "w"))
-          PY
-          fastlane deliver \
-            --api_key_path /tmp/asc_key.json \
-            --app_identifier "$BUNDLE_ID" \
-            --app_version "1.0" \
-            --platform ios \
-            --metadata_path "$CM_BUILD_DIR/fastlane/metadata" \
-            --screenshots_path "$CM_BUILD_DIR/fastlane/screenshots" \
-            --skip_binary_upload true \
-            --overwrite_screenshots true \
-            --submit_for_review false \
-            --run_precheck_before_submit false \
-            --force true
+      - <<: *asc_key
+        ignore_failure: true
+      - <<: *listing
+        ignore_failure: true
     artifacts:
       - build/ios/ipa/*.ipa
       - screenshots/*.png
