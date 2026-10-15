@@ -1,0 +1,528 @@
+import SwiftUI
+
+struct GameResult {
+    let won: Bool
+    let score: Int
+}
+
+struct GameView: View {
+    @StateObject private var engine: GameEngine
+    @Environment(\.dismiss) private var dismiss
+    let onFinish: (GameResult) -> Void
+
+    @State private var showScores = false
+    @State private var confirmQuit = false
+    @State private var reported = false
+
+    init(settings: GameSettings, onFinish: @escaping (GameResult) -> Void) {
+        _engine = StateObject(wrappedValue: GameEngine(settings: settings))
+        self.onFinish = onFinish
+    }
+
+    /// Folosit de modul de capturi: pornește dintr-un joc deja pregătit.
+    init(engine: GameEngine, showScores: Bool = false) {
+        _engine = StateObject(wrappedValue: engine)
+        _showScores = State(initialValue: showScores)
+        _reported = State(initialValue: true)
+        self.onFinish = { _ in }
+    }
+
+    var body: some View {
+        ZStack {
+            Theme.bg.ignoresSafeArea()
+
+            GeometryReader { geo in
+                let compact = geo.size.height < 720
+                VStack(spacing: compact ? 7 : 12) {
+                    topBar
+                    opponents
+                    infoRow
+                    centerArea
+                    Spacer(minLength: 0)
+                    myStatus
+                    HandView(engine: engine)
+                }
+                .padding(.horizontal, 14)
+                .padding(.bottom, 6)
+                .environment(\.compactLayout, compact)
+            }
+
+            if engine.phase == .handEnd || engine.phase == .gameOver {
+                Color.black.opacity(0.25).ignoresSafeArea()
+                    .transition(.opacity)
+                HandSummaryView(engine: engine,
+                                onNext: { withAnimation(.spring) { engine.nextHand() } },
+                                onScores: { showScores = true },
+                                onExit: { dismiss() })
+                    .padding(20)
+                    .transition(.scale(scale: 0.9).combined(with: .opacity))
+            }
+        }
+        .animation(.spring(response: 0.4, dampingFraction: 0.85), value: engine.phase)
+        .sheet(isPresented: $showScores) { ScoreboardView(engine: engine) }
+        .confirmationDialog("Abandonezi jocul?", isPresented: $confirmQuit, titleVisibility: .visible) {
+            Button("Abandonează", role: .destructive) { engine.stop(); dismiss() }
+            Button("Continuă jocul", role: .cancel) {}
+        }
+        .onChange(of: engine.phase) { _, newPhase in
+            guard newPhase == .gameOver, !reported else { return }
+            reported = true
+            let best = engine.players.map(\.score).max() ?? 0
+            let mine = engine.players[engine.human].score
+            onFinish(GameResult(won: mine == best, score: mine))
+        }
+        .onDisappear { engine.stop() }
+    }
+
+    // MARK: Top
+
+    private var topBar: some View {
+        HStack {
+            IconButton(system: "xmark") {
+                if engine.phase == .gameOver { dismiss() } else { confirmQuit = true }
+            }
+            Spacer()
+            VStack(spacing: 2) {
+                Text("Mâna \(engine.handIndex + 1) din \(engine.handSizes.count)")
+                    .font(Theme.font(17, .bold)).foregroundStyle(Theme.ink)
+                Text(engine.handSize == 1 ? "1 carte" : "\(engine.handSize) cărți")
+                    .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+            }
+            Spacer()
+            IconButton(system: "list.number") { showScores = true }
+        }
+        .padding(.top, 4)
+    }
+
+    private var opponents: some View {
+        HStack(spacing: 6) {
+            ForEach(engine.players.dropFirst()) { p in
+                OpponentChip(player: p,
+                             visibleCard: engine.isForeheadHand ? p.hand.first : nil,
+                             isDealer: p.id == engine.dealer,
+                             isTurn: p.id == engine.current && (engine.phase == .bidding || engine.phase == .playing))
+            }
+        }
+    }
+
+    private var infoRow: some View {
+        HStack(spacing: 10) {
+            HStack(spacing: 8) {
+                if let t = engine.trump {
+                    CardView(card: t, width: 30)
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Atu").font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+                        Text(t.suit.name).font(Theme.font(15, .bold)).foregroundStyle(t.suit.isRed ? Theme.red : Theme.ink)
+                    }
+                } else {
+                    Image(systemName: "nosign").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.muted)
+                    Text("Fără atu").font(Theme.font(15, .bold)).foregroundStyle(Theme.ink)
+                }
+            }
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Theme.surface))
+
+            Spacer()
+
+            let sum = engine.bidSum
+            let size = engine.handSize
+            VStack(alignment: .trailing, spacing: 0) {
+                Text("Licitat").font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+                HStack(spacing: 4) {
+                    Text("\(sum) / \(size)").font(Theme.font(15, .bold)).foregroundStyle(Theme.ink)
+                    if engine.phase != .bidding {
+                        Text(sum > size ? "peste" : "sub")
+                            .font(Theme.font(11, .bold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 6).padding(.vertical, 2)
+                            .background(Capsule().fill(sum > size ? Theme.red : Theme.primary))
+                    }
+                }
+            }
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Theme.surface))
+        }
+    }
+
+    // MARK: Center
+
+    @ViewBuilder
+    private var centerArea: some View {
+        if engine.phase == .bidding && engine.current == engine.human {
+            BidPanel(engine: engine)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+        } else {
+            TrickTable(engine: engine)
+        }
+    }
+
+    private var myStatus: some View {
+        let me = engine.players[engine.human]
+        return HStack(spacing: 10) {
+            AvatarView(name: "Tu", index: 0, size: 34)
+            VStack(alignment: .leading, spacing: 1) {
+                HStack(spacing: 6) {
+                    Text("Tu").font(Theme.font(16, .bold)).foregroundStyle(Theme.ink)
+                    if engine.dealer == engine.human { DealerBadge() }
+                }
+                Text(statusLine(me)).font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+            }
+            Spacer()
+            if engine.settings.streakBonus && me.streak != 0 {
+                Label("\(abs(me.streak))", systemImage: me.streak > 0 ? "flame.fill" : "snowflake")
+                    .font(Theme.font(13, .bold))
+                    .foregroundStyle(me.streak > 0 ? Theme.gold : Theme.primary)
+            }
+            VStack(alignment: .trailing, spacing: 0) {
+                Text("\(me.score)").font(Theme.font(22, .heavy)).foregroundStyle(Theme.primary)
+                Text("puncte").font(Theme.font(11, .medium)).foregroundStyle(Theme.muted)
+            }
+        }
+        .padding(.horizontal, 4)
+    }
+
+    private func statusLine(_ me: Player) -> String {
+        guard let b = me.bid else { return engine.current == engine.human ? "Alege câte levate iei" : "Aștepți licitația…" }
+        return "Licitat \(b) · Luate \(me.tricks)"
+    }
+}
+
+// MARK: - Opponent chip
+
+struct DealerBadge: View {
+    var body: some View {
+        Text("D")
+            .font(Theme.font(10, .heavy))
+            .foregroundStyle(.white)
+            .frame(width: 16, height: 16)
+            .background(Circle().fill(Theme.gold))
+            .accessibilityLabel("Împarte")
+    }
+}
+
+struct OpponentChip: View {
+    let player: Player
+    var visibleCard: Card? = nil
+    let isDealer: Bool
+    let isTurn: Bool
+    @Environment(\.compactLayout) private var compact
+
+    var body: some View {
+        VStack(spacing: 5) {
+            ZStack(alignment: .topTrailing) {
+                if let c = visibleCard {
+                    // cartea „de pe fruntea” adversarului
+                    CardView(card: c, width: 30)
+                        .overlay(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                            .strokeBorder(Theme.gold, lineWidth: isTurn ? 2.5 : 0).padding(-3))
+                        .frame(height: 46)
+                        .transition(.scale.combined(with: .opacity))
+                } else {
+                    AvatarView(name: player.name, index: player.id, size: 38)
+                    .overlay(Circle().strokeBorder(Theme.gold, lineWidth: isTurn ? 3 : 0).padding(-4))
+                    .scaleEffect(isTurn ? 1.06 : 1)
+                    .animation(.spring(response: 0.3), value: isTurn)
+                }
+                if isDealer { DealerBadge().offset(x: 6, y: -4) }
+            }
+            .padding(.top, 4)
+            Text(verbatim: player.name)
+                .font(Theme.font(13, .bold)).foregroundStyle(Theme.ink).lineLimit(1)
+                .minimumScaleFactor(0.8)
+            Text(verbatim: bidText)
+                .font(Theme.font(13, .bold))
+                .foregroundStyle(bidColor)
+                .padding(.horizontal, 8).padding(.vertical, 2)
+                .background(Capsule().fill(Theme.soft))
+            HStack(spacing: 3) {
+                if !compact {
+                    CardBackView(width: 10)
+                    Text("\(player.hand.count) ·").font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
+                }
+                Text("\(player.score) p").font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, compact ? 5 : 8)
+        .background(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(Theme.surface)
+                .shadow(color: Theme.primaryDk.opacity(isTurn ? 0.16 : 0.06), radius: 8, y: 3)
+        )
+    }
+
+    private var bidText: String {
+        guard let b = player.bid else { return "–" }
+        return "\(player.tricks) / \(b)"
+    }
+
+    private var bidColor: Color {
+        guard let b = player.bid else { return Theme.muted }
+        if player.tricks > b { return Theme.red }
+        if player.tricks == b { return Theme.green }
+        return Theme.primary
+    }
+}
+
+// MARK: - Trick table
+
+struct TrickTable: View {
+    @ObservedObject var engine: GameEngine
+    @Environment(\.compactLayout) private var compact
+
+    var body: some View {
+        GeometryReader { geo in
+            let n = CGFloat(engine.n)
+            let cardW = max(10, min(64, (geo.size.width - 24 - (n - 1) * 6) / n))
+            ZStack {
+                if engine.trick.isEmpty {
+                    VStack(spacing: 6) {
+                        Text(headline).font(Theme.font(18, .bold)).foregroundStyle(Theme.ink)
+                        Text(subline).font(Theme.font(14, .medium)).foregroundStyle(Theme.muted)
+                    }
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 12)
+                    .transition(.opacity)
+                } else {
+                    HStack(spacing: 6) {
+                        ForEach(engine.trick) { pc in
+                            VStack(spacing: 6) {
+                                CardView(card: pc.card, width: cardW, glow: pc.player == engine.trickWinner)
+                                    .scaleEffect(pc.player == engine.trickWinner ? 1.06 : 1)
+                                Text(engine.players[pc.player].name)
+                                    .font(Theme.font(12, .semibold))
+                                    .foregroundStyle(pc.player == engine.trickWinner ? Theme.ink : Theme.muted)
+                                    .lineLimit(1)
+                            }
+                            .transition(.asymmetric(insertion: .scale(scale: 0.6).combined(with: .opacity),
+                                                    removal: .opacity))
+                        }
+                    }
+                }
+
+                if let w = engine.trickWinner {
+                    VStack {
+                        Spacer()
+                        Text(w == engine.human ? "Iei levata!" : "\(engine.players[w].name) ia levata")
+                            .font(Theme.font(14, .bold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14).padding(.vertical, 6)
+                            .background(Capsule().fill(Theme.primary))
+                    }
+                    .padding(.bottom, 10)
+                    .transition(.opacity)
+                }
+            }
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
+        .frame(height: compact ? 150 : 190)
+        .background(
+            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                .fill(Theme.surface)
+                .shadow(color: Theme.primaryDk.opacity(0.08), radius: 14, y: 6)
+        )
+        .animation(.spring(response: 0.35, dampingFraction: 0.8), value: engine.trick.count)
+        .animation(.easeInOut(duration: 0.2), value: engine.trickWinner)
+    }
+
+    private var headline: String {
+        let p = engine.players[engine.current]
+        switch engine.phase {
+        case .bidding: return p.isHuman ? "Rândul tău" : "Licitează \(p.name)…"
+        case .playing: return p.isHuman ? (engine.trick.isEmpty ? "Tu deschizi" : "Rândul tău") : "Joacă \(p.name)…"
+        default: return ""
+        }
+    }
+
+    private var subline: String {
+        switch engine.phase {
+        case .bidding: return "Fiecare spune câte levate crede că ia"
+        case .playing:
+            let me = engine.players[engine.human]
+            guard let b = me.bid else { return "" }
+            let left = b - me.tricks
+            if left > 0 { return "Mai ai nevoie de \(left) \(left == 1 ? "levată" : "levate")" }
+            if left == 0 { return "Ai exact cât ai licitat — evită levatele" }
+            return "Ai depășit licitația cu \(-left)"
+        default: return ""
+        }
+    }
+}
+
+// MARK: - Bid panel
+
+struct BidPanel: View {
+    @ObservedObject var engine: GameEngine
+    @Environment(\.compactLayout) private var compact
+
+    var body: some View {
+        let allowed = Set(engine.allowedBids(for: engine.human))
+        let forbidden = engine.forbiddenBid(for: engine.human)
+        VStack(spacing: compact ? 8 : 12) {
+            Text("Câte levate iei?").font(Theme.font(19, .bold)).foregroundStyle(Theme.ink)
+            if engine.isForeheadHand {
+                Label("Cartea e pe frunte: o vezi doar pe a celorlalți", systemImage: "eye.slash.fill")
+                    .font(Theme.font(13, .semibold)).foregroundStyle(Theme.primary)
+            }
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: min(engine.handSize + 1, 5)), spacing: 8) {
+                ForEach(0...engine.handSize, id: \.self) { b in
+                    let ok = allowed.contains(b)
+                    Button {
+                        Haptics.tap()
+                        withAnimation(.spring) { engine.humanBid(b) }
+                    } label: {
+                        Text("\(b)")
+                            .font(Theme.font(22, .bold))
+                            .foregroundStyle(ok ? .white : Theme.muted)
+                            .strikethrough(!ok, color: Theme.red)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: compact ? 40 : 50)
+                            .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(ok ? Theme.primary : Theme.soft))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!ok)
+                }
+            }
+            if let f = forbidden {
+                Text("Împarți tu: nu poți spune \(f), suma licitațiilor ar fi egală cu numărul de cărți.")
+                    .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text("Suma licitată până acum: \(engine.bidSum) din \(engine.handSize)")
+                    .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(minHeight: compact ? 150 : 190)
+        .panel(padding: compact ? 12 : 16)
+    }
+}
+
+// MARK: - Hand
+
+struct HandView: View {
+    @ObservedObject var engine: GameEngine
+    @Environment(\.compactLayout) private var compact
+    private var maxCardW: CGFloat { compact ? 60 : 74 }
+
+    var body: some View {
+        GeometryReader { geo in
+            let hand = engine.players[engine.human].hand
+            let count = max(hand.count, 1)
+            let cardW: CGFloat = min(maxCardW, geo.size.width / 4.6)
+            let natural = CGFloat(count) * cardW + CGFloat(count - 1) * 6
+            let spacing = natural > geo.size.width
+                ? (geo.size.width - CGFloat(count) * cardW) / CGFloat(max(count - 1, 1))
+                : 6
+            let myTurn = engine.phase == .playing && engine.current == engine.human
+            let legal = Set(engine.legalCards(for: engine.human))
+
+            HStack(spacing: spacing) {
+                ForEach(hand) { card in
+                    let canPlay = myTurn && legal.contains(card)
+                    Group {
+                        if engine.isForeheadHand {
+                            CardBackView(width: cardW)
+                                .overlay(Image(systemName: "questionmark")
+                                    .font(.system(size: cardW * 0.3, weight: .heavy))
+                                    .foregroundStyle(.white))
+                        } else {
+                            CardView(card: card, width: cardW, dimmed: myTurn && !canPlay)
+                        }
+                    }
+                        .offset(y: canPlay ? -12 : 0)
+                        .onTapGesture { engine.humanPlay(card) }
+                        .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity),
+                                                removal: .scale(scale: 0.5).combined(with: .opacity)))
+                }
+            }
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .bottom)
+            .animation(.spring(response: 0.35, dampingFraction: 0.75), value: myTurn)
+            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: hand.count)
+        }
+        .frame(height: maxCardW * 1.42 + 16)
+    }
+}
+
+// MARK: - Summary
+
+struct HandSummaryView: View {
+    @ObservedObject var engine: GameEngine
+    let onNext: () -> Void
+    let onScores: () -> Void
+    let onExit: () -> Void
+
+    var body: some View {
+        let over = engine.phase == .gameOver
+        let rec = engine.history.last
+        VStack(spacing: 16) {
+            if over {
+                let best = engine.players.map(\.score).max() ?? 0
+                let won = engine.players[engine.human].score == best
+                Image(systemName: won ? "trophy.fill" : "flag.checkered")
+                    .font(.system(size: 42, weight: .bold))
+                    .foregroundStyle(won ? Theme.gold : Theme.primary)
+                Text(won ? "Ai câștigat!" : "Joc încheiat")
+                    .font(Theme.font(28, .heavy)).foregroundStyle(Theme.ink)
+            } else if let rec {
+                let me = rec.entries[engine.human]
+                Text(me.made ? "Contract reușit!" : "Contract ratat")
+                    .font(Theme.font(24, .heavy))
+                    .foregroundStyle(me.made ? Theme.green : Theme.red)
+                Text("Mâna \(rec.id + 1) · \(rec.size) \(rec.size == 1 ? "carte" : "cărți")")
+                    .font(Theme.font(14, .medium)).foregroundStyle(Theme.muted)
+            }
+
+            VStack(spacing: 8) {
+                let order = over
+                    ? engine.players.sorted { $0.score > $1.score }.map(\.id)
+                    : engine.players.map(\.id)
+                ForEach(Array(order.enumerated()), id: \.element) { pos, i in
+                    row(pos: pos, i: i, over: over, entry: rec?.entries[i])
+                }
+            }
+
+            VStack(spacing: 10) {
+                if over {
+                    Button("Înapoi la meniu", action: onExit).buttonStyle(PrimaryButtonStyle())
+                } else {
+                    Button("Mâna următoare", action: onNext).buttonStyle(PrimaryButtonStyle())
+                }
+                Button("Tabela de scor", action: onScores).buttonStyle(SecondaryButtonStyle())
+            }
+        }
+        .panel(padding: 22)
+        .frame(maxWidth: 440)
+    }
+
+    private func row(pos: Int, i: Int, over: Bool, entry: HandRecord.Entry?) -> some View {
+        let p = engine.players[i]
+        return HStack(spacing: 10) {
+            if over {
+                Text("\(pos + 1)").font(Theme.font(15, .bold)).foregroundStyle(Theme.muted).frame(width: 18)
+            }
+            AvatarView(name: p.name, index: p.id, size: 30)
+            Text(p.name).font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+            Spacer()
+            if !over, let e = entry {
+                Text("\(e.tricks)/\(e.bid)").font(Theme.font(14, .medium)).foregroundStyle(Theme.muted)
+                Text(e.delta >= 0 ? "+\(e.delta)" : "\(e.delta)")
+                    .font(Theme.font(15, .bold))
+                    .foregroundStyle(e.made ? Theme.green : Theme.red)
+                    .frame(minWidth: 34, alignment: .trailing)
+                if e.bonus != 0 {
+                    Text(e.bonus > 0 ? "+\(e.bonus)" : "\(e.bonus)")
+                        .font(Theme.font(12, .heavy))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 6).padding(.vertical, 2)
+                        .background(Capsule().fill(e.bonus > 0 ? Theme.gold : Theme.red))
+                }
+            }
+            Text("\(p.score)")
+                .font(Theme.font(17, .heavy)).foregroundStyle(Theme.primary)
+                .frame(minWidth: 40, alignment: .trailing)
+        }
+        .padding(.horizontal, 12).padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(p.isHuman ? Theme.soft : Theme.bg))
+    }
+}

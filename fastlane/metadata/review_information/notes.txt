@@ -1,0 +1,3 @@
+Whist Românesc is a single-player Romanian whist card game against computer opponents. No account, no login, no network access, no in-app purchases, no real-money or simulated gambling (no betting, no currency). The app is in Romanian.
+
+To try it: tap "Joc nou" (New game). When it is your turn to bid, tap a number; when it is your turn to play, tap one of the raised cards. The list icon at the top right opens the score sheet.

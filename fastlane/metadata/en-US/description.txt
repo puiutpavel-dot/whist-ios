@@ -1,0 +1,21 @@
+Romanian whist, the way it is played at the table, now on iPhone. The app is in Romanian.
+
+Play against 2–5 computer opponents with the classic rules:
+• 3–6 players, 8 cards per player in the deck
+• 1-8-1 or 8-1-8 formats
+• trump is turned up after the deal; 8-card hands are played without trump
+• the dealer cannot make the total of the bids equal the number of cards
+• you must follow suit, and must trump if you can't
+• 5 points plus one per trick for an exact contract, minus the difference if you miss
+
+Optional variants:
+• Card on the forehead: in the last one-card hands you can't see your own card, only everyone else's
+• Streak bonuses: ±10 points for 5 contracts made or missed in a row
+
+Also:
+• the classic paper-style score sheet
+• the cards you are allowed to play are raised, so you never misplay
+• stats: games, wins, best score
+• three opponent speeds
+
+No account, no ads, works offline. We collect no data.

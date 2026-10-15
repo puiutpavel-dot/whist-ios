@@ -1,0 +1,220 @@
+definitions:
+  env: &env
+    xcode: latest
+    vars:
+      XCODE_PROJECT: Whist.xcodeproj
+      XCODE_SCHEME: Whist
+      BUNDLE_ID: ro.draghicioiu.whist
+
+  scripts:
+    - &sim_build
+      name: Build pentru simulator
+      script: |
+        set -o pipefail
+        xcodebuild -project "$XCODE_PROJECT" -scheme "$XCODE_SCHEME" -configuration Debug \
+          -destination 'generic/platform=iOS Simulator' \
+          -derivedDataPath "$CM_BUILD_DIR/dd" \
+          CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$CM_BUILD_DIR/build.log" \
+        || { echo "===== ERORI ====="; grep -E "error:" "$CM_BUILD_DIR/build.log" | sort -u | head -100; exit 1; }
+
+    - &screenshots
+      name: Capturi App Store (iPhone 6.9")
+      script: |
+        set -e
+        APP=$(find "$CM_BUILD_DIR/dd/Build/Products/Debug-iphonesimulator" -maxdepth 1 -name "*.app" | head -1)
+        echo "App: $APP"
+        UDID=$(xcrun simctl list devices available -j | python3 -c "
+        import sys, json, re
+        d = json.load(sys.stdin)['devices']
+        best = None
+        for rt, devs in d.items():
+            m = re.search(r'iOS-(\d+)-(\d+)', rt)
+            if not m: continue
+            ver = (int(m.group(1)), int(m.group(2)))
+            for dv in devs:
+                if 'Pro Max' in dv['name'] and (best is None or ver > best[0]):
+                    best = (ver, dv['udid'], dv['name'])
+        print(best[1]); print(best[2], best[0], file=sys.stderr)")
+        xcrun simctl boot "$UDID" || true
+        xcrun simctl bootstatus "$UDID" -b
+        xcrun simctl ui "$UDID" appearance light
+        xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 \
+          --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
+        xcrun simctl install "$UDID" "$APP"
+        OUT="$CM_BUILD_DIR/fastlane/screenshots"
+        mkdir -p "$OUT/ro" "$OUT/en-US"
+        for N in 1 2 3 4 5 6 7; do
+          xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
+          xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N
+          sleep 6
+          xcrun simctl io "$UDID" screenshot "$OUT/ro/0${N}_whist.png"
+          cp "$OUT/ro/0${N}_whist.png" "$OUT/en-US/0${N}_whist.png"
+          sips -g pixelWidth -g pixelHeight "$OUT/ro/0${N}_whist.png" | tail -2
+        done
+        mkdir -p "$CM_BUILD_DIR/screenshots" && cp "$OUT/ro/"*.png "$CM_BUILD_DIR/screenshots/"
+
+workflows:
+  ios-build:
+    name: Whist — verificare build (simulator)
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment: *env
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Xcode
+        script: xcodebuild -version
+      - *sim_build
+    artifacts:
+      - build.log
+
+  ios-screenshots:
+    name: Whist — capturi App Store
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment: *env
+    scripts:
+      - *sim_build
+      - *screenshots
+    artifacts:
+      - screenshots/*.png
+      - build.log
+
+  ios-setup:
+    name: Whist — Configurare (bundle ID + profil App Store)
+    instance_type: mac_mini_m2
+    max_build_duration: 10
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment: *env
+    scripts:
+      - name: Înregistrează bundle ID și creează profilul App Store
+        script: |
+          set -e
+          find_bundle() {
+            app-store-connect bundle-ids list --bundle-id-identifier "$BUNDLE_ID" --strict-match-identifier --json \
+              | python3 -c "import sys,json
+          d=json.load(sys.stdin)
+          print(d[0]['id'] if d else '')"
+          }
+          BUNDLE_RES=$(find_bundle)
+          if [ -z "$BUNDLE_RES" ]; then
+            echo "Bundle ID nou: $BUNDLE_ID"
+            app-store-connect bundle-ids create "$BUNDLE_ID" --name "Whist Romanesc" --platform IOS
+            BUNDLE_RES=$(find_bundle)
+          fi
+          echo "Bundle resource: $BUNDLE_RES"
+          EXISTING=$(app-store-connect profiles list --bundle-id-resource-id "$BUNDLE_RES" --type IOS_APP_STORE --json 2>/dev/null | python3 -c "import sys,json
+          try:
+              print(len(json.load(sys.stdin)))
+          except Exception:
+              print(0)")
+          if [ "$EXISTING" != "0" ]; then
+            echo "Profilul App Store există deja"
+            exit 0
+          fi
+          CERTS=""
+          for T in DISTRIBUTION IOS_DISTRIBUTION; do
+            IDS=$(app-store-connect certificates list --type $T --json 2>/dev/null | python3 -c "import sys,json
+          try:
+              print(' '.join(c['id'] for c in json.load(sys.stdin)))
+          except Exception:
+              pass")
+            CERTS="$CERTS $IDS"
+          done
+          CERTS=$(echo $CERTS)
+          echo "Certificates: $CERTS"
+          app-store-connect profiles create "$BUNDLE_RES" --certificate-ids $CERTS --type IOS_APP_STORE --name "Whist App Store"
+
+  ios-testflight:
+    name: Whist — TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 45
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment:
+      <<: *env
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: ro.draghicioiu.whist
+    scripts:
+      - name: Aplică profilurile de semnare
+        script: xcode-project use-profiles --project "$XCODE_PROJECT"
+      - &build_number
+        name: Număr de build
+        script: |
+          echo "Build number: $BUILD_NUMBER"
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" "$XCODE_PROJECT/project.pbxproj"
+          grep -c "CURRENT_PROJECT_VERSION = $BUILD_NUMBER;" "$XCODE_PROJECT/project.pbxproj"
+      - &build_ipa
+        name: Build IPA
+        script: xcode-project build-ipa --project "$XCODE_PROJECT" --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+
+  ios-appstore:
+    name: Whist — App Store (build + fișă + capturi + trimitere la review)
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment:
+      <<: *env
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: ro.draghicioiu.whist
+    scripts:
+      - *sim_build
+      - *screenshots
+      - name: Aplică profilurile de semnare
+        script: xcode-project use-profiles --project "$XCODE_PROJECT"
+      - *build_number
+      - *build_ipa
+      - name: Fișa din App Store (texte + capturi)
+        script: |
+          set -e
+          for V in APP_STORE_CONNECT_KEY_IDENTIFIER APP_STORE_CONNECT_ISSUER_ID APP_STORE_CONNECT_PRIVATE_KEY; do
+            if [ -z "${!V}" ]; then echo "Lipsește $V din integrarea App Store Connect"; exit 1; fi
+          done
+          python3 - <<'PY'
+          import json, os
+          json.dump({
+              "key_id": os.environ["APP_STORE_CONNECT_KEY_IDENTIFIER"],
+              "issuer_id": os.environ["APP_STORE_CONNECT_ISSUER_ID"],
+              "key": os.environ["APP_STORE_CONNECT_PRIVATE_KEY"],
+              "in_house": False,
+          }, open("/tmp/asc_key.json", "w"))
+          PY
+          fastlane deliver \
+            --api_key_path /tmp/asc_key.json \
+            --app_identifier "$BUNDLE_ID" \
+            --app_version "1.0" \
+            --platform ios \
+            --metadata_path "$CM_BUILD_DIR/fastlane/metadata" \
+            --screenshots_path "$CM_BUILD_DIR/fastlane/screenshots" \
+            --skip_binary_upload true \
+            --overwrite_screenshots true \
+            --submit_for_review false \
+            --run_precheck_before_submit false \
+            --force true
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - screenshots/*.png
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: true
+        release_type: AFTER_APPROVAL
+        cancel_previous_submissions: true

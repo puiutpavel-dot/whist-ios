@@ -1,0 +1,21 @@
+Whistul românesc, așa cum se joacă la masă, acum pe iPhone.
+
+Joci împotriva a 2–5 adversari simulați de telefon, după regulile clasice:
+• 3–6 jucători, câte 8 cărți de jucător
+• formate 1-8-1 sau 8-1-8
+• atuul se întoarce după împărțire; la mâinile de 8 cărți se joacă fără atu
+• licitație în care cel care împarte nu poate face suma egală cu numărul de cărți
+• obligat la culoare, obligat să tai cu atu
+• 5 puncte + câte unul pe levată la contract exact, minus diferența dacă ratezi
+
+Variante opționale:
+• Cartea pe frunte: la ultimele mâini de o carte nu-ți vezi cartea, dar le vezi pe ale celorlalți
+• Premii pentru serii: ±10 puncte la 5 contracte reușite sau ratate la rând
+
+Și în plus:
+• tabela de scor clasică, ca pe hârtie
+• cărțile pe care ai voie să le joci sunt ridicate, ca să nu greșești
+• statistici: jocuri, victorii, record
+• trei viteze pentru adversari
+
+Fără cont, fără reclame, fără internet. Nu colectăm niciun fel de date.
