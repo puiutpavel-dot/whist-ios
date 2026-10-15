@@ -187,11 +187,25 @@ workflows:
             if [ -z "${!V}" ]; then echo "Lipsește $V din integrarea App Store Connect"; exit 1; fi
           done
           python3 - <<'PY'
-          import json, os
+          import base64, json, os, re, textwrap
+          raw = os.environ["APP_STORE_CONNECT_PRIVATE_KEY"].replace("\\n", "\n").strip()
+          if "BEGIN" not in raw:
+              try:
+                  dec = base64.b64decode(raw).decode()
+                  if "BEGIN" in dec:
+                      raw = dec
+              except Exception:
+                  pass
+          print("Format cheie:", "PEM" if "BEGIN" in raw else "fără antet PEM")
+          body = re.sub(r"-----(BEGIN|END) [A-Z ]+-----", "", raw)
+          body = re.sub(r"\s+", "", body)
+          pem = "-----BEGIN PRIVATE KEY-----\n" + "\n".join(textwrap.wrap(body, 64)) + "\n-----END PRIVATE KEY-----\n"
+          print("Cheie normalizată:", len(body), "caractere base64")
           json.dump({
               "key_id": os.environ["APP_STORE_CONNECT_KEY_IDENTIFIER"],
               "issuer_id": os.environ["APP_STORE_CONNECT_ISSUER_ID"],
-              "key": os.environ["APP_STORE_CONNECT_PRIVATE_KEY"],
+              "key": base64.b64encode(pem.encode()).decode(),
+              "is_key_content_base64": True,
               "in_house": False,
           }, open("/tmp/asc_key.json", "w"))
           PY
