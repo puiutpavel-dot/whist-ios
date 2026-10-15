@@ -27,8 +27,19 @@ VERSION = os.environ.get("APP_VERSION", "1.0")
 DISPLAY_TYPE = "APP_IPHONE_67"   # slotul 6.9"/6.7" (1320×2868 și 1290×2796)
 
 
+def env(name: str) -> str:
+    """Valoarea unei variabile; Codemagic poate da o referință: @file:/cale sau @env:VARIABILA."""
+    raw = os.environ[name].strip()
+    for _ in range(3):
+        if raw.startswith("@file:"):
+            raw = open(os.path.expanduser(raw[len("@file:"):]), encoding="utf-8").read().strip()
+        elif raw.startswith("@env:"):
+            raw = os.environ[raw[len("@env:"):]].strip()
+    return raw
+
+
 def private_key() -> str:
-    raw = os.environ["APP_STORE_CONNECT_PRIVATE_KEY"].replace("\\n", "\n").strip()
+    raw = env("APP_STORE_CONNECT_PRIVATE_KEY").replace("\\n", "\n")
     if "BEGIN" not in raw:
         try:
             dec = base64.b64decode(raw).decode()
@@ -49,9 +60,9 @@ def token() -> str:
         return _token["value"]
     exp = int(time.time()) + 15 * 60
     _token["value"] = jwt.encode(
-        {"iss": os.environ["APP_STORE_CONNECT_ISSUER_ID"], "exp": exp, "aud": "appstoreconnect-v1"},
+        {"iss": env("APP_STORE_CONNECT_ISSUER_ID"), "exp": exp, "aud": "appstoreconnect-v1"},
         private_key(), algorithm="ES256",
-        headers={"kid": os.environ["APP_STORE_CONNECT_KEY_IDENTIFIER"], "typ": "JWT"})
+        headers={"kid": env("APP_STORE_CONNECT_KEY_IDENTIFIER"), "typ": "JWT"})
     _token["exp"] = exp
     return _token["value"]
 
