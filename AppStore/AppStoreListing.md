@@ -25,7 +25,8 @@ Totul e automatizat prin Codemagic, ca la celelalte aplicații. Rămân doar câ
    - **App Privacy** → Data Not Collected → Publish.
    - **Age Rating** → toate întrebările „None/No” (fără pariuri, fără bani reali, fără conținut generat de utilizatori) → 4+.
    - **App Information** → Content Rights: nu conține conținut de la terți.
-6. **Codemagic** → rulează `ios-appstore`: build, capturi 6.9" făcute în simulator, texte RO + EN, urcare și trimitere la review (release după aprobare).
+6. **Codemagic** → rulează `ios-appstore`: build, capturi 6.9" făcute în simulator, texte RO + EN, urcare în App Store Connect.
+7. Verifici fișa în App Store Connect, alegi build-ul și apeși **Add for Review** → **Submit**.
 
 Opțional, înainte de pasul 6: `ios-screenshots` produce doar capturile, ca să le vezi.
 
