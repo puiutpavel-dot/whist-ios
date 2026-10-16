@@ -44,6 +44,7 @@ struct CardView: View {
 /// Spatele cărții: roșu, cu un model geometric de romburi (desen propriu).
 struct CardBackView: View {
     var width: CGFloat = 30
+    var emblem: String = "♠"
     var body: some View {
         let r = width * 0.14
         ZStack {
@@ -58,8 +59,8 @@ struct CardBackView: View {
                 .strokeBorder(Color.white.opacity(0.55), lineWidth: max(0.5, width * 0.02))
                 .padding(width * 0.1)
             if width >= 24 {
-                Text("♠")
-                    .font(.system(size: width * 0.34, weight: .bold))
+                Text(emblem)
+                    .font(.system(size: width * 0.34, weight: .heavy))
                     .foregroundStyle(.white)
                     .frame(width: width * 0.48, height: width * 0.48)
                     .background(Circle().fill(Theme.accentDk))

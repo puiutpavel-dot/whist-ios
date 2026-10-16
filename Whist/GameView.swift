@@ -423,10 +423,7 @@ struct HandView: View {
                     let canPlay = myTurn && legal.contains(card)
                     Group {
                         if engine.isForeheadHand {
-                            CardBackView(width: cardW)
-                                .overlay(Image(systemName: "questionmark")
-                                    .font(.system(size: cardW * 0.3, weight: .heavy))
-                                    .foregroundStyle(.white))
+                            CardBackView(width: cardW, emblem: "?")
                         } else {
                             CardView(card: card, width: cardW, dimmed: myTurn && !canPlay)
                         }

@@ -125,16 +125,18 @@ struct HomeView: View {
             // evantai de cărți în dreapta
             ZStack {
                 ForEach(0..<7) { i in
-                    CardBackView(width: 54)
-                        .rotationEffect(.degrees(Double(i - 3) * 13), anchor: .bottom)
+                    CardBackView(width: 66)
+                        .rotationEffect(.degrees(Double(i - 3) * 17), anchor: .bottom)
+                        .offset(y: -34)
                 }
                 CardView(card: Card(suit: .spades, rank: 14), width: 60)
-                    .rotationEffect(.degrees(-8)).offset(x: -18, y: 22)
+                    .rotationEffect(.degrees(-8)).offset(x: -20, y: 46)
                 CardView(card: Card(suit: .hearts, rank: 13), width: 60)
-                    .rotationEffect(.degrees(9)).offset(x: 22, y: 26)
+                    .rotationEffect(.degrees(9)).offset(x: 22, y: 50)
             }
+            .frame(width: 190, height: 200)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(.trailing, 30).padding(.top, 26)
+            .padding(.trailing, 4).padding(.top, 18)
             .opacity(0.95)
 
             VStack(alignment: .leading, spacing: 6) {
