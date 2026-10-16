@@ -15,7 +15,7 @@ struct WhistApp: App {
                     HomeView()
                 }
             }
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
         }
     }
 }
@@ -43,12 +43,20 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Theme.bg.ignoresSafeArea()
+            Theme.backdrop
             ScrollView {
                 VStack(spacing: 20) {
-                    logo.padding(.top, 24)
+                    hero.padding(.top, 8)
+
+                    VStack(spacing: 12) {
+                        Button("Joc nou") { playing = true }
+                            .buttonStyle(PrimaryButtonStyle())
+                        Button("Reguli") { showRules = true }
+                            .buttonStyle(SecondaryButtonStyle())
+                    }
 
                     VStack(alignment: .leading, spacing: 18) {
+                        Text("SETĂRI MASĂ").font(Theme.display(22)).foregroundStyle(Theme.ink)
                         label("Jucători")
                         Pills(options: [3, 4, 5, 6], selection: $playerCount) { "\($0)" }
                         Text("Tu + \(playerCount - 1) adversari · \(GameSettings.handSizes(players: playerCount, format: settings.format).count) mâini")
@@ -93,14 +101,7 @@ struct HomeView: View {
                     .panel(padding: 20)
 
                     stats
-
-                    VStack(spacing: 12) {
-                        Button("Joc nou") { playing = true }
-                            .buttonStyle(PrimaryButtonStyle())
-                        Button("Reguli") { showRules = true }
-                            .buttonStyle(SecondaryButtonStyle())
-                    }
-                    .padding(.bottom, 24)
+                        .padding(.bottom, 24)
                 }
                 .padding(.horizontal, 20)
             }
@@ -115,21 +116,40 @@ struct HomeView: View {
         .sheet(isPresented: $showRules) { RulesView() }
     }
 
-    private var logo: some View {
-        VStack(spacing: 14) {
+    /// Banner roșu cu evantai de cărți (desen propriu) și titlu condensat.
+    private var hero: some View {
+        ZStack(alignment: .bottomLeading) {
+            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                .fill(LinearGradient(colors: [Theme.accent, Theme.accentDk, Color(hex: 0x3A0209)],
+                                     startPoint: .topTrailing, endPoint: .bottomLeading))
+            // evantai de cărți în dreapta
             ZStack {
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(LinearGradient(colors: [Theme.primary, Theme.primaryDk], startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .frame(width: 112, height: 112)
-                    .shadow(color: Theme.primary.opacity(0.35), radius: 16, y: 8)
-                HStack(spacing: -18) {
-                    CardView(card: Card(suit: .spades, rank: 14), width: 46).rotationEffect(.degrees(-12))
-                    CardView(card: Card(suit: .hearts, rank: 13), width: 46).rotationEffect(.degrees(10)).offset(y: 4)
+                ForEach(0..<7) { i in
+                    CardBackView(width: 54)
+                        .rotationEffect(.degrees(Double(i - 3) * 13), anchor: .bottom)
                 }
+                CardView(card: Card(suit: .spades, rank: 14), width: 60)
+                    .rotationEffect(.degrees(-8)).offset(x: -18, y: 22)
+                CardView(card: Card(suit: .hearts, rank: 13), width: 60)
+                    .rotationEffect(.degrees(9)).offset(x: 22, y: 26)
             }
-            Text("Whist").font(Theme.font(38, .heavy)).foregroundStyle(Theme.ink)
-            Text("Jocul românesc de levate").font(Theme.font(16, .medium)).foregroundStyle(Theme.muted)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(.trailing, 30).padding(.top, 26)
+            .opacity(0.95)
+
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 6) {
+                    GoldTag(text: "1-8-1")
+                    GoldTag(text: "8-1-8")
+                }
+                Text("WHIST").font(Theme.display(64)).foregroundStyle(.white)
+                    .shadow(color: .black.opacity(0.35), radius: 6, y: 3)
+                Text("Jocul românesc de levate").font(Theme.font(15, .semibold)).foregroundStyle(.white.opacity(0.85))
+            }
+            .padding(20)
         }
+        .frame(height: 250)
+        .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
     }
 
     private var stats: some View {
@@ -142,15 +162,15 @@ struct HomeView: View {
 
     private func stat(_ value: String, _ title: String) -> some View {
         VStack(spacing: 4) {
-            Text(value).font(Theme.font(22, .bold)).foregroundStyle(Theme.primary)
-            Text(title).font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+            Text(value).font(Theme.display(30)).foregroundStyle(Theme.ink)
+            Text(title.uppercased()).font(.system(size: 11, weight: .bold)).foregroundStyle(Theme.muted)
         }
         .frame(maxWidth: .infinity)
         .panel(padding: 14)
     }
 
     private func label(_ s: String) -> some View {
-        Text(s).font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+        Text(s.uppercased()).font(.system(size: 12, weight: .heavy)).kerning(0.6).foregroundStyle(Theme.muted)
     }
 }
 
@@ -169,10 +189,11 @@ struct Pills<T: Hashable>: View {
                 } label: {
                     Text(title(opt))
                         .font(Theme.font(16, .bold))
-                        .foregroundStyle(on ? .white : Theme.primary)
+                        .foregroundStyle(on ? Theme.onPrimary : Theme.ink)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 11)
-                        .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(on ? Theme.primary : Theme.soft))
+                        .background(Capsule().fill(on ? Theme.primary : Theme.soft))
+                        .overlay(Capsule().strokeBorder(on ? .clear : Theme.line, lineWidth: 1))
                 }
                 .buttonStyle(.plain)
             }

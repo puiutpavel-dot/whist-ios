@@ -29,7 +29,7 @@ struct GameView: View {
 
     var body: some View {
         ZStack {
-            Theme.bg.ignoresSafeArea()
+            Theme.backdrop
 
             GeometryReader { geo in
                 let compact = geo.size.height < 720
@@ -48,7 +48,7 @@ struct GameView: View {
             }
 
             if engine.phase == .handEnd || engine.phase == .gameOver {
-                Color.black.opacity(0.25).ignoresSafeArea()
+                Color.black.opacity(0.6).ignoresSafeArea()
                     .transition(.opacity)
                 HandSummaryView(engine: engine,
                                 onNext: { withAnimation(.spring) { engine.nextHand() } },
@@ -83,8 +83,8 @@ struct GameView: View {
             }
             Spacer()
             VStack(spacing: 2) {
-                Text("Mâna \(engine.handIndex + 1) din \(engine.handSizes.count)")
-                    .font(Theme.font(17, .bold)).foregroundStyle(Theme.ink)
+                Text("MÂNA \(engine.handIndex + 1) / \(engine.handSizes.count)")
+                    .font(Theme.display(24)).foregroundStyle(Theme.ink)
                 Text(engine.handSize == 1 ? "1 carte" : "\(engine.handSize) cărți")
                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
             }
@@ -120,7 +120,8 @@ struct GameView: View {
                 }
             }
             .padding(.horizontal, 12).padding(.vertical, 8)
-            .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Theme.surface))
+            .background(Capsule().fill(Theme.surface))
+            .overlay(Capsule().strokeBorder(Theme.line, lineWidth: 1))
 
             Spacer()
 
@@ -133,14 +134,15 @@ struct GameView: View {
                     if engine.phase != .bidding {
                         Text(sum > size ? "peste" : "sub")
                             .font(Theme.font(11, .bold))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(sum > size ? Color.white : Theme.onPrimary)
                             .padding(.horizontal, 6).padding(.vertical, 2)
-                            .background(Capsule().fill(sum > size ? Theme.red : Theme.primary))
+                            .background(Capsule().fill(sum > size ? Theme.accent : Theme.primary))
                     }
                 }
             }
             .padding(.horizontal, 12).padding(.vertical, 8)
-            .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Theme.surface))
+            .background(Capsule().fill(Theme.surface))
+            .overlay(Capsule().strokeBorder(Theme.line, lineWidth: 1))
         }
     }
 
@@ -193,7 +195,7 @@ struct DealerBadge: View {
     var body: some View {
         Text("D")
             .font(Theme.font(10, .heavy))
-            .foregroundStyle(.white)
+            .foregroundStyle(Color.black)
             .frame(width: 16, height: 16)
             .background(Circle().fill(Theme.gold))
             .accessibilityLabel("Împarte")
@@ -246,8 +248,11 @@ struct OpponentChip: View {
         .padding(.vertical, compact ? 5 : 8)
         .background(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(Theme.surface)
-                .shadow(color: Theme.primaryDk.opacity(isTurn ? 0.16 : 0.06), radius: 8, y: 3)
+                .fill(isTurn ? Theme.raised : Theme.surface)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(isTurn ? Theme.gold : Theme.line, lineWidth: isTurn ? 1.5 : 1)
         )
     }
 
@@ -305,9 +310,9 @@ struct TrickTable: View {
                         Spacer()
                         Text(w == engine.human ? "Iei levata!" : "\(engine.players[w].name) ia levata")
                             .font(Theme.font(14, .bold))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(w == engine.human ? Theme.onPrimary : .white)
                             .padding(.horizontal, 14).padding(.vertical, 6)
-                            .background(Capsule().fill(Theme.primary))
+                            .background(Capsule().fill(w == engine.human ? Theme.primary : Theme.accent))
                     }
                     .padding(.bottom, 10)
                     .transition(.opacity)
@@ -316,11 +321,7 @@ struct TrickTable: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .frame(height: compact ? 150 : 190)
-        .background(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(Theme.surface)
-                .shadow(color: Theme.primaryDk.opacity(0.08), radius: 14, y: 6)
-        )
+        .background(TableFelt())
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: engine.trick.count)
         .animation(.easeInOut(duration: 0.2), value: engine.trickWinner)
     }
@@ -359,7 +360,7 @@ struct BidPanel: View {
         let allowed = Set(engine.allowedBids(for: engine.human))
         let forbidden = engine.forbiddenBid(for: engine.human)
         VStack(spacing: compact ? 8 : 12) {
-            Text("Câte levate iei?").font(Theme.font(19, .bold)).foregroundStyle(Theme.ink)
+            Text("CÂTE LEVATE IEI?").font(Theme.display(26)).foregroundStyle(Theme.ink)
             if engine.isForeheadHand {
                 Label("Cartea e pe frunte: o vezi doar pe a celorlalți", systemImage: "eye.slash.fill")
                     .font(Theme.font(13, .semibold)).foregroundStyle(Theme.primary)
@@ -373,11 +374,11 @@ struct BidPanel: View {
                     } label: {
                         Text("\(b)")
                             .font(Theme.font(22, .bold))
-                            .foregroundStyle(ok ? .white : Theme.muted)
+                            .foregroundStyle(ok ? Theme.onPrimary : Theme.muted)
                             .strikethrough(!ok, color: Theme.red)
                             .frame(maxWidth: .infinity)
                             .frame(height: compact ? 40 : 50)
-                            .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(ok ? Theme.primary : Theme.soft))
+                            .background(Capsule().fill(ok ? Theme.primary : Theme.soft))
                     }
                     .buttonStyle(.plain)
                     .disabled(!ok)
@@ -462,12 +463,12 @@ struct HandSummaryView: View {
                 Image(systemName: won ? "trophy.fill" : "flag.checkered")
                     .font(.system(size: 42, weight: .bold))
                     .foregroundStyle(won ? Theme.gold : Theme.primary)
-                Text(won ? "Ai câștigat!" : "Joc încheiat")
-                    .font(Theme.font(28, .heavy)).foregroundStyle(Theme.ink)
+                Text(won ? "AI CÂȘTIGAT!" : "JOC ÎNCHEIAT")
+                    .font(Theme.display(40)).foregroundStyle(Theme.ink)
             } else if let rec {
                 let me = rec.entries[engine.human]
-                Text(me.made ? "Contract reușit!" : "Contract ratat")
-                    .font(Theme.font(24, .heavy))
+                Text(me.made ? "CONTRACT REUȘIT!" : "CONTRACT RATAT")
+                    .font(Theme.display(34))
                     .foregroundStyle(me.made ? Theme.green : Theme.red)
                 Text("Mâna \(rec.id + 1) · \(rec.size) \(rec.size == 1 ? "carte" : "cărți")")
                     .font(Theme.font(14, .medium)).foregroundStyle(Theme.muted)
@@ -513,9 +514,9 @@ struct HandSummaryView: View {
                 if e.bonus != 0 {
                     Text(e.bonus > 0 ? "+\(e.bonus)" : "\(e.bonus)")
                         .font(Theme.font(12, .heavy))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(e.bonus > 0 ? Color.black : .white)
                         .padding(.horizontal, 6).padding(.vertical, 2)
-                        .background(Capsule().fill(e.bonus > 0 ? Theme.gold : Theme.red))
+                        .background(Capsule().fill(e.bonus > 0 ? Theme.gold : Theme.accent))
                 }
             }
             Text("\(p.score)")
@@ -524,5 +525,19 @@ struct HandSummaryView: View {
         }
         .padding(.horizontal, 12).padding(.vertical, 8)
         .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(p.isHuman ? Theme.soft : Theme.bg))
+    }
+}
+
+/// Masa de joc: postav închis, cu o lumină roșie discretă și un chenar subțire.
+struct TableFelt: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 28, style: .continuous)
+            .fill(RadialGradient(colors: [Color(hex: 0x2A0E14), Theme.surface],
+                                 center: .center, startRadius: 10, endRadius: 260))
+            .overlay(
+                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    .strokeBorder(LinearGradient(colors: [Theme.accent.opacity(0.8), Theme.accent.opacity(0.15)],
+                                                 startPoint: .top, endPoint: .bottom), lineWidth: 1.5))
+            .shadow(color: Theme.accent.opacity(0.18), radius: 18, y: 6)
     }
 }

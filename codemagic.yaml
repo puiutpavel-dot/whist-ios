@@ -5,6 +5,7 @@ definitions:
       XCODE_PROJECT: Whist.xcodeproj
       XCODE_SCHEME: Whist
       BUNDLE_ID: ro.draghicioiu.whist
+      APP_VERSION: "1.1"
 
   scripts:
     - &sim_build

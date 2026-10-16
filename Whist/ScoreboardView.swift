@@ -66,10 +66,10 @@ struct ScoreboardView: View {
     }
 
     private func header(_ s: String) -> some View {
-        Text(s).font(Theme.font(14, .bold)).foregroundStyle(.white)
+        Text(s.uppercased()).font(.system(size: 13, weight: .heavy)).foregroundStyle(.white)
             .lineLimit(1)
             .frame(maxWidth: .infinity, minHeight: 36)
-            .background(Theme.primary)
+            .background(Theme.accent)
     }
 
     private func sub(_ s: String) -> some View {

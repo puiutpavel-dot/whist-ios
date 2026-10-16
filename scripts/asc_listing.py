@@ -151,6 +151,8 @@ def main():
             "promotionalText": read(f"{loc}/promotional_text.txt"),
             "supportUrl": read(f"{loc}/support_url.txt"),
             "marketingUrl": read(f"{loc}/marketing_url.txt"),
+            # „Ce e nou” nu se acceptă la prima versiune a aplicației
+            "whatsNew": read(f"{loc}/release_notes.txt") if VERSION != "1.0" else None,
         }.items() if v}
         if loc in ver_locs:
             lid = ver_locs[loc]["id"]
