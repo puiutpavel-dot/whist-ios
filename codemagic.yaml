@@ -54,6 +54,16 @@ definitions:
         done
         mkdir -p "$CM_BUILD_DIR/screenshots" && cp "$OUT/ro/"*.png "$CM_BUILD_DIR/screenshots/"
 
+    - &preview_log
+      name: Miniaturi în log (previzualizare)
+      script: |
+        mkdir -p /tmp/thumbs
+        for f in "$CM_BUILD_DIR/screenshots/"*.png; do
+          n=$(basename "$f" .png)
+          sips -s format jpeg -s formatOptions 55 --resampleWidth 260 "$f" --out "/tmp/thumbs/$n.jpg" >/dev/null
+          echo "THUMB:$n:$(base64 -i "/tmp/thumbs/$n.jpg" | tr -d '\n')"
+        done
+
     - &listing
       name: Fișa din App Store (texte + capturi)
       script: |
@@ -90,6 +100,7 @@ workflows:
     scripts:
       - *sim_build
       - *screenshots
+      - *preview_log
     artifacts:
       - screenshots/*.png
       - build.log
