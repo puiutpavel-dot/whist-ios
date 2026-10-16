@@ -81,6 +81,7 @@ struct GameSettings {
     var format: GameFormat = .oneEightOne
     var streakBonus: Bool = true
     var forehead: Bool = true
+    var coach: Bool = true
     var speed: Double = 1.0
 
     static func handSizes(players n: Int, format: GameFormat) -> [Int] {

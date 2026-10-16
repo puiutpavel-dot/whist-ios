@@ -16,6 +16,8 @@ enum ScreenshotMode {
         d.set(11, forKey: "gamesWon")
         d.set(146, forKey: "bestScore")
         d.set(4, forKey: "players")
+        d.set(312, forKey: "contractsMade")
+        d.set(431, forKey: "contractsTotal")
     }
 
     /// Construiește un joc adus în starea potrivită capturii N.
@@ -39,6 +41,9 @@ enum ScreenshotMode {
             case 6:   // cartea pe frunte
                 ok = e.fastForward { $0.isForeheadHand && $0.phase == .bidding && $0.current == $0.human && $0.players[$0.human].bid == nil
                     && $0.players.contains { $0.bid != nil } }
+            case 8:   // contorul de cărți ieșite, la jumătatea unei mâini cu atu
+                ok = e.fastForward { $0.phase == .playing && $0.current == $0.human && $0.handSize >= 6
+                    && $0.trump != nil && $0.playedThisHand.count >= $0.n * 2 }
             case 7:   // victorie
                 ok = e.fastForward { $0.phase == .gameOver }
                     && e.players[e.human].score == e.players.map(\.score).max()

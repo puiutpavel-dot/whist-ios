@@ -15,6 +15,8 @@ final class GameEngine: ObservableObject {
     @Published private(set) var trick: [PlayedCard] = []
     @Published private(set) var trickWinner: Int? = nil
     @Published private(set) var history: [HandRecord] = []
+    /// Cărțile jucate în mâna curentă (pentru contorul „Cărți ieșite”).
+    @Published private(set) var playedThisHand: [PlayedCard] = []
     @Published private(set) var toast: String? = nil
 
     let settings: GameSettings
@@ -120,6 +122,7 @@ final class GameEngine: ObservableObject {
         deck.removeAll()
         for i in players.indices { players[i].hand = sortHand(players[i].hand) }
         trick = []
+        playedThisHand = []
         trickWinner = nil
         current = (dealer + 1) % n
         phase = .bidding
@@ -170,6 +173,7 @@ final class GameEngine: ObservableObject {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
             players[p].hand.removeAll { $0 == card }
             trick.append(PlayedCard(player: p, card: card))
+            playedThisHand.append(PlayedCard(player: p, card: card))
         }
         if trick.count == n {
             trickWinner = currentWinner()?.player
@@ -219,6 +223,46 @@ final class GameEngine: ObservableObject {
         let me = entries[human]
         if me.made { Haptics.success() } else { Haptics.warning() }
         phase = handIndex == handSizes.count - 1 ? .gameOver : .handEnd
+    }
+
+    // MARK: Antrenor
+
+    /// Câte contracte ai reușit / câte ai avut, fără mâinile de o carte.
+    var humanContractStats: (made: Int, total: Int) {
+        let recs = history.filter { $0.size > 1 }
+        return (recs.filter { $0.entries[human].made }.count, recs.count)
+    }
+
+    /// Sugestia antrenorului la licitație: numărul și explicația.
+    func coachBid() -> (bid: Int, reason: String) {
+        let hand = players[human].hand
+        let allowed = allowedBids(for: human)
+        if isForeheadHand {
+            let b = BotAI.foreheadBid(for: human, engine: self, allowed: allowed)
+            return (b, b == 1 ? "Cărțile celorlalți sunt mici: ai șanse bune să iei levata."
+                              : "Cel puțin un adversar are o carte care te bate probabil.")
+        }
+        let est = BotAI.estimateTricks(hand: hand, trump: trump, players: n)
+        let b = allowed.min { abs(Double($0) - est) < abs(Double($1) - est) } ?? 0
+        let aces = hand.filter { $0.rank == 14 && $0.suit != trumpSuit }.count
+        let trumps = hand.filter { $0.suit == trumpSuit }
+        let bigTrumps = trumps.filter { $0.rank >= 12 }.count
+        var parts: [String] = []
+        if aces > 0 { parts.append(aces == 1 ? "un as" : "\(aces) ași") }
+        if !trumps.isEmpty { parts.append("\(trumps.count) atu" + (bigTrumps > 0 ? " (\(bigTrumps) mari)" : "")) }
+        var reason = parts.isEmpty ? "Ai cărți mici, fără atu: levatele vor fi greu de luat."
+                                   : "Ai " + parts.joined(separator: " și ") + "."
+        reason += String(format: " Estimare: %.1f levate.", est)
+        if !allowed.contains(Int(est.rounded())) { reason += " Numărul cel mai apropiat e interzis pentru tine." }
+        return (b, reason)
+    }
+
+    /// Cartea pe care ar juca-o antrenorul în locul tău.
+    func coachCard() -> Card? {
+        guard phase == .playing, current == human else { return nil }
+        let me = players[human]
+        return BotAI.chooseCard(legal: legalCards(for: human), engine: self,
+                                wantsMore: (me.bid ?? 0) > me.tricks)
     }
 
     // MARK: Derulare rapidă (capturi App Store)

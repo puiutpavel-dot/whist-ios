@@ -24,7 +24,8 @@ META = os.path.join(ROOT, "fastlane", "metadata")
 SHOTS = os.path.join(ROOT, "fastlane", "screenshots")
 BUNDLE_ID = os.environ["BUNDLE_ID"]
 VERSION = os.environ.get("APP_VERSION", "1.0")
-DISPLAY_TYPE = "APP_IPHONE_67"   # slotul 6.9"/6.7" (1320×2868 și 1290×2796)
+DISPLAY_TYPE = "APP_IPHONE_67"
+HAS_RELEASE = False   # slotul 6.9"/6.7" (1320×2868 și 1290×2796)
 
 
 def env(name: str) -> str:
@@ -112,7 +113,11 @@ def main():
             "attributes": {"platform": "IOS", "versionString": VERSION},
             "relationships": {"app": {"data": {"type": "apps", "id": app_id}}}}})["data"]
     vid = version["id"]
-    print(f"Aplicație {app_id}, versiune {VERSION} ({vid})")
+    global HAS_RELEASE
+    HAS_RELEASE = any(v["attributes"].get("appStoreState") in
+                      ("READY_FOR_SALE", "READY_FOR_DISTRIBUTION", "REPLACED_WITH_NEW_VERSION", "REMOVED_FROM_SALE")
+                      for v in versions)
+    print(f"Aplicație {app_id}, versiune {VERSION} ({vid}), publicată anterior: {HAS_RELEASE}")
 
     copyright_ = read("copyright.txt")
     if copyright_:
@@ -152,7 +157,7 @@ def main():
             "supportUrl": read(f"{loc}/support_url.txt"),
             "marketingUrl": read(f"{loc}/marketing_url.txt"),
             # „Ce e nou” nu se acceptă la prima versiune a aplicației
-            "whatsNew": read(f"{loc}/release_notes.txt") if VERSION != "1.0" else None,
+            "whatsNew": read(f"{loc}/release_notes.txt") if HAS_RELEASE else None,
         }.items() if v}
         if loc in ver_locs:
             lid = ver_locs[loc]["id"]

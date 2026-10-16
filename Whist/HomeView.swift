@@ -10,7 +10,7 @@ struct WhistApp: App {
         WindowGroup {
             Group {
                 if let shot = ScreenshotMode.shot, shot >= 2 {
-                    GameView(engine: ScreenshotMode.engine(for: shot), showScores: shot == 5)
+                    GameView(engine: ScreenshotMode.engine(for: shot), showScores: shot == 5, showTracker: shot == 8)
                 } else {
                     HomeView()
                 }
@@ -25,6 +25,9 @@ struct HomeView: View {
     @AppStorage("format") private var formatRaw = GameFormat.oneEightOne.rawValue
     @AppStorage("streakBonus") private var streakBonus = true
     @AppStorage("forehead") private var forehead = true
+    @AppStorage("coach") private var coach = true
+    @AppStorage("contractsMade") private var contractsMade = 0
+    @AppStorage("contractsTotal") private var contractsTotal = 0
     @AppStorage("speed") private var speed = 1.0
     @AppStorage("gamesPlayed") private var gamesPlayed = 0
     @AppStorage("gamesWon") private var gamesWon = 0
@@ -38,6 +41,7 @@ struct HomeView: View {
                      format: GameFormat(rawValue: formatRaw) ?? .oneEightOne,
                      streakBonus: streakBonus,
                      forehead: forehead,
+                     coach: coach,
                      speed: speed)
     }
 
@@ -93,6 +97,20 @@ struct HomeView: View {
 
                         Divider().overlay(Theme.line)
 
+                        Toggle(isOn: $coach) {
+                            VStack(alignment: .leading, spacing: 2) {
+                                HStack(spacing: 6) {
+                                    Text("Antrenor").font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+                                    GoldTag(text: "Nou")
+                                }
+                                Text("Îți sugerează licitația, cu explicație, și cartea de jucat")
+                                    .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+                            }
+                        }
+                        .tint(Theme.primary)
+
+                        Divider().overlay(Theme.line)
+
                         label("Viteza adversarilor")
                         Pills(options: [0.6, 1.0, 1.8], selection: $speed) {
                             $0 < 0.9 ? "Lent" : ($0 < 1.5 ? "Normal" : "Rapid")
@@ -111,6 +129,8 @@ struct HomeView: View {
                 gamesPlayed += 1
                 if result.won { gamesWon += 1 }
                 bestScore = max(bestScore, result.score)
+                contractsMade += result.contractsMade
+                contractsTotal += result.contractsTotal
             }
         }
         .sheet(isPresented: $showRules) { RulesView() }
@@ -159,6 +179,7 @@ struct HomeView: View {
             stat("\(gamesPlayed)", "Jocuri")
             stat("\(gamesWon)", "Victorii")
             stat("\(bestScore)", "Record")
+            stat(contractsTotal > 0 ? "\(Int((Double(contractsMade) / Double(contractsTotal) * 100).rounded()))%" : "–", "Precizie")
         }
     }
 

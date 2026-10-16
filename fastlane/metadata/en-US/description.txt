@@ -8,6 +8,12 @@ Play against 2–5 computer opponents with the classic rules:
 • you must follow suit, and must trump if you can't
 • 5 points plus one per trick for an exact contract, minus the difference if you miss
 
+Learn and play better:
+• Coach: suggests how many tricks to bid and explains why (aces, trumps, estimate), and highlights the recommended card to play
+• Cards out: see, for every suit, what has been played, what you hold and what is still with the others, with trumps highlighted
+• Bidding accuracy: the share of contracts you made, across games
+• Strategy tips and a short history of whist, right in the app
+
 Optional variants:
 • Card on the forehead: in the last one-card hands you can't see your own card, only everyone else's
 • Streak bonuses: ±10 points for 5 contracts made or missed in a row

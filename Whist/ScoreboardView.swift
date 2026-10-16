@@ -110,7 +110,13 @@ struct RulesView: View {
         RuleItem("eye.slash.fill", "Cartea pe frunte (opțional)",
          "La ultima serie de mâini de o carte nu-ți vezi cartea: o ții „pe frunte”. Vezi cărțile celorlalți și licitezi după ele și după ce au spus ei."),
         RuleItem("flame.fill", "Premii (opțional)",
-         "Cu premiile activate: 5 contracte reușite la rând aduc +10 puncte, 5 ratate la rând −10. Mâinile de o carte nu se pun la serii.")
+         "Cu premiile activate: 5 contracte reușite la rând aduc +10 puncte, 5 ratate la rând −10. Mâinile de o carte nu se pun la serii."),
+        RuleItem("lightbulb.fill", "Strategie: licitația",
+         "Numără sigur doar așii și atuurile mari. Un rege fără as în aceeași culoare e o levată doar pe jumătate. Când împarți tu, gândește-te din timp la numărul interzis: cel mai bine e să ai o mână care să meargă cu o levată în plus sau în minus."),
+        RuleItem("target", "Strategie: jocul",
+         "Nu tăia inutil când ai deja levatele licitate: păstrează atuurile pentru momentele în care te salvează. După ce ai exact cât ai spus, scapă de cărțile mari când nu poți fi forțat să iei. Urmărește ce a ieșit: butonul Cărți ieșite îți arată ce mai e în joc."),
+        RuleItem("book.closed.fill", "Puțină istorie",
+         "Whistul vine din Anglia secolului al XVI-lea, din jocul „Ruff and Honours”. Edmond Hoyle i-a fixat regulile în 1742, iar din el s-a născut mai târziu bridge-ul. Varianta românească, cu licitație pe numărul exact de levate și mâini de la 1 la 8 cărți, e rudă cu „Oh Hell” și se joacă în familie și între prieteni de generații.")
     ]
 
     var body: some View {

@@ -3,6 +3,8 @@ import SwiftUI
 struct GameResult {
     let won: Bool
     let score: Int
+    let contractsMade: Int
+    let contractsTotal: Int
 }
 
 struct GameView: View {
@@ -11,6 +13,7 @@ struct GameView: View {
     let onFinish: (GameResult) -> Void
 
     @State private var showScores = false
+    @State private var showTracker = false
     @State private var confirmQuit = false
     @State private var reported = false
 
@@ -20,9 +23,10 @@ struct GameView: View {
     }
 
     /// Folosit de modul de capturi: pornește dintr-un joc deja pregătit.
-    init(engine: GameEngine, showScores: Bool = false) {
+    init(engine: GameEngine, showScores: Bool = false, showTracker: Bool = false) {
         _engine = StateObject(wrappedValue: engine)
         _showScores = State(initialValue: showScores)
+        _showTracker = State(initialValue: showTracker)
         _reported = State(initialValue: true)
         self.onFinish = { _ in }
     }
@@ -60,6 +64,10 @@ struct GameView: View {
         }
         .animation(.spring(response: 0.4, dampingFraction: 0.85), value: engine.phase)
         .sheet(isPresented: $showScores) { ScoreboardView(engine: engine) }
+        .sheet(isPresented: $showTracker) {
+            TrackerView(engine: engine)
+                .presentationDetents([.medium, .large])
+        }
         .confirmationDialog("Abandonezi jocul?", isPresented: $confirmQuit, titleVisibility: .visible) {
             Button("Abandonează", role: .destructive) { engine.stop(); dismiss() }
             Button("Continuă jocul", role: .cancel) {}
@@ -69,7 +77,8 @@ struct GameView: View {
             reported = true
             let best = engine.players.map(\.score).max() ?? 0
             let mine = engine.players[engine.human].score
-            onFinish(GameResult(won: mine == best, score: mine))
+            let c = engine.humanContractStats
+            onFinish(GameResult(won: mine == best, score: mine, contractsMade: c.made, contractsTotal: c.total))
         }
         .onDisappear { engine.stop() }
     }
@@ -78,8 +87,11 @@ struct GameView: View {
 
     private var topBar: some View {
         HStack {
-            IconButton(system: "xmark") {
-                if engine.phase == .gameOver { dismiss() } else { confirmQuit = true }
+            HStack(spacing: 8) {
+                IconButton(system: "xmark") {
+                    if engine.phase == .gameOver { dismiss() } else { confirmQuit = true }
+                }
+                Color.clear.frame(width: 42, height: 42)
             }
             Spacer()
             VStack(spacing: 2) {
@@ -89,7 +101,11 @@ struct GameView: View {
                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
             }
             Spacer()
-            IconButton(system: "list.number") { showScores = true }
+            HStack(spacing: 8) {
+                IconButton(system: "rectangle.stack") { showTracker = true }
+                    .accessibilityLabel("Cărți ieșite")
+                IconButton(system: "list.number") { showScores = true }
+            }
         }
         .padding(.top, 4)
     }
@@ -359,6 +375,7 @@ struct BidPanel: View {
     var body: some View {
         let allowed = Set(engine.allowedBids(for: engine.human))
         let forbidden = engine.forbiddenBid(for: engine.human)
+        let tip = engine.settings.coach ? engine.coachBid() : nil
         VStack(spacing: compact ? 8 : 12) {
             Text("CÂTE LEVATE IEI?").font(Theme.display(26)).foregroundStyle(Theme.ink)
             if engine.isForeheadHand {
@@ -379,10 +396,14 @@ struct BidPanel: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: compact ? 40 : 50)
                             .background(Capsule().fill(ok ? Theme.primary : Theme.soft))
+                            .overlay(Capsule().strokeBorder(Theme.gold, lineWidth: tip?.bid == b ? 3 : 0))
                     }
                     .buttonStyle(.plain)
                     .disabled(!ok)
                 }
+            }
+            if let tip {
+                CoachTip(title: "SFAT: SPUNE \(tip.bid)", text: tip.reason)
             }
             if let f = forbidden {
                 Text("Împarți tu: nu poți spune \(f), suma licitațiilor ar fi egală cu numărul de cărți.")
@@ -417,6 +438,7 @@ struct HandView: View {
                 : 6
             let myTurn = engine.phase == .playing && engine.current == engine.human
             let legal = Set(engine.legalCards(for: engine.human))
+            let suggested = engine.settings.coach && !engine.isForeheadHand ? engine.coachCard() : nil
 
             HStack(spacing: spacing) {
                 ForEach(hand) { card in
@@ -428,6 +450,11 @@ struct HandView: View {
                             CardView(card: card, width: cardW, dimmed: myTurn && !canPlay)
                         }
                     }
+                        .overlay(alignment: .top) {
+                            if suggested == card {
+                                GoldTag(text: "Sfat").offset(y: -9)
+                            }
+                        }
                         .offset(y: canPlay ? -12 : 0)
                         .onTapGesture { engine.humanPlay(card) }
                         .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity),
@@ -536,5 +563,106 @@ struct TableFelt: View {
                     .strokeBorder(LinearGradient(colors: [Theme.accent.opacity(0.8), Theme.accent.opacity(0.15)],
                                                  startPoint: .top, endPoint: .bottom), lineWidth: 1.5))
             .shadow(color: Theme.accent.opacity(0.18), radius: 18, y: 6)
+    }
+}
+
+/// Bulă de sfat a antrenorului.
+struct CoachTip: View {
+    let title: String
+    let text: String
+    var body: some View {
+        HStack(alignment: .top, spacing: 8) {
+            Image(systemName: "lightbulb.fill")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundStyle(Theme.gold)
+                .padding(.top, 1)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.system(size: 12, weight: .heavy)).foregroundStyle(Theme.gold)
+                Text(text).font(Theme.font(12, .medium)).foregroundStyle(Theme.ink.opacity(0.85))
+                    .lineLimit(3).fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+        .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Theme.gold.opacity(0.10)))
+        .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Theme.gold.opacity(0.35), lineWidth: 1))
+    }
+}
+
+/// „Cărți ieșite”: pentru fiecare culoare, ce s-a jucat, ce ai tu și ce mai e la ceilalți.
+struct TrackerView: View {
+    @ObservedObject var engine: GameEngine
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        let low = Deck.lowestRank(players: engine.n)
+        let played = Set(engine.playedThisHand.map(\.card))
+        let mine = engine.isForeheadHand ? [] : Set(engine.players[engine.human].hand)
+        let order: [Suit] = engine.trumpSuit.map { t in [t] + Suit.allCases.filter { $0 != t } } ?? Suit.allCases
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 12) {
+                    HStack(spacing: 14) {
+                        legend(color: Theme.cardFace, text: "în joc")
+                        legend(color: Theme.primary, text: "la tine")
+                        legend(color: Theme.soft, text: "ieșite")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ForEach(order, id: \.self) { suit in
+                        let ranks = Array((low...14).reversed())
+                        let out = ranks.filter { r in
+                            let c = Card(suit: suit, rank: r)
+                            return !played.contains(c) && !mine.contains(c) && c != engine.trump
+                        }.count
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                Text(suit.symbol).font(.system(size: 22, weight: .bold))
+                                    .foregroundStyle(suit.isRed ? Theme.red : Theme.ink)
+                                Text(suit.name.uppercased()).font(Theme.display(20)).foregroundStyle(Theme.ink)
+                                if suit == engine.trumpSuit { GoldTag(text: "Atu") }
+                                Spacer()
+                                Text("\(out) la ceilalți").font(Theme.font(12, .semibold)).foregroundStyle(Theme.muted)
+                            }
+                            HStack(spacing: 4) {
+                                ForEach(ranks, id: \.self) { r in
+                                    let c = Card(suit: suit, rank: r)
+                                    let isMine = mine.contains(c)
+                                    let gone = played.contains(c) || c == engine.trump
+                                    Text(c.rankLabel)
+                                        .font(.system(size: 13, weight: .heavy).width(.condensed))
+                                        .foregroundStyle(isMine ? Theme.onPrimary : gone ? Theme.muted : Theme.cardInk)
+                                        .strikethrough(gone && !isMine, color: Theme.muted)
+                                        .frame(maxWidth: .infinity, minHeight: 30)
+                                        .background(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                            .fill(isMine ? Theme.primary : gone ? Theme.soft : Theme.cardFace))
+                                }
+                            }
+                        }
+                        .panel(padding: 12)
+                    }
+                    if engine.trump != nil {
+                        Text("Cartea de atu întoarsă se socotește ieșită.")
+                            .font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+                    }
+                }
+                .padding(16)
+            }
+            .background(Theme.bg)
+            .navigationTitle("Cărți ieșite")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Gata") { dismiss() }.font(Theme.font(17, .bold))
+                }
+            }
+        }
+    }
+
+    private func legend(color: Color, text: String) -> some View {
+        HStack(spacing: 6) {
+            RoundedRectangle(cornerRadius: 3).fill(color).frame(width: 14, height: 14)
+            Text(text).font(Theme.font(12, .semibold)).foregroundStyle(Theme.muted)
+        }
     }
 }

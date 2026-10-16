@@ -44,13 +44,15 @@ definitions:
         xcrun simctl install "$UDID" "$APP"
         OUT="$CM_BUILD_DIR/fastlane/screenshots"
         mkdir -p "$OUT/ro" "$OUT/en-US"
-        for N in 1 2 3 4 5 6 7; do
+        I=0
+        for N in 1 2 8 3 4 5 6 7; do
+          I=$((I+1))
           xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
           xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N
           sleep 6
-          xcrun simctl io "$UDID" screenshot "$OUT/ro/0${N}_whist.png"
-          cp "$OUT/ro/0${N}_whist.png" "$OUT/en-US/0${N}_whist.png"
-          sips -g pixelWidth -g pixelHeight "$OUT/ro/0${N}_whist.png" | tail -2
+          xcrun simctl io "$UDID" screenshot "$OUT/ro/0${I}_whist.png"
+          cp "$OUT/ro/0${I}_whist.png" "$OUT/en-US/0${I}_whist.png"
+          sips -g pixelWidth -g pixelHeight "$OUT/ro/0${I}_whist.png" | tail -2
         done
         mkdir -p "$CM_BUILD_DIR/screenshots" && cp "$OUT/ro/"*.png "$CM_BUILD_DIR/screenshots/"
 
