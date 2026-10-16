@@ -160,6 +160,7 @@ final class GameEngine: ObservableObject {
     func stop() { botTask?.cancel() }
 
     private func placeBid(_ b: Int, by p: Int) {
+        guard phase == .bidding, p == current, players[p].bid == nil else { return }
         players[p].bid = b
         if players.allSatisfy({ $0.bid != nil }) {
             phase = .playing
@@ -170,6 +171,7 @@ final class GameEngine: ObservableObject {
     }
 
     private func play(_ card: Card, by p: Int) {
+        guard phase == .playing, p == current, players[p].hand.contains(card) else { return }
         withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
             players[p].hand.removeAll { $0 == card }
             trick.append(PlayedCard(player: p, card: card))
@@ -234,7 +236,8 @@ final class GameEngine: ObservableObject {
     }
 
     /// Sugestia antrenorului la licitație: numărul și explicația.
-    func coachBid() -> (bid: Int, reason: String) {
+    func coachBid() -> (bid: Int, reason: String)? {
+        guard phase == .bidding, current == human else { return nil }
         let hand = players[human].hand
         let allowed = allowedBids(for: human)
         if isForeheadHand {
@@ -259,7 +262,7 @@ final class GameEngine: ObservableObject {
 
     /// Cartea pe care ar juca-o antrenorul în locul tău.
     func coachCard() -> Card? {
-        guard phase == .playing, current == human else { return nil }
+        guard phase == .playing, current == human, !players[human].hand.isEmpty else { return nil }
         let me = players[human]
         return BotAI.chooseCard(legal: legalCards(for: human), engine: self,
                                 wantsMore: (me.bid ?? 0) > me.tricks)
@@ -285,7 +288,8 @@ final class GameEngine: ObservableObject {
             case .playing:
                 let p = current
                 let wants = (players[p].bid ?? 0) > players[p].tricks
-                play(BotAI.chooseCard(legal: legalCards(for: p), engine: self, wantsMore: wants), by: p)
+                guard let card = BotAI.chooseCard(legal: legalCards(for: p), engine: self, wantsMore: wants) else { return false }
+                play(card, by: p)
             case .trickEnd:
                 finishTrick()
             case .handEnd:
@@ -331,7 +335,7 @@ final class GameEngine: ObservableObject {
                 if Task.isCancelled { return }
                 let p = current
                 let wants = (players[p].bid ?? 0) > players[p].tricks
-                let card = BotAI.chooseCard(legal: legalCards(for: p), engine: self, wantsMore: wants)
+                guard let card = BotAI.chooseCard(legal: legalCards(for: p), engine: self, wantsMore: wants) else { return }
                 play(card, by: p)
             case .trickEnd:
                 await pause(1.1)

@@ -375,7 +375,7 @@ struct BidPanel: View {
     var body: some View {
         let allowed = Set(engine.allowedBids(for: engine.human))
         let forbidden = engine.forbiddenBid(for: engine.human)
-        let tip = engine.settings.coach ? engine.coachBid() : nil
+        let tip = engine.settings.coach ? engine.coachBid() : nil   // nil când nu mai e licitația ta
         VStack(spacing: compact ? 8 : 12) {
             Text("CÂTE LEVATE IEI?").font(Theme.display(26)).foregroundStyle(Theme.ink)
             if engine.isForeheadHand {

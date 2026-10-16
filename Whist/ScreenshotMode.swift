@@ -54,4 +54,62 @@ enum ScreenshotMode {
         }
         return GameEngine(settings: settings)
     }
+
+    // MARK: Test de anduranță (doar în CI): `-stress`
+
+    static var isStress: Bool { ProcessInfo.processInfo.arguments.contains("-stress") }
+
+    /// Joacă multe partide în toate configurațiile și verifică regulile la fiecare pas.
+    /// Rezultatul se scrie în Documents/stress.txt („STRESS OK …” sau „STRESS FAIL …”).
+    static func runStress() {
+        var games = 0, steps = 0
+        var errors: [String] = []
+        func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
+        for players in 3...6 {
+            for format in GameFormat.allCases {
+                for forehead in [true, false] {
+                    for _ in 0..<40 {
+                        var settings = GameSettings()
+                        settings.playerCount = players
+                        settings.format = format
+                        settings.forehead = forehead
+                        settings.streakBonus = Bool.random()
+                        let e = GameEngine(settings: settings)
+                        var lastHistory = 0
+                        let done = e.fastForward(maxSteps: 200_000) { g in
+                            steps += 1
+                            // ce face interfața la fiecare redesenare, inclusiv în tranziții
+                            _ = g.coachBid(); _ = g.coachCard(); _ = g.humanContractStats
+                            _ = g.legalCards(for: g.human); _ = g.isForeheadHand
+                            if g.isForeheadHand {
+                                _ = BotAI.foreheadBid(for: g.human, engine: g, allowed: g.allowedBids(for: g.human))
+                            }
+                            if g.phase == .playing && g.legalCards(for: g.current).isEmpty {
+                                fail("fără cărți legale: mâna \(g.handIndex), jucător \(g.current)")
+                            }
+                            if g.history.count != lastHistory {
+                                lastHistory = g.history.count
+                                if let r = g.history.last {
+                                    let bids = r.entries.map(\.bid).reduce(0, +)
+                                    let tricks = r.entries.map(\.tricks).reduce(0, +)
+                                    if bids == r.size { fail("suma licitațiilor = \(r.size) la mâna \(r.id)") }
+                                    if tricks != r.size { fail("levate \(tricks) ≠ \(r.size) la mâna \(r.id)") }
+                                }
+                            }
+                            return g.phase == .gameOver
+                        }
+                        games += 1
+                        if !done { fail("joc neterminat: \(players)p \(format.rawValue) frunte=\(forehead), mâna \(e.handIndex), faza \(e.phase)") }
+                        if e.history.count != e.handSizes.count { fail("istoric \(e.history.count) ≠ \(e.handSizes.count)") }
+                    }
+                }
+            }
+        }
+        let text = errors.isEmpty
+            ? "STRESS OK: \(games) jocuri, \(steps) pași"
+            : "STRESS FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("stress.txt")
+        try? text.write(to: url, atomically: true, encoding: .utf8)
+        print(text)
+    }
 }

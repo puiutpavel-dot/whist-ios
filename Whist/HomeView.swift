@@ -4,6 +4,7 @@ import SwiftUI
 struct WhistApp: App {
     init() {
         if ScreenshotMode.shot == 1 { ScreenshotMode.prepareHomeStats() }
+        if ScreenshotMode.isStress { ScreenshotMode.runStress() }
     }
 
     var body: some Scene {

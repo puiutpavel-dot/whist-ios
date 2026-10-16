@@ -94,6 +94,36 @@ workflows:
     artifacts:
       - build.log
 
+  ios-stress:
+    name: Whist — test de anduranță (simulator)
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment: *env
+    scripts:
+      - *sim_build
+      - name: Mii de partide în simulator
+        script: |
+          set -e
+          APP=$(find "$CM_BUILD_DIR/dd/Build/Products/Debug-iphonesimulator" -maxdepth 1 -name "*.app" | head -1)
+          UDID=$(xcrun simctl list devices available | grep -m1 -E "iPhone 1[5-9]|iPhone 2" | sed -E 's/.*\(([0-9A-F-]{36})\).*/\1/')
+          echo "Simulator: $UDID"
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl install "$UDID" "$APP"
+          xcrun simctl launch "$UDID" "$BUNDLE_ID" -stress
+          DATA=$(xcrun simctl get_app_container "$UDID" "$BUNDLE_ID" data)
+          for i in $(seq 1 120); do
+            [ -f "$DATA/Documents/stress.txt" ] && break
+            if ! xcrun simctl spawn "$UDID" launchctl list | grep -q "$BUNDLE_ID"; then
+              echo "Aplicația s-a oprit înainte de final"; break
+            fi
+            sleep 5
+          done
+          echo "======== REZULTAT ========"
+          cat "$DATA/Documents/stress.txt" 2>/dev/null || { echo "Fără rezultat (crash)"; \
+            find ~/Library/Logs/DiagnosticReports -name "Whist*" -newer "$APP" -exec head -80 {} \; ; exit 1; }
+          grep -q "STRESS OK" "$DATA/Documents/stress.txt"
+
   ios-screenshots:
     name: Whist — capturi App Store
     instance_type: mac_mini_m2

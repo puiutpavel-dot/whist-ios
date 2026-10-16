@@ -63,7 +63,12 @@ enum BotAI {
             var best: (player: Int, card: Card)?
             for k in 0..<engine.n {
                 let q = (leader + k) % engine.n
-                let c = q == p ? mine : engine.players[q].hand[0]
+                // după ce s-a jucat, cartea nu mai e în mână: o luăm din levata curentă
+                let c: Card
+                if q == p { c = mine }
+                else if let h = engine.players[q].hand.first { c = h }
+                else if let pc = engine.playedThisHand.first(where: { $0.player == q }) { c = pc.card }
+                else { continue }
                 if let b = best {
                     if engine.beats(c, b.card) { best = (q, c) }
                 } else {
@@ -85,10 +90,10 @@ enum BotAI {
         c.rank + (c.suit == trump ? 100 : 0)
     }
 
-    static func chooseCard(legal: [Card], engine: GameEngine, wantsMore: Bool) -> Card {
+    static func chooseCard(legal: [Card], engine: GameEngine, wantsMore: Bool) -> Card? {
         let t = engine.trumpSuit
         let sorted = legal.sorted { strength($0, trump: t) < strength($1, trump: t) }
-        guard let lowest = sorted.first, let highest = sorted.last else { return legal[0] }
+        guard let lowest = sorted.first, let highest = sorted.last else { return nil }
 
         // Deschidere
         guard let best = engine.currentWinner() else {
@@ -106,7 +111,7 @@ enum BotAI {
         let isLast = engine.trick.count == engine.n - 1
 
         if wantsMore {
-            if !winners.isEmpty { return isLast ? winners.first! : winners.last! }
+            if let w = isLast ? winners.first : winners.last { return w }
             return losers.first ?? lowest
         } else {
             if let dump = losers.last { return dump }       // scăpăm de cea mai mare carte care pierde
