@@ -1,1 +1,0 @@
-A built-in coach for bidding and play, a cards-out tracker, bidding accuracy stats, strategy tips and a new evening-table look.

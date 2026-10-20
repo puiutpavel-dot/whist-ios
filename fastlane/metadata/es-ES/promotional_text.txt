@@ -1,0 +1,1 @@
+Tres clásicos rumanos en una sola app: Whist con entrenador, Rummy de fichas y Rentz con sus 8 juegos.

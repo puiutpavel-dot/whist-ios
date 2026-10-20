@@ -19,7 +19,7 @@ definitions:
         || { echo "===== ERORI ====="; grep -E "error:" "$CM_BUILD_DIR/build.log" | sort -u | head -100; exit 1; }
 
     - &screenshots
-      name: Capturi App Store (iPhone 6.9")
+      name: Capturi App Store (iPhone 6.9", 7 limbi)
       script: |
         set -e
         APP=$(find "$CM_BUILD_DIR/dd/Build/Products/Debug-iphonesimulator" -maxdepth 1 -name "*.app" | head -1)
@@ -38,29 +38,32 @@ definitions:
         print(best[1]); print(best[2], best[0], file=sys.stderr)")
         xcrun simctl boot "$UDID" || true
         xcrun simctl bootstatus "$UDID" -b
-        xcrun simctl ui "$UDID" appearance light
+        xcrun simctl ui "$UDID" appearance dark
         xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 \
           --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
         xcrun simctl install "$UDID" "$APP"
         OUT="$CM_BUILD_DIR/fastlane/screenshots"
-        mkdir -p "$OUT/ro" "$OUT/en-US"
-        I=0
-        for N in 1 2 8 3 4 5 6 7; do
-          I=$((I+1))
-          xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
-          xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N
-          sleep 6
-          xcrun simctl io "$UDID" screenshot "$OUT/ro/0${I}_whist.png"
-          cp "$OUT/ro/0${I}_whist.png" "$OUT/en-US/0${I}_whist.png"
-          sips -g pixelWidth -g pixelHeight "$OUT/ro/0${I}_whist.png" | tail -2
+        rm -rf "$OUT"; mkdir -p "$CM_BUILD_DIR/screenshots"
+        # dosar App Store : limba aplicației : regiune
+        for SPEC in ro:ro:ro_RO en-US:en:en_US de-DE:de:de_DE fr-FR:fr:fr_FR it:it:it_IT es-ES:es:es_ES hu:hu:hu_HU; do
+          IFS=: read -r DIR LANG REGION <<< "$SPEC"
+          mkdir -p "$OUT/$DIR"
+          for N in 1 2 3 4 5 6 7 8; do
+            xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
+            xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N -AppleLanguages "($LANG)" -AppleLocale "$REGION"
+            sleep 9
+            xcrun simctl io "$UDID" screenshot "$OUT/$DIR/0${N}_jocuri.png"
+          done
+          for f in "$OUT/$DIR/"*.png; do cp "$f" "$CM_BUILD_DIR/screenshots/${DIR}_$(basename "$f")"; done
+          echo "Capturi $DIR: $(ls "$OUT/$DIR" | wc -l)"
         done
-        mkdir -p "$CM_BUILD_DIR/screenshots" && cp "$OUT/ro/"*.png "$CM_BUILD_DIR/screenshots/"
+        sips -g pixelWidth -g pixelHeight "$OUT/ro/01_jocuri.png" | tail -2
 
     - &preview_log
       name: Miniaturi în log (previzualizare)
       script: |
         mkdir -p /tmp/thumbs
-        for f in "$CM_BUILD_DIR/screenshots/"*.png; do
+        for f in "$CM_BUILD_DIR/screenshots/"ro_*.png "$CM_BUILD_DIR/screenshots/"de-DE_0[2-8]*.png; do
           n=$(basename "$f" .png)
           sips -s format jpeg -s formatOptions 55 --resampleWidth 260 "$f" --out "/tmp/thumbs/$n.jpg" >/dev/null
           echo "THUMB:$n:$(base64 -i "/tmp/thumbs/$n.jpg" | tr -d '\n')"

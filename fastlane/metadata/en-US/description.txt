@@ -1,27 +1,22 @@
-Romanian whist, the way it is played at the table, now on iPhone. The app is in Romanian.
+Three Romanian card games at one table: Whist, tile Rummy (Remi etalat) and Rentz. Play solo against the computer, anytime, offline.
 
-Play against 2–5 computer opponents with the classic rules:
-• 3–6 players, 8 cards per player in the deck
-• 1-8-1 or 8-1-8 formats
-• trump is turned up after the deal; 8-card hands are played without trump
-• the dealer cannot make the total of the bids equal the number of cards
-• you must follow suit, and must trump if you can't
-• 5 points plus one per trick for an exact contract, minus the difference if you miss
+WHIST
+• Bid exactly how many tricks you'll take; the dealer can't make the bids add up.
+• 1-8-1 and 8-1-8 formats, 3–6 players.
+• Forehead card in the last one-card hands.
+• The coach suggests your bid, with a reason, and the card to play.
+• Cards-played tracker and scoreboard.
 
-Learn and play better:
-• Coach: suggests how many tricks to bid and explains why (aces, trumps, estimate), and highlights the recommended card to play
-• Cards out: see, for every suit, what has been played, what you hold and what is still with the others, with trumps highlighted
-• Bidding accuracy: the share of contracts you made, across games
-• Strategy tips and a short history of whist, right in the app
+TILE RUMMY (REMI ETALAT)
+• Classic Romanian rules: 45-point opening, trump tile, Jokers, adding to melds and going out.
+• 2–4 players, suggestion button for melds.
 
-Optional variants:
-• Card on the forehead: in the last one-card hands you can't see your own card, only everyone else's
-• Streak bonuses: ±10 points for 5 contracts made or missed in a row
+RENTZ
+• All 8 games: King of Hearts, Queens, Diamonds, No Tricks, Totals, Whist, Ten of Clubs and Rentz.
+• Each player chooses a game in turn after seeing their hand, with a tip.
+• 3–6 players, score table with each player's chosen games.
 
-Also:
-• the classic paper-style score sheet
-• the cards you are allowed to play are raised, so you never misplay
-• stats: games, wins, best score
-• three opponent speeds
+NO ADS, NO ACCOUNT
+No data collected. No betting or money, real or virtual.
 
-No account, no ads, works offline. We collect no data.
+Available in English, Romanian, German, French, Italian, Spanish and Hungarian.
