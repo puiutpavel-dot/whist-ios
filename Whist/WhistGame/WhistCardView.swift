@@ -37,7 +37,7 @@ struct CardView: View {
                 .fill(Color.black.opacity(dimmed ? 0.5 : 0))
         )
         .shadow(color: glow ? Theme.gold.opacity(0.6) : .clear, radius: 10)
-        .accessibilityLabel("\(card.rankLabel) de \(card.suit.name)")
+        .accessibilityLabel(L("w.card.a11y", card.rankLabel, card.suit.name))
     }
 }
 

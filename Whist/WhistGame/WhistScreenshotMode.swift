@@ -3,7 +3,7 @@ import SwiftUI
 /// Capturile pentru App Store se fac în simulator cu: `xcrun simctl launch booted <bundle> -shot N`.
 /// Fără acest argument, aplicația pornește normal.
 @MainActor
-enum ScreenshotMode {
+enum WhistShots {
     static var shot: Int? {
         let args = ProcessInfo.processInfo.arguments
         guard let i = args.firstIndex(of: "-shot"), i + 1 < args.count else { return nil }
@@ -61,7 +61,7 @@ enum ScreenshotMode {
 
     /// Joacă multe partide în toate configurațiile și verifică regulile la fiecare pas.
     /// Rezultatul se scrie în Documents/stress.txt („STRESS OK …” sau „STRESS FAIL …”).
-    static func runStress() {
+    static func runStress() -> String {
         var games = 0, steps = 0
         var errors: [String] = []
         func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
@@ -106,10 +106,8 @@ enum ScreenshotMode {
             }
         }
         let text = errors.isEmpty
-            ? "STRESS OK: \(games) jocuri, \(steps) pași"
-            : "STRESS FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("stress.txt")
-        try? text.write(to: url, atomically: true, encoding: .utf8)
-        print(text)
+            ? "WHIST OK: \(games) jocuri, \(steps) pași"
+            : "WHIST FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
+        return text
     }
 }

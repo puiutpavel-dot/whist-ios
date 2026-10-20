@@ -24,7 +24,7 @@ final class GameEngine: ObservableObject {
     let human = 0
     private var botTask: Task<Void, Never>?
 
-    static let botNames = ["Ana", "Mihai", "Ioana", "Radu", "Elena"]
+    static let botNames = ["Ana", "Mihai", "Ioana", "Radu", "Elena"]   // nume românești în toate limbile
 
     /// Folosit doar pentru capturile din App Store: adversarii stau pe loc.
     var frozen = false
@@ -32,7 +32,7 @@ final class GameEngine: ObservableObject {
     init(settings: GameSettings) {
         self.settings = settings
         self.handSizes = GameSettings.handSizes(players: settings.playerCount, format: settings.format)
-        var list = [Player(id: 0, name: "Tu", isHuman: true)]
+        var list = [Player(id: 0, name: L("name.you"), isHuman: true)]
         for i in 1..<settings.playerCount {
             list.append(Player(id: i, name: Self.botNames[i - 1], isHuman: false))
         }
@@ -242,8 +242,7 @@ final class GameEngine: ObservableObject {
         let allowed = allowedBids(for: human)
         if isForeheadHand {
             let b = BotAI.foreheadBid(for: human, engine: self, allowed: allowed)
-            return (b, b == 1 ? "Cărțile celorlalți sunt mici: ai șanse bune să iei levata."
-                              : "Cel puțin un adversar are o carte care te bate probabil.")
+            return (b, b == 1 ? L("w.coach.foreheadGood") : L("w.coach.foreheadBad"))
         }
         let est = BotAI.estimateTricks(hand: hand, trump: trump, players: n)
         let b = allowed.min { abs(Double($0) - est) < abs(Double($1) - est) } ?? 0
@@ -251,12 +250,11 @@ final class GameEngine: ObservableObject {
         let trumps = hand.filter { $0.suit == trumpSuit }
         let bigTrumps = trumps.filter { $0.rank >= 12 }.count
         var parts: [String] = []
-        if aces > 0 { parts.append(aces == 1 ? "un as" : "\(aces) ași") }
-        if !trumps.isEmpty { parts.append("\(trumps.count) atu" + (bigTrumps > 0 ? " (\(bigTrumps) mari)" : "")) }
-        var reason = parts.isEmpty ? "Ai cărți mici, fără atu: levatele vor fi greu de luat."
-                                   : "Ai " + parts.joined(separator: " și ") + "."
-        reason += String(format: " Estimare: %.1f levate.", est)
-        if !allowed.contains(Int(est.rounded())) { reason += " Numărul cel mai apropiat e interzis pentru tine." }
+        if aces > 0 { parts.append(aces == 1 ? L("w.coach.oneAce") : L("w.coach.aces", aces)) }
+        if !trumps.isEmpty { parts.append(L("w.coach.trumps", trumps.count) + (bigTrumps > 0 ? L("w.coach.bigTrumps", bigTrumps) : "")) }
+        var reason = parts.isEmpty ? L("w.coach.weak") : L("w.coach.have", parts.joined(separator: L("w.coach.and")))
+        reason += L("w.coach.estimate", est.formatted(.number.precision(.fractionLength(1))))
+        if !allowed.contains(Int(est.rounded())) { reason += L("w.coach.forbidden") }
         return (b, reason)
     }
 

@@ -16,10 +16,10 @@ enum Suit: Int, CaseIterable, Hashable {
 
     var name: String {
         switch self {
-        case .spades: return "Pică"
-        case .hearts: return "Inimă roșie"
-        case .diamonds: return "Caro"
-        case .clubs: return "Treflă"
+        case .spades: return L("w.suit.spades")
+        case .hearts: return L("w.suit.hearts")
+        case .diamonds: return L("w.suit.diamonds")
+        case .clubs: return L("w.suit.clubs")
         }
     }
 
@@ -70,8 +70,8 @@ enum GameFormat: String, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .oneEightOne: return "Începe cu mâini de o carte"
-        case .eightOneEight: return "Începe cu mâini de 8 cărți"
+        case .oneEightOne: return L("w.format.181")
+        case .eightOneEight: return L("w.format.818")
         }
     }
 }

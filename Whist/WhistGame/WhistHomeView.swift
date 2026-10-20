@@ -1,27 +1,6 @@
 import SwiftUI
 
-@main
-struct WhistApp: App {
-    init() {
-        if ScreenshotMode.shot == 1 { ScreenshotMode.prepareHomeStats() }
-        if ScreenshotMode.isStress { ScreenshotMode.runStress() }
-    }
-
-    var body: some Scene {
-        WindowGroup {
-            Group {
-                if let shot = ScreenshotMode.shot, shot >= 2 {
-                    GameView(engine: ScreenshotMode.engine(for: shot), showScores: shot == 5, showTracker: shot == 8)
-                } else {
-                    HomeView()
-                }
-            }
-            .preferredColorScheme(.dark)
-        }
-    }
-}
-
-struct HomeView: View {
+struct WhistHomeView: View {
     @AppStorage("players") private var playerCount = 4
     @AppStorage("format") private var formatRaw = GameFormat.oneEightOne.rawValue
     @AppStorage("streakBonus") private var streakBonus = true
@@ -54,22 +33,22 @@ struct HomeView: View {
                     hero.padding(.top, 8)
 
                     VStack(spacing: 12) {
-                        Button("Joc nou") { playing = true }
+                        Button(L("w.menu.new")) { playing = true }
                             .buttonStyle(PrimaryButtonStyle())
-                        Button("Reguli") { showRules = true }
+                        Button(L("w.menu.rules")) { showRules = true }
                             .buttonStyle(SecondaryButtonStyle())
                     }
 
                     VStack(alignment: .leading, spacing: 18) {
-                        Text("SETĂRI MASĂ").font(Theme.display(22)).foregroundStyle(Theme.ink)
-                        label("Jucători")
+                        Text(L("w.menu.settings")).font(Theme.display(22)).foregroundStyle(Theme.ink)
+                        label(L("w.menu.players"))
                         Pills(options: [3, 4, 5, 6], selection: $playerCount) { "\($0)" }
-                        Text("Tu + \(playerCount - 1) adversari · \(GameSettings.handSizes(players: playerCount, format: settings.format).count) mâini")
+                        Text(L("w.menu.playersLine", playerCount - 1, GameSettings.handSizes(players: playerCount, format: settings.format).count))
                             .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
 
                         Divider().overlay(Theme.line)
 
-                        label("Format")
+                        label(L("w.menu.format"))
                         Pills(options: GameFormat.allCases.map(\.rawValue), selection: $formatRaw) { $0 }
                         Text(settings.format.subtitle)
                             .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
@@ -78,8 +57,8 @@ struct HomeView: View {
 
                         Toggle(isOn: $streakBonus) {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Premii pentru serii").font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
-                                Text("±10 puncte la 5 contracte reușite / ratate la rând")
+                                Text(L("w.menu.streak")).font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+                                Text(L("w.menu.streakText"))
                                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
                             }
                         }
@@ -89,8 +68,8 @@ struct HomeView: View {
 
                         Toggle(isOn: $forehead) {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Cartea pe frunte").font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
-                                Text("Ultima serie de mâini de o carte: nu-ți vezi cartea, le vezi pe ale celorlalți")
+                                Text(L("w.menu.forehead")).font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+                                Text(L("w.menu.foreheadText"))
                                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
                             }
                         }
@@ -101,10 +80,10 @@ struct HomeView: View {
                         Toggle(isOn: $coach) {
                             VStack(alignment: .leading, spacing: 2) {
                                 HStack(spacing: 6) {
-                                    Text("Antrenor").font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
-                                    GoldTag(text: "Nou")
+                                    Text(L("w.menu.coach")).font(Theme.font(16, .semibold)).foregroundStyle(Theme.ink)
+                                    GoldTag(text: L("w.menu.new.tag"))
                                 }
-                                Text("Îți sugerează licitația, cu explicație, și cartea de jucat")
+                                Text(L("w.menu.coachText"))
                                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
                             }
                         }
@@ -112,9 +91,9 @@ struct HomeView: View {
 
                         Divider().overlay(Theme.line)
 
-                        label("Viteza adversarilor")
+                        label(L("w.menu.speed"))
                         Pills(options: [0.6, 1.0, 1.8], selection: $speed) {
-                            $0 < 0.9 ? "Lent" : ($0 < 1.5 ? "Normal" : "Rapid")
+                            $0 < 0.9 ? L("w.speed.slow") : ($0 < 1.5 ? L("w.speed.normal") : L("w.speed.fast"))
                         }
                     }
                     .panel(padding: 20)
@@ -167,7 +146,7 @@ struct HomeView: View {
                 }
                 Text("WHIST").font(Theme.display(64)).foregroundStyle(.white)
                     .shadow(color: .black.opacity(0.35), radius: 6, y: 3)
-                Text("Jocul românesc de levate").font(Theme.font(15, .semibold)).foregroundStyle(.white.opacity(0.85))
+                Text(L("w.menu.tagline")).font(Theme.font(15, .semibold)).foregroundStyle(.white.opacity(0.85))
             }
             .padding(20)
         }
@@ -177,10 +156,10 @@ struct HomeView: View {
 
     private var stats: some View {
         HStack(spacing: 12) {
-            stat("\(gamesPlayed)", "Jocuri")
-            stat("\(gamesWon)", "Victorii")
-            stat("\(bestScore)", "Record")
-            stat(contractsTotal > 0 ? "\(Int((Double(contractsMade) / Double(contractsTotal) * 100).rounded()))%" : "–", "Precizie")
+            stat("\(gamesPlayed)", L("w.stat.games"))
+            stat("\(gamesWon)", L("w.stat.wins"))
+            stat("\(bestScore)", L("w.stat.best"))
+            stat(contractsTotal > 0 ? "\(Int((Double(contractsMade) / Double(contractsTotal) * 100).rounded()))%" : "–", L("w.stat.accuracy"))
         }
     }
 

@@ -9,7 +9,7 @@ struct ScoreboardView: View {
             ScrollView([.vertical, .horizontal]) {
                 Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                     GridRow {
-                        header("Cărți").gridCellColumns(1)
+                        header(L("w.sb.cards")).gridCellColumns(1)
                         ForEach(engine.players) { p in
                             header(p.name).gridCellColumns(2)
                         }
@@ -17,8 +17,8 @@ struct ScoreboardView: View {
                     GridRow {
                         sub("")
                         ForEach(engine.players) { _ in
-                            sub("Lic.")
-                            sub("Pct.")
+                            sub(L("w.sb.bid"))
+                            sub(L("w.sb.pts"))
                         }
                     }
                     ForEach(engine.handSizes.indices, id: \.self) { i in
@@ -50,11 +50,11 @@ struct ScoreboardView: View {
                 .padding(16)
             }
             .background(Theme.bg)
-            .navigationTitle("Tabela de scor")
+            .navigationTitle(L("w.scores"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Gata") { dismiss() }.font(Theme.font(17, .bold))
+                    Button(L("w.done")) { dismiss() }.font(Theme.font(17, .bold))
                 }
             }
         }
@@ -94,30 +94,19 @@ struct RulesView: View {
         init(_ icon: String, _ title: String, _ text: String) { self.icon = icon; self.title = title; self.text = text }
     }
 
-    private let sections: [RuleItem] = [
-        RuleItem("person.3.fill", "Jucători și pachet",
-         "3–6 jucători, fiecare pe cont propriu. Se folosesc câte 8 cărți pentru fiecare jucător: 24 la 3 jucători, 32 la 4, până la 48 la 6. Ordinea cărților: A, K, Q, J, 10, 9 și așa mai departe."),
-        RuleItem("square.stack.3d.up.fill", "Mâinile",
-         "În formatul 1-8-1 se joacă întâi atâtea mâini de o carte câți jucători sunt, apoi 2, 3 … 7, apoi atâtea mâini de 8 câți jucători sunt, apoi înapoi la 1. Formatul 8-1-8 face invers. Cel care împarte se schimbă după fiecare mână."),
-        RuleItem("suit.heart.fill", "Atuul",
-         "După împărțire, următoarea carte din pachet se întoarce și dă culoarea de atu. La mâinile de 8 cărți nu mai rămâne nicio carte, deci se joacă fără atu."),
-        RuleItem("number.circle.fill", "Licitația",
-         "Începând din stânga celui care împarte, fiecare spune câte levate crede că va lua. Ultimul (cel care a împărțit) nu are voie să aleagă numărul care ar face suma licitațiilor egală cu numărul de cărți din mână."),
-        RuleItem("hand.tap.fill", "Jocul",
-         "Deschide jucătorul din stânga celui care împarte. Ești obligat să răspunzi la culoare. Dacă nu ai culoarea, ești obligat să tai cu atu. Dacă nu ai nici atu, dai orice carte. Levata o ia cel mai mare atu sau, fără atu, cea mai mare carte din culoarea cerută. Câștigătorul deschide următoarea levată."),
-        RuleItem("star.fill", "Punctajul",
-         "Dacă iei exact cât ai licitat: 5 puncte + câte 1 pentru fiecare levată. Dacă iei mai multe sau mai puține, pierzi câte 1 punct pentru fiecare levată de diferență."),
-        RuleItem("eye.slash.fill", "Cartea pe frunte (opțional)",
-         "La ultima serie de mâini de o carte nu-ți vezi cartea: o ții „pe frunte”. Vezi cărțile celorlalți și licitezi după ele și după ce au spus ei."),
-        RuleItem("flame.fill", "Premii (opțional)",
-         "Cu premiile activate: 5 contracte reușite la rând aduc +10 puncte, 5 ratate la rând −10. Mâinile de o carte nu se pun la serii."),
-        RuleItem("lightbulb.fill", "Strategie: licitația",
-         "Numără sigur doar așii și atuurile mari. Un rege fără as în aceeași culoare e o levată doar pe jumătate. Când împarți tu, gândește-te din timp la numărul interzis: cel mai bine e să ai o mână care să meargă cu o levată în plus sau în minus."),
-        RuleItem("target", "Strategie: jocul",
-         "Nu tăia inutil când ai deja levatele licitate: păstrează atuurile pentru momentele în care te salvează. După ce ai exact cât ai spus, scapă de cărțile mari când nu poți fi forțat să iei. Urmărește ce a ieșit: butonul Cărți ieșite îți arată ce mai e în joc."),
-        RuleItem("book.closed.fill", "Puțină istorie",
-         "Whistul vine din Anglia secolului al XVI-lea, din jocul „Ruff and Honours”. Edmond Hoyle i-a fixat regulile în 1742, iar din el s-a născut mai târziu bridge-ul. Varianta românească, cu licitație pe numărul exact de levate și mâini de la 1 la 8 cărți, e rudă cu „Oh Hell” și se joacă în familie și între prieteni de generații.")
-    ]
+    private var sections: [RuleItem] { [
+        RuleItem("person.3.fill", L("w.r1.t"), L("w.r1.x")),
+        RuleItem("square.stack.3d.up.fill", L("w.r2.t"), L("w.r2.x")),
+        RuleItem("suit.heart.fill", L("w.r3.t"), L("w.r3.x")),
+        RuleItem("number.circle.fill", L("w.r4.t"), L("w.r4.x")),
+        RuleItem("hand.tap.fill", L("w.r5.t"), L("w.r5.x")),
+        RuleItem("star.fill", L("w.r6.t"), L("w.r6.x")),
+        RuleItem("eye.slash.fill", L("w.r7.t"), L("w.r7.x")),
+        RuleItem("flame.fill", L("w.r8.t"), L("w.r8.x")),
+        RuleItem("lightbulb.fill", L("w.r9.t"), L("w.r9.x")),
+        RuleItem("target", L("w.r10.t"), L("w.r10.x")),
+        RuleItem("book.closed.fill", L("w.r11.t"), L("w.r11.x"))
+    ] }
 
     var body: some View {
         NavigationStack {
@@ -143,11 +132,11 @@ struct RulesView: View {
                 .padding(16)
             }
             .background(Theme.bg)
-            .navigationTitle("Reguli")
+            .navigationTitle(L("w.rules.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Gata") { dismiss() }.font(Theme.font(17, .bold))
+                    Button(L("w.done")) { dismiss() }.font(Theme.font(17, .bold))
                 }
             }
         }

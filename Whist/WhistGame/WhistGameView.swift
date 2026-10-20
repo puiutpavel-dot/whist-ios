@@ -68,9 +68,9 @@ struct GameView: View {
             TrackerView(engine: engine)
                 .presentationDetents([.medium, .large])
         }
-        .confirmationDialog("Abandonezi jocul?", isPresented: $confirmQuit, titleVisibility: .visible) {
-            Button("Abandonează", role: .destructive) { engine.stop(); dismiss() }
-            Button("Continuă jocul", role: .cancel) {}
+        .confirmationDialog(L("w.quit.title"), isPresented: $confirmQuit, titleVisibility: .visible) {
+            Button(L("w.quit.yes"), role: .destructive) { engine.stop(); dismiss() }
+            Button(L("w.quit.no"), role: .cancel) {}
         }
         .onChange(of: engine.phase) { _, newPhase in
             guard newPhase == .gameOver, !reported else { return }
@@ -95,16 +95,17 @@ struct GameView: View {
             }
             Spacer()
             VStack(spacing: 2) {
-                Text("MÂNA \(engine.handIndex + 1) / \(engine.handSizes.count)")
+                Text(L("w.hand.title", engine.handIndex + 1, engine.handSizes.count))
                     .font(Theme.display(24)).foregroundStyle(Theme.ink)
-                Text(engine.handSize == 1 ? "1 carte" : "\(engine.handSize) cărți")
+                Text(engine.handSize == 1 ? L("w.cards.one") : L("w.cards.n", engine.handSize))
                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
             }
             Spacer()
             HStack(spacing: 8) {
                 IconButton(system: "rectangle.stack") { showTracker = true }
-                    .accessibilityLabel("Cărți ieșite")
+                    .accessibilityLabel(L("w.tracker"))
                 IconButton(system: "list.number") { showScores = true }
+                    .accessibilityLabel(L("w.scores"))
             }
         }
         .padding(.top, 4)
@@ -127,12 +128,12 @@ struct GameView: View {
                 if let t = engine.trump {
                     CardView(card: t, width: 30)
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("Atu").font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+                        Text(L("w.trump")).font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
                         Text(t.suit.name).font(Theme.font(15, .bold)).foregroundStyle(t.suit.isRed ? Theme.red : Theme.ink)
                     }
                 } else {
                     Image(systemName: "nosign").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.muted)
-                    Text("Fără atu").font(Theme.font(15, .bold)).foregroundStyle(Theme.ink)
+                    Text(L("w.noTrump")).font(Theme.font(15, .bold)).foregroundStyle(Theme.ink)
                 }
             }
             .padding(.horizontal, 12).padding(.vertical, 8)
@@ -144,11 +145,11 @@ struct GameView: View {
             let sum = engine.bidSum
             let size = engine.handSize
             VStack(alignment: .trailing, spacing: 0) {
-                Text("Licitat").font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
+                Text(L("w.bid")).font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
                 HStack(spacing: 4) {
                     Text("\(sum) / \(size)").font(Theme.font(15, .bold)).foregroundStyle(Theme.ink)
                     if engine.phase != .bidding {
-                        Text(sum > size ? "peste" : "sub")
+                        Text(sum > size ? L("w.over") : L("w.under"))
                             .font(Theme.font(11, .bold))
                             .foregroundStyle(sum > size ? Color.white : Theme.onPrimary)
                             .padding(.horizontal, 6).padding(.vertical, 2)
@@ -177,10 +178,10 @@ struct GameView: View {
     private var myStatus: some View {
         let me = engine.players[engine.human]
         return HStack(spacing: 10) {
-            AvatarView(name: "Tu", index: 0, size: 34)
+            AvatarView(name: L("name.you"), index: 0, size: 34)
             VStack(alignment: .leading, spacing: 1) {
                 HStack(spacing: 6) {
-                    Text("Tu").font(Theme.font(16, .bold)).foregroundStyle(Theme.ink)
+                    Text(L("name.you")).font(Theme.font(16, .bold)).foregroundStyle(Theme.ink)
                     if engine.dealer == engine.human { DealerBadge() }
                 }
                 Text(statusLine(me)).font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
@@ -193,15 +194,15 @@ struct GameView: View {
             }
             VStack(alignment: .trailing, spacing: 0) {
                 Text("\(me.score)").font(Theme.font(22, .heavy)).foregroundStyle(Theme.primary)
-                Text("puncte").font(Theme.font(11, .medium)).foregroundStyle(Theme.muted)
+                Text(L("w.points")).font(Theme.font(11, .medium)).foregroundStyle(Theme.muted)
             }
         }
         .padding(.horizontal, 4)
     }
 
     private func statusLine(_ me: Player) -> String {
-        guard let b = me.bid else { return engine.current == engine.human ? "Alege câte levate iei" : "Aștepți licitația…" }
-        return "Licitat \(b) · Luate \(me.tricks)"
+        guard let b = me.bid else { return engine.current == engine.human ? L("w.status.choose") : L("w.status.waiting") }
+        return L("w.status.line", b, me.tricks)
     }
 }
 
@@ -209,12 +210,12 @@ struct GameView: View {
 
 struct DealerBadge: View {
     var body: some View {
-        Text("D")
+        Text(L("w.dealer.letter"))
             .font(Theme.font(10, .heavy))
             .foregroundStyle(Color.black)
             .frame(width: 16, height: 16)
             .background(Circle().fill(Theme.gold))
-            .accessibilityLabel("Împarte")
+            .accessibilityLabel(L("w.dealer"))
     }
 }
 
@@ -257,7 +258,7 @@ struct OpponentChip: View {
                     CardBackView(width: 10)
                     Text("\(player.hand.count) ·").font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
                 }
-                Text("\(player.score) p").font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
+                Text(L("w.pts.short", player.score)).font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
             }
         }
         .frame(maxWidth: .infinity)
@@ -324,7 +325,7 @@ struct TrickTable: View {
                 if let w = engine.trickWinner {
                     VStack {
                         Spacer()
-                        Text(w == engine.human ? "Iei levata!" : "\(engine.players[w].name) ia levata")
+                        Text(w == engine.human ? L("w.trick.you") : L("w.trick.other", engine.players[w].name))
                             .font(Theme.font(14, .bold))
                             .foregroundStyle(w == engine.human ? Theme.onPrimary : .white)
                             .padding(.horizontal, 14).padding(.vertical, 6)
@@ -345,22 +346,22 @@ struct TrickTable: View {
     private var headline: String {
         let p = engine.players[engine.current]
         switch engine.phase {
-        case .bidding: return p.isHuman ? "Rândul tău" : "Licitează \(p.name)…"
-        case .playing: return p.isHuman ? (engine.trick.isEmpty ? "Tu deschizi" : "Rândul tău") : "Joacă \(p.name)…"
+        case .bidding: return p.isHuman ? L("w.turn.you") : L("w.turn.bidding", p.name)
+        case .playing: return p.isHuman ? (engine.trick.isEmpty ? L("w.turn.lead") : L("w.turn.you")) : L("w.turn.playing", p.name)
         default: return ""
         }
     }
 
     private var subline: String {
         switch engine.phase {
-        case .bidding: return "Fiecare spune câte levate crede că ia"
+        case .bidding: return L("w.sub.bidding")
         case .playing:
             let me = engine.players[engine.human]
             guard let b = me.bid else { return "" }
             let left = b - me.tricks
-            if left > 0 { return "Mai ai nevoie de \(left) \(left == 1 ? "levată" : "levate")" }
-            if left == 0 { return "Ai exact cât ai licitat — evită levatele" }
-            return "Ai depășit licitația cu \(-left)"
+            if left > 0 { return left == 1 ? L("w.sub.needOne") : L("w.sub.needN", left) }
+            if left == 0 { return L("w.sub.exact") }
+            return L("w.sub.over", -left)
         default: return ""
         }
     }
@@ -377,9 +378,9 @@ struct BidPanel: View {
         let forbidden = engine.forbiddenBid(for: engine.human)
         let tip = engine.settings.coach ? engine.coachBid() : nil   // nil când nu mai e licitația ta
         VStack(spacing: compact ? 8 : 12) {
-            Text("CÂTE LEVATE IEI?").font(Theme.display(26)).foregroundStyle(Theme.ink)
+            Text(L("w.bid.title")).font(Theme.display(26)).foregroundStyle(Theme.ink)
             if engine.isForeheadHand {
-                Label("Cartea e pe frunte: o vezi doar pe a celorlalți", systemImage: "eye.slash.fill")
+                Label(L("w.bid.forehead"), systemImage: "eye.slash.fill")
                     .font(Theme.font(13, .semibold)).foregroundStyle(Theme.primary)
             }
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: min(engine.handSize + 1, 5)), spacing: 8) {
@@ -403,14 +404,14 @@ struct BidPanel: View {
                 }
             }
             if let tip {
-                CoachTip(title: "SFAT: SPUNE \(tip.bid)", text: tip.reason)
+                CoachTip(title: L("w.bid.tip", tip.bid), text: tip.reason)
             }
             if let f = forbidden {
-                Text("Împarți tu: nu poți spune \(f), suma licitațiilor ar fi egală cu numărul de cărți.")
+                Text(L("w.bid.forbidden", f))
                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
                     .multilineTextAlignment(.center)
             } else {
-                Text("Suma licitată până acum: \(engine.bidSum) din \(engine.handSize)")
+                Text(L("w.bid.sum", engine.bidSum, engine.handSize))
                     .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
             }
         }
@@ -452,7 +453,7 @@ struct HandView: View {
                     }
                         .overlay(alignment: .top) {
                             if suggested == card {
-                                GoldTag(text: "Sfat").offset(y: -9)
+                                GoldTag(text: L("w.tip")).offset(y: -9)
                             }
                         }
                         .offset(y: canPlay ? -12 : 0)
@@ -487,14 +488,14 @@ struct HandSummaryView: View {
                 Image(systemName: won ? "trophy.fill" : "flag.checkered")
                     .font(.system(size: 42, weight: .bold))
                     .foregroundStyle(won ? Theme.gold : Theme.primary)
-                Text(won ? "AI CÂȘTIGAT!" : "JOC ÎNCHEIAT")
+                Text(won ? L("w.won") : L("w.gameOver"))
                     .font(Theme.display(40)).foregroundStyle(Theme.ink)
             } else if let rec {
                 let me = rec.entries[engine.human]
-                Text(me.made ? "CONTRACT REUȘIT!" : "CONTRACT RATAT")
+                Text(me.made ? L("w.made") : L("w.failed"))
                     .font(Theme.display(34))
                     .foregroundStyle(me.made ? Theme.green : Theme.red)
-                Text("Mâna \(rec.id + 1) · \(rec.size) \(rec.size == 1 ? "carte" : "cărți")")
+                Text(L("w.summary.hand", rec.id + 1, rec.size == 1 ? L("w.cards.one") : L("w.cards.n", rec.size)))
                     .font(Theme.font(14, .medium)).foregroundStyle(Theme.muted)
             }
 
@@ -509,11 +510,11 @@ struct HandSummaryView: View {
 
             VStack(spacing: 10) {
                 if over {
-                    Button("Înapoi la meniu", action: onExit).buttonStyle(PrimaryButtonStyle())
+                    Button(L("w.backToMenu"), action: onExit).buttonStyle(PrimaryButtonStyle())
                 } else {
-                    Button("Mâna următoare", action: onNext).buttonStyle(PrimaryButtonStyle())
+                    Button(L("w.nextHand"), action: onNext).buttonStyle(PrimaryButtonStyle())
                 }
-                Button("Tabela de scor", action: onScores).buttonStyle(SecondaryButtonStyle())
+                Button(L("w.scores"), action: onScores).buttonStyle(SecondaryButtonStyle())
             }
         }
         .panel(padding: 22)
@@ -603,9 +604,9 @@ struct TrackerView: View {
             ScrollView {
                 VStack(spacing: 12) {
                     HStack(spacing: 14) {
-                        legend(color: Theme.cardFace, text: "în joc")
-                        legend(color: Theme.primary, text: "la tine")
-                        legend(color: Theme.soft, text: "ieșite")
+                        legend(color: Theme.cardFace, text: L("w.tracker.inPlay"))
+                        legend(color: Theme.primary, text: L("w.tracker.yours"))
+                        legend(color: Theme.soft, text: L("w.tracker.out"))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -620,9 +621,9 @@ struct TrackerView: View {
                                 Text(suit.symbol).font(.system(size: 22, weight: .bold))
                                     .foregroundStyle(suit.isRed ? Theme.red : Theme.ink)
                                 Text(suit.name.uppercased()).font(Theme.display(20)).foregroundStyle(Theme.ink)
-                                if suit == engine.trumpSuit { GoldTag(text: "Atu") }
+                                if suit == engine.trumpSuit { GoldTag(text: L("w.trump")) }
                                 Spacer()
-                                Text("\(out) la ceilalți").font(Theme.font(12, .semibold)).foregroundStyle(Theme.muted)
+                                Text(L("w.tracker.others", out)).font(Theme.font(12, .semibold)).foregroundStyle(Theme.muted)
                             }
                             HStack(spacing: 4) {
                                 ForEach(ranks, id: \.self) { r in
@@ -642,18 +643,18 @@ struct TrackerView: View {
                         .panel(padding: 12)
                     }
                     if engine.trump != nil {
-                        Text("Cartea de atu întoarsă se socotește ieșită.")
+                        Text(L("w.tracker.trumpNote"))
                             .font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
                     }
                 }
                 .padding(16)
             }
             .background(Theme.bg)
-            .navigationTitle("Cărți ieșite")
+            .navigationTitle(L("w.tracker"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Gata") { dismiss() }.font(Theme.font(17, .bold))
+                    Button(L("w.done")) { dismiss() }.font(Theme.font(17, .bold))
                 }
             }
         }
