@@ -42,6 +42,10 @@ definitions:
         xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 \
           --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
         xcrun simctl install "$UDID" "$APP"
+        # notificările de sistem de după prima pornire („Ready for Apple Intelligence” etc.) trec înainte de capturi
+        xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot 1
+        sleep 60
+        xcrun simctl terminate "$UDID" "$BUNDLE_ID" || true
         OUT="$CM_BUILD_DIR/fastlane/screenshots"
         rm -rf "$OUT"; mkdir -p "$CM_BUILD_DIR/screenshots"
         # dosar App Store : limba aplicației : regiune
