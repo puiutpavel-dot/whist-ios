@@ -1,4 +1,4 @@
-Tres juegos de cartas rumanos en la misma mesa: Whist, Rummy de fichas (Remi etalat) y Rentz. Juegas solo contra el ordenador, cuando quieras, sin conexión.
+Cuatro clásicos rumanos en una sola app: Whist, Rummy de fichas (Remi etalat), Rentz y Avioane. Las cartas se juegan solo contra el ordenador, cuando quieras, sin conexión; Avioane también online con un amigo.
 
 WHIST
 • Apuestas exactamente tus bazas; el que reparte no puede cerrar la suma.
@@ -15,6 +15,12 @@ RENTZ
 • Los 8 juegos: Rey de corazones, Damas, Diamantes, Sin bazas, Totales, Whist, Diez de tréboles y Rentz.
 • Cada uno elige su juego por turnos tras ver su mano, con un consejo.
 • 3–6 jugadores, tabla de juegos elegidos.
+
+AVIOANE (AVIONES)
+• El clásico del pupitre: esconde tus aviones en una cuadrícula de 10×10 y caza los del rival.
+• Agua, Tocado o Derribado; un disparo en el morro derriba el avión al instante.
+• 1, 2 o 3 aviones por jugador.
+• Contra el bot (3 niveles) u online con un amigo o un rival aleatorio mediante Game Center.
 
 SIN ANUNCIOS, SIN CUENTA
 No se recogen datos. Sin apuestas ni dinero, real o virtual.

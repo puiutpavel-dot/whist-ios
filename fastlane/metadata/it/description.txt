@@ -1,4 +1,4 @@
-Tre giochi di carte rumeni allo stesso tavolo: Whist, Ramino con tessere (Remi etalat) e Rentz. Giochi da solo contro il computer, quando vuoi, offline.
+Quattro classici rumeni in un'unica app: Whist, Ramino con tessere (Remi etalat), Rentz e Avioane. I giochi di carte si giocano da soli contro il computer, quando vuoi, offline; Avioane anche online con un amico.
 
 WHIST
 • Dichiari esattamente le prese; il mazziere non può chiudere la somma.
@@ -15,6 +15,12 @@ RENTZ
 • Tutti gli 8 giochi: Re di cuori, Donne, Quadri, Niente prese, Totale, Whist, Dieci di fiori e Rentz.
 • Ognuno sceglie a turno il gioco dopo aver visto le carte, con un consiglio.
 • 3–6 giocatori, tabella dei giochi scelti.
+
+AVIOANE (AEREI)
+• Il classico dei banchi di scuola: nascondi i tuoi aerei su una griglia 10×10 e dai la caccia a quelli dell'avversario.
+• Acqua, Colpito o Distrutto; un colpo sul muso abbatte subito l'aereo.
+• 1, 2 o 3 aerei per giocatore.
+• Contro il bot (3 livelli) o online con un amico o un avversario casuale tramite Game Center.
 
 NIENTE PUBBLICITÀ, NIENTE ACCOUNT
 Nessun dato raccolto. Nessuna scommessa né denaro, reale o virtuale.

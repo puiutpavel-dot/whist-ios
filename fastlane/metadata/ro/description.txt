@@ -1,4 +1,4 @@
-Trei jocuri de cărți românești, la aceeași masă: Whist, Remi etalat și Renț. Joci singur, împotriva calculatorului, oricând și fără internet.
+Patru jocuri românești, în aceeași aplicație: Whist, Remi etalat, Renț și Avioane. Jocurile de cărți le joci împotriva calculatorului, oricând și fără internet; Avioane și online, cu un prieten.
 
 WHIST
 • Licitezi exact câte levate iei; ultimul nu poate închide suma.
@@ -15,6 +15,12 @@ RENȚ
 • Toate cele 8 jocuri: Popa roșu, Dame, Carouri, Levate, Totale, Whist, Zece de treflă și Renț.
 • Fiecare jucător alege pe rând jocul, după ce își vede cărțile; sfat pentru alegere.
 • 3–6 jucători, tabelă cu jocurile alese de fiecare.
+
+AVIOANE
+• Clasicul din bancă: îți ascunzi avioanele pe o grilă 10×10 și le vânezi pe ale adversarului.
+• Apă, Lovit sau Distrus; o lovitură în bot doboară avionul pe loc.
+• 1, 2 sau 3 avioane de fiecare jucător.
+• Contra botului (3 niveluri) sau online, cu un prieten ori un adversar aleator, prin Game Center.
 
 FĂRĂ RECLAME, FĂRĂ CONT
 Nu se colectează date. Nu există pariuri sau bani, nici reali, nici virtuali.

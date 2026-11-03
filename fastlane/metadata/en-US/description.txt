@@ -1,4 +1,4 @@
-Three Romanian card games at one table: Whist, tile Rummy (Remi etalat) and Rentz. Play solo against the computer, anytime, offline.
+Four Romanian classics in one app: Whist, tile Rummy (Remi etalat), Rentz and Avioane. Play the card games solo against the computer, anytime, offline; play Avioane online with a friend too.
 
 WHIST
 • Bid exactly how many tricks you'll take; the dealer can't make the bids add up.
@@ -15,6 +15,12 @@ RENTZ
 • All 8 games: King of Hearts, Queens, Diamonds, No Tricks, Totals, Whist, Ten of Clubs and Rentz.
 • Each player chooses a game in turn after seeing their hand, with a tip.
 • 3–6 players, score table with each player's chosen games.
+
+AVIOANE (PLANES)
+• The school-desk classic: hide your planes on a 10×10 grid and hunt your opponent's.
+• Water, Hit or Destroyed; a hit on the nose downs a plane instantly.
+• 1, 2 or 3 planes per player.
+• Against the bot (3 levels) or online with a friend or a random opponent via Game Center.
 
 NO ADS, NO ACCOUNT
 No data collected. No betting or money, real or virtual.

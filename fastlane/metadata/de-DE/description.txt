@@ -1,4 +1,4 @@
-Drei rumänische Kartenspiele an einem Tisch: Whist, Rommé mit Steinen (Remi etalat) und Rentz. Allein gegen den Computer, jederzeit und offline.
+Vier rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz und Avioane. Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
 
 WHIST
 • Sag genau deine Stiche an; der Geber darf die Summe nicht schließen.
@@ -15,6 +15,12 @@ RENTZ
 • Alle 8 Spiele: Herzkönig, Damen, Karos, Keine Stiche, Alles, Whist, Kreuz-Zehn und Rentz.
 • Jeder wählt reihum sein Spiel, nachdem er die Karten gesehen hat – mit Tipp.
 • 3–6 Spieler, Tabelle mit den gewählten Spielen.
+
+AVIOANE (FLUGZEUGE)
+• Der Klassiker von der Schulbank: Verstecke deine Flugzeuge auf einem 10×10-Raster und jage die des Gegners.
+• Wasser, Treffer oder Zerstört; ein Treffer in die Nase holt ein Flugzeug sofort runter.
+• 1, 2 oder 3 Flugzeuge pro Spieler.
+• Gegen den Bot (3 Stufen) oder online mit Freunden oder zufälligen Gegnern über Game Center.
 
 KEINE WERBUNG, KEIN KONTO
 Keine Daten. Keine Wetten, kein Geld – weder echt noch virtuell.

@@ -1,1 +1,1 @@
-Trei clasice românești într-o singură aplicație: Whist cu antrenor, Remi etalat cu piese și Renț cu toate cele 8 jocuri.
+Patru clasice românești într-o singură aplicație: Whist cu antrenor, Remi etalat, Renț cu toate cele 8 jocuri și, nou, Avioane — contra botului sau online.

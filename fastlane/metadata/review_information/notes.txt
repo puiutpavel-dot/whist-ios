@@ -1,8 +1,8 @@
-This version consolidates our Romanian card games into ONE app, following the guidance in the previous 4.3(a) review. "Whist Românesc", "Remi Etalat: Tile Rummy" and "Masa de Renț – Rentz" were separate submissions; they are now three game modes of this single app, and the separate apps will not be resubmitted.
+Version 2.1 adds a fourth game, "Avioane" (Planes), to this app. Avioane was previously submitted as a separate app ("Avioane: Jocul Clasic"); following the 4.3 guidance it is now a game mode of this single app, and the separate app will not be resubmitted.
 
-The app is single-player against computer opponents. No account, no login, no network access, no ads, no in-app purchases, no real-money or simulated gambling (no betting, no currency). Languages: Romanian, English, German, French, Italian, Spanish, Hungarian (follows the device language).
+How to test Avioane: on the main screen tap the AVIOANE card.
+- Against the bot: choose 1, 2 or 3 planes and a difficulty, tap "Play vs. Bot", place the planes (drag to move, tap to rotate), tap "Ready for battle!", then tap squares on the attack radar to fire.
+- Online (optional): "Play online" uses Game Center matchmaking (invite a friend or Auto-Match). It requires a second device signed in to Game Center; the bot mode covers all of the game's features.
 
-To try it: the main screen lists the three games. Tap one, then "New game".
-- Whist: tap a number to bid, then tap a raised card to play.
-- Tile Rummy: draw a tile, select tiles to meld or tap Suggestion, then discard one tile.
-- Rentz: when it's your turn to choose, pick one of the 8 games, then tap a raised card to play.
+The card games (Whist, Tile Rummy, Rentz) are unchanged: single player against computer opponents, offline.
+No account (other than optional Game Center), no ads, no in-app purchases, no real-money or simulated gambling. The app runs on iPad in iPhone compatibility mode; all screens were checked on iPad Air 11-inch and iPhone SE. Languages: Romanian, English, German, French, Italian, Spanish, Hungarian (follows the device language).

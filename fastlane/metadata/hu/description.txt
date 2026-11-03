@@ -1,4 +1,4 @@
-Három román kártyajáték egy asztalnál: Whist, lapkás römi (Remi etalat) és Rentz. Egyedül játszol a gép ellen, bármikor, internet nélkül.
+Négy román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz és Avioane. A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
 
 WHIST
 • Pontosan bemondod az ütéseidet; az osztó nem zárhatja az összeget.
@@ -15,6 +15,12 @@ RENTZ
 • Mind a 8 játék: Kőr király, Dámák, Kárók, Ütés nélkül, Összes, Whist, Treff tízes és Rentz.
 • Mindenki sorban választ játékot, miután látta a lapjait – tanáccsal.
 • 3–6 játékos, tábla a választott játékokkal.
+
+AVIOANE (REPÜLŐK)
+• Az iskolapad klasszikusa: rejtsd el a repülőidet egy 10×10-es rácson, és vadászd le az ellenfélét.
+• Víz, Talált vagy Lelőve; az orrba mért találat azonnal lehozza a repülőt.
+• Játékosonként 1, 2 vagy 3 repülő.
+• A bot ellen (3 szint) vagy online, baráttal vagy véletlen ellenféllel, a Game Centeren át.
 
 REKLÁM ÉS FIÓK NÉLKÜL
 Nincs adatgyűjtés. Nincs fogadás vagy pénz, sem valódi, sem virtuális.

@@ -1,4 +1,4 @@
-Trois jeux de cartes roumains à la même table : Whist, Rami aux tuiles (Remi etalat) et Rentz. Jouez seul contre l'ordinateur, à tout moment, hors ligne.
+Quatre classiques roumains dans une seule app : Whist, Rami aux tuiles (Remi etalat), Rentz et Avioane. Les jeux de cartes se jouent seul contre l'ordinateur, à tout moment, hors ligne ; Avioane aussi en ligne avec un ami.
 
 WHIST
 • Annoncez exactement vos plis ; le donneur ne peut pas fermer la somme.
@@ -15,6 +15,12 @@ RENTZ
 • Les 8 jeux : Roi de cœur, Dames, Carreaux, Pas de plis, Totale, Whist, Dix de trèfle et Rentz.
 • Chacun choisit son jeu à son tour après avoir vu sa main, avec un conseil.
 • 3 à 6 joueurs, tableau des jeux choisis.
+
+AVIOANE (AVIONS)
+• Le classique des bancs d'école : cachez vos avions sur une grille 10×10 et traquez ceux de l'adversaire.
+• Eau, Touché ou Détruit ; un tir dans le nez abat l'avion aussitôt.
+• 1, 2 ou 3 avions par joueur.
+• Contre le bot (3 niveaux) ou en ligne avec un ami ou un adversaire au hasard via Game Center.
 
 SANS PUB, SANS COMPTE
 Aucune donnée collectée. Ni paris ni argent, réel ou virtuel.
