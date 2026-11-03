@@ -5,7 +5,7 @@ definitions:
       XCODE_PROJECT: Whist.xcodeproj
       XCODE_SCHEME: Whist
       BUNDLE_ID: ro.draghicioiu.whist
-      APP_VERSION: "2.0"
+      APP_VERSION: "2.1"
 
   scripts:
     - &sim_build
@@ -52,11 +52,11 @@ definitions:
         for SPEC in ro:ro:ro_RO en-US:en:en_US de-DE:de:de_DE fr-FR:fr:fr_FR it:it:it_IT es-ES:es:es_ES hu:hu:hu_HU; do
           IFS=: read -r DIR LANG REGION <<< "$SPEC"
           mkdir -p "$OUT/$DIR"
-          for N in 1 2 3 4 5 6 7 8; do
+          for N in 1 2 3 4 5 6 7 8 9 10; do
             xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
             xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N -AppleLanguages "($LANG)" -AppleLocale "$REGION"
             sleep 9
-            xcrun simctl io "$UDID" screenshot "$OUT/$DIR/0${N}_jocuri.png"
+            xcrun simctl io "$UDID" screenshot "$OUT/$DIR/$(printf %02d $N)_jocuri.png"
           done
           for f in "$OUT/$DIR/"*.png; do cp "$f" "$CM_BUILD_DIR/screenshots/${DIR}_$(basename "$f")"; done
           echo "Capturi $DIR: $(ls "$OUT/$DIR" | wc -l)"
@@ -67,7 +67,7 @@ definitions:
       name: Miniaturi în log (previzualizare)
       script: |
         mkdir -p /tmp/thumbs
-        for f in "$CM_BUILD_DIR/screenshots/"ro_*.png "$CM_BUILD_DIR/screenshots/"de-DE_0[2-8]*.png; do
+        for f in "$CM_BUILD_DIR/screenshots/"ro_*.png "$CM_BUILD_DIR/screenshots/"de-DE_*.png; do
           n=$(basename "$f" .png)
           sips -s format jpeg -s formatOptions 55 --resampleWidth 260 "$f" --out "/tmp/thumbs/$n.jpg" >/dev/null
           echo "THUMB:$n:$(base64 -i "/tmp/thumbs/$n.jpg" | tr -d '\n')"
@@ -220,6 +220,93 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
+
+  ios-gc-setup:
+    name: Whist — Game Center pe bundle + profil App Store nou
+    instance_type: mac_mini_m2
+    max_build_duration: 10
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment:
+      <<: *env
+      vars:
+        BUNDLE_ID: ro.draghicioiu.whist
+        PROFILE_NAME: Whist App Store GC
+    scripts:
+      - name: Game Center + profil
+        script: |
+          python3 -m venv /tmp/ascenv && /tmp/ascenv/bin/pip install -q pyjwt cryptography
+          /tmp/ascenv/bin/python scripts/asc_signing.py
+
+  ios-status:
+    name: Whist — stare App Review
+    instance_type: mac_mini_m2
+    max_build_duration: 10
+    integrations:
+      app_store_connect: kino_ledger_asc_key
+    environment:
+      <<: *env
+      vars:
+        BUNDLE_ID: ro.draghicioiu.whist
+    scripts:
+      - name: Stare
+        script: |
+          python3 -m venv /tmp/ascenv && /tmp/ascenv/bin/pip install -q pyjwt cryptography
+          /tmp/ascenv/bin/python scripts/asc_status.py
+
+  ios-device-check:
+    name: Whist — verificare iPad + iPhone SE (capturi)
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment: *env
+    scripts:
+      - *sim_build
+      - name: Capturi pe iPad Air 11" (modul compatibil iPhone) și iPhone SE
+        script: |
+          set -e
+          APP=$(find "$CM_BUILD_DIR/dd/Build/Products/Debug-iphonesimulator" -maxdepth 1 -name "*.app" | head -1)
+          mkdir -p "$CM_BUILD_DIR/check"
+          RT=$(xcrun simctl list runtimes -j | python3 -c "import sys,json; r=[x for x in json.load(sys.stdin)['runtimes'] if x['platform']=='iOS' and x['isAvailable']]; print(r[-1]['identifier'])")
+          xcrun simctl list devices available | grep -q "iPhone SE" || \
+            xcrun simctl create "iPhone SE" com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation "$RT" || true
+          for PATTERN in "iPad Air 11" "iPhone SE"; do
+            UDID=$(xcrun simctl list devices available -j | python3 -c "
+          import sys, json, re
+          d = json.load(sys.stdin)['devices']; best = None
+          for rt, devs in d.items():
+              m = re.search(r'iOS-(\\d+)-(\\d+)', rt)
+              if not m: continue
+              ver = (int(m.group(1)), int(m.group(2)))
+              for dv in devs:
+                  if '$PATTERN' in dv['name'] and (best is None or ver > best[0]): best = (ver, dv['udid'], dv['name'])
+          print(best[1] if best else '')")
+            [ -z "$UDID" ] && { echo "Nu există simulator pentru $PATTERN"; continue; }
+            TAG=$(echo "$PATTERN" | tr -d ' "')
+            xcrun simctl boot "$UDID" || true
+            xcrun simctl bootstatus "$UDID" -b
+            xcrun simctl ui "$UDID" appearance dark
+            xcrun simctl install "$UDID" "$APP"
+            for N in 1 9 10 11 12; do
+              xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
+              xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot $N -AppleLanguages "(ro)" -AppleLocale ro_RO >/dev/null
+              sleep 7
+              xcrun simctl io "$UDID" screenshot "$CM_BUILD_DIR/check/${TAG}_$N.png"
+            done
+            xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
+            xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot 11 -AppleLanguages "(hu)" -AppleLocale hu_HU >/dev/null
+            sleep 7
+            xcrun simctl io "$UDID" screenshot "$CM_BUILD_DIR/check/${TAG}_11_hu.png"
+            xcrun simctl shutdown "$UDID" || true
+          done
+          mkdir -p /tmp/thumbs
+          for f in "$CM_BUILD_DIR/check/"*.png; do
+            n=$(basename "$f" .png)
+            sips -s format jpeg -s formatOptions 55 --resampleWidth 260 "$f" --out "/tmp/thumbs/$n.jpg" >/dev/null
+            echo "THUMB:$n:$(base64 -i "/tmp/thumbs/$n.jpg" | tr -d '\n')"
+          done
+    artifacts:
+      - check/*.png
+      - build.log
 
   ios-listing:
     name: Whist — fișa App Store (texte + capturi, fără build)

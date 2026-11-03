@@ -1,10 +1,16 @@
 import SwiftUI
+import Combine
 
 @main
 struct CardGamesApp: App {
     init() {
         if AppShots.shot == 1 { WhistShots.prepareHomeStats() }
         if WhistShots.isStress { AppShots.runStress() }
+        // Cine a jucat deja Avioane online e conectat la Game Center din pornire, ca să primească invitațiile.
+        if AppShots.shot == nil, UserDefaults.standard.bool(forKey: GameViewModel.gameCenterUsedKey) {
+            _ = GameViewModel.shared
+            GameCenter.shared.authenticate()
+        }
     }
 
     var body: some Scene {
@@ -25,7 +31,7 @@ struct CardGamesApp: App {
 // MARK: - Meniul principal
 
 enum CardGame: String, Hashable, CaseIterable, Identifiable {
-    case whist, remi, rentz
+    case whist, remi, rentz, avioane
     var id: String { rawValue }
 }
 
@@ -60,6 +66,10 @@ struct HubView: View {
                 }
             }
             .navigationTitle(L("hub.back"))
+            // invitație acceptată la Avioane (din notificare sau din Game Center) → deschidem jocul
+            .onReceive(GameCenter.shared.$inviteAccepted.dropFirst()) { _ in
+                if path.last != .avioane { path = [.avioane] }
+            }
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: CardGame.self) { g in
                 Group {
@@ -67,6 +77,7 @@ struct HubView: View {
                     case .whist: WhistHomeView()
                     case .remi: RemiMenuView()
                     case .rentz: RentzMenuView()
+                    case .avioane: AvioaneRootView()
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
@@ -93,14 +104,24 @@ private struct GameTile: View {
         case .whist: return [Theme.accent, Theme.accentDk, Color(hex: 0x3A0209)]
         case .remi: return [Color(hex: 0x0F6B45), Color(hex: 0x074029), Color(hex: 0x03190F)]
         case .rentz: return [Theme.violet, Color(hex: 0x3B2E9E), Color(hex: 0x17123F)]
+        case .avioane: return [Color(hex: 0x1D5C8C), Color(hex: 0x0E2F4D), Color(hex: 0x06131F)]
         }
     }
     private var title: String {
-        switch game { case .whist: return "WHIST"; case .remi: return "REMI"; case .rentz: return "RENȚ" }
+        switch game {
+        case .whist: return "WHIST"
+        case .remi: return "REMI"
+        case .rentz: return "RENȚ"
+        case .avioane: return "AVIOANE"
+        }
     }
     private var desc: String { L("hub.\(game.rawValue).desc") }
     private var players: String {
-        switch game { case .whist, .rentz: return "3–6"; case .remi: return "2–4" }
+        switch game {
+        case .whist, .rentz: return "3–6"
+        case .remi: return "2–4"
+        case .avioane: return "1–2"
+        }
     }
 
     var body: some View {
@@ -174,6 +195,46 @@ private struct GameTile: View {
                     .offset(x: CGFloat(i - 1) * 42)
                 }
             }
+        case .avioane:
+            AvioaneTileArt()
         }
+    }
+}
+
+/// Desenul din cartea Avioane: o grilă de radar cu un avion (botul, aripile, corpul, coada) și o lovitură.
+private struct AvioaneTileArt: View {
+    private let cell: CGFloat = 22
+    // avionul cu botul în sus: (rând, coloană) pe o grilă 6×6
+    private let plane: Set<[Int]> = [[0, 2], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 2], [3, 1], [3, 2], [3, 3]]
+    private let misses: Set<[Int]> = [[4, 4], [0, 5], [5, 0]]
+
+    var body: some View {
+        VStack(spacing: 2) {
+            ForEach(0..<6, id: \.self) { r in
+                HStack(spacing: 2) {
+                    ForEach(0..<6, id: \.self) { c in
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            .fill(fill(r, c))
+                            .frame(width: cell, height: cell)
+                            .overlay {
+                                if r == 0 && c == 2 {
+                                    Image(systemName: "flame.fill").font(.system(size: 11, weight: .bold)).foregroundStyle(.white)
+                                } else if misses.contains([r, c]) {
+                                    Circle().fill(.white.opacity(0.55)).frame(width: 6, height: 6)
+                                }
+                            }
+                    }
+                }
+            }
+        }
+        .padding(6)
+        .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(.black.opacity(0.25)))
+        .rotationEffect(.degrees(-8))
+    }
+
+    private func fill(_ r: Int, _ c: Int) -> Color {
+        if r == 0 && c == 2 { return Theme.accent }
+        if plane.contains([r, c]) { return Theme.gold.opacity(0.9) }
+        return .white.opacity(0.08)
     }
 }

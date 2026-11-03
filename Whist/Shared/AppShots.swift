@@ -3,6 +3,7 @@ import SwiftUI
 /// Capturile din App Store (`-shot N -AppleLanguages "(de)"`) și testul de anduranță (`-stress`).
 /// 1 meniul · 2 Whist: licitația cu sfat · 3 Whist: levată · 4 Remi: masa · 5 Remi: etalare sugerată
 /// 6 Renț: alegerea jocului · 7 Renț: levată la Dame · 8 Renț: rândurile din Renț
+/// 9 Avioane: hangarul · 10 Avioane: bătălia
 @MainActor
 enum AppShots {
     static var shot: Int? { WhistShots.shot }
@@ -15,6 +16,8 @@ enum AppShots {
         case 4: RemiShotScreen(shot: 2)
         case 5: RemiShotScreen(shot: 3)
         case 6, 7, 8: RentzGameView(engine: rentzEngine(for: shot))
+        case 9, 10: AvioaneShotScreen(scene: shot == 9 ? "hangar" : "battle")
+        case 11, 12: AvioaneShotScreen(scene: shot == 11 ? "home" : "victory") // doar pentru verificări
         default: HubView()
         }
     }
@@ -118,4 +121,10 @@ private struct RemiShotScreen: View {
     @StateObject private var engine: RemiEngine
     init(shot: Int) { _engine = StateObject(wrappedValue: RemiShots.engine(for: shot)) }
     var body: some View { RemiGameView(engine: engine) }
+}
+
+/// Ecranele Avioane pentru capturi: modelul pornește direct pe scena cerută.
+private struct AvioaneShotScreen: View {
+    init(scene: String) { GameViewModel.forcedScene = scene }
+    var body: some View { AvioaneRootView() }
 }
