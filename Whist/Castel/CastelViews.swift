@@ -371,7 +371,7 @@ struct CastelOpponentView: View {
     var body: some View {
         let isTurn = engine.current == player.id && engine.phase == .playing
         let hit = engine.lastAttack.map { $0.to == player.id } ?? false
-        let w: CGFloat = compact ? 34 : 42
+        let w: CGFloat = engine.n >= 4 ? (compact ? 40 : 50) : (compact ? 48 : 60)
         VStack(spacing: 6) {
             ZStack(alignment: .topTrailing) {
                 AvatarView(name: player.name, index: player.id, size: 30)
@@ -417,7 +417,7 @@ struct CastleTower: View {
     var cardWidth: CGFloat = 40
     var shielded = false
     var body: some View {
-        let step = cardWidth * 0.42
+        let step = cardWidth * 0.5
         ZStack(alignment: .bottom) {
             ForEach(0..<CastelRules.levels, id: \.self) { i in
                 Group {
@@ -432,7 +432,8 @@ struct CastleTower: View {
                     }
                 }
                 .offset(y: -CGFloat(i) * step)
-                .zIndex(Double(i))
+                // nivelurile de jos stau deasupra, ca să se vadă colțul cu numărul fiecăruia
+                .zIndex(Double(CastelRules.levels - i))
             }
         }
         .frame(width: cardWidth + 8, height: cardWidth * 1.42 + step * CGFloat(CastelRules.levels - 1), alignment: .bottom)
