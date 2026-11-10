@@ -4,14 +4,43 @@ import SwiftUI
 // MARK: - Jocurile din Renț
 
 enum RentzGame: String, CaseIterable, Identifiable, Hashable {
-    case kingOfHearts, queens, diamonds, tricks, totals, whist, tenOfClubs, rentz
+    case kingOfHearts, queens, diamonds, tricks, totals, whist, totalsPlus, tenOfClubs, rentz
     var id: String { rawValue }
 
-    var isPositive: Bool { self == .whist || self == .tenOfClubs || self == .rentz }
+    var isPositive: Bool { self == .whist || self == .totalsPlus || self == .tenOfClubs || self == .rentz }
     var isTrickGame: Bool { self != .rentz }
+    /// Jocurile în care vrei să iei levate (și, la Totale Plus, tot ce e „penalizare” la Totale).
+    var wantsTricks: Bool { self == .whist || self == .totalsPlus }
 
     var name: String { L("r.game.\(rawValue)") }
-    var short: String { L("r.short.\(rawValue)") }
+    var short: String { short(RentzScore.current) }
+
+    func short(_ s: RentzScoring) -> String {
+        switch self {
+        case .kingOfHearts: return L("r.short.kingOfHearts", abs(s.kingOfHearts))
+        case .queens: return L("r.short.queens", abs(s.queen))
+        case .diamonds: return L("r.short.diamonds", abs(s.diamond))
+        case .tricks: return L("r.short.tricks", abs(s.trickMinus))
+        case .whist: return L("r.short.whist", s.trickPlus)
+        case .tenOfClubs: return L("r.short.tenOfClubs", s.tenOfClubs)
+        default: return L("r.short.\(rawValue)")
+        }
+    }
+
+    func rules(_ s: RentzScoring) -> String {
+        switch self {
+        case .kingOfHearts: return L("r.rules.kingOfHearts", abs(s.kingOfHearts))
+        case .queens: return L("r.rules.queens", abs(s.queen))
+        case .diamonds: return L("r.rules.diamonds", abs(s.diamond))
+        case .tricks: return L("r.rules.tricks", abs(s.trickMinus))
+        case .whist: return L("r.rules.whist", s.trickPlus)
+        case .tenOfClubs: return L("r.rules.tenOfClubs", s.tenOfClubs)
+        case .rentz:
+            let p = s.places
+            return L("r.rules.rentz", p[0], p[1], p[2], p[3], p[4])
+        default: return L("r.rules.\(rawValue)")
+        }
+    }
 
     var icon: String {
         switch self {
@@ -21,24 +50,49 @@ enum RentzGame: String, CaseIterable, Identifiable, Hashable {
         case .tricks: return "square.stack.3d.down.right"
         case .totals: return "sum"
         case .whist: return "square.stack.3d.up.fill"
+        case .totalsPlus: return "plus.circle.fill"
         case .tenOfClubs: return "suit.club.fill"
         case .rentz: return "rectangle.split.3x1"
         }
     }
 }
 
-/// Punctajul (variantă des întâlnită în România; vezi Regulile din aplicație).
+/// Varianta de joc aleasă în meniu: punctajul (Clasic / Casino) și al optulea joc (Whist / Totale Plus).
+struct RentzScoring: Equatable {
+    enum Style: String, CaseIterable { case classic, casino }
+
+    var style: Style = .classic
+    var eighth: RentzGame = .whist
+
+    var kingOfHearts: Int { style == .classic ? -300 : -100 }
+    var queen: Int { style == .classic ? -75 : -25 }
+    var diamond: Int { style == .classic ? -40 : -10 }
+    var trickMinus: Int { style == .classic ? -40 : -10 }
+    var trickPlus: Int { -trickMinus }
+    var tenOfClubs: Int { -kingOfHearts }
+    /// Punctele pentru locurile 1–5 la Renț; ultimul ia mereu 0.
+    var places: [Int] { style == .classic ? [600, 300, 150, 75, 40] : [200, 100, 50, 25, 10] }
+
+    /// Cele 8 jocuri ale partidei, în ordinea din tabel.
+    var games: [RentzGame] { [.kingOfHearts, .queens, .diamonds, .tricks, .totals, eighth, .tenOfClubs, .rentz] }
+}
+
+/// Punctajul jocului în desfășurare (îl fixează motorul la pornire).
 enum RentzScore {
-    static let kingOfHearts = -200
-    static let queen = -40
-    static let diamond = -30
-    static let trickMinus = -50
-    static let trickPlus = 50
-    static let tenOfClubs = 200
-    /// Locurile la Renț: primul 400, al doilea 200, al treilea 100, al patrulea 50, al cincilea 25; ultimul 0.
+    static var current = RentzScoring()
+
+    static var kingOfHearts: Int { current.kingOfHearts }
+    static var queen: Int { current.queen }
+    static var diamond: Int { current.diamond }
+    static var trickMinus: Int { current.trickMinus }
+    static var trickPlus: Int { current.trickPlus }
+    static var tenOfClubs: Int { current.tenOfClubs }
+    static var games: [RentzGame] { current.games }
+
+    /// Locurile la Renț: primul, al doilea… (până la al cincilea); ultimul 0.
     static func rentzPlace(_ place: Int, of n: Int) -> Int {
         if place >= n { return 0 }
-        return [400, 200, 100, 50, 25][min(place - 1, 4)]
+        return current.places[min(place - 1, 4)]
     }
 
     static func isKingOfHearts(_ c: Card) -> Bool { c.suit == .hearts && c.rank == 13 }
@@ -56,6 +110,7 @@ enum RentzScore {
         case .totals:
             return trickValue(cards, game: .kingOfHearts) + trickValue(cards, game: .queens)
                 + trickValue(cards, game: .diamonds) + trickMinus
+        case .totalsPlus: return -trickValue(cards, game: .totals)
         case .rentz: return 0
         }
     }
@@ -115,9 +170,14 @@ final class RentzEngine: ObservableObject {
 
     static let botNames = ["Ana", "Mihai", "Ioana", "Radu", "Elena"]
 
-    init(players count: Int, speed: Double = 1) {
+    let scoring: RentzScoring
+
+    init(players count: Int, speed: Double = 1, name: String = "", scoring: RentzScoring = RentzScoring()) {
         self.speed = speed
-        var list = [RentzPlayer(id: 0, name: L("name.you"), isHuman: true)]
+        self.scoring = scoring
+        RentzScore.current = scoring
+        let me = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        var list = [RentzPlayer(id: 0, name: me.isEmpty ? L("name.you") : String(me.prefix(12)), isHuman: true)]
         for i in 1..<count { list.append(RentzPlayer(id: i, name: Self.botNames[i - 1], isHuman: false)) }
         players = list
         chooser = Int.random(in: 0..<count)
@@ -127,12 +187,13 @@ final class RentzEngine: ObservableObject {
     // MARK: Derivate
 
     var n: Int { players.count }
-    var totalDeals: Int { n * RentzGame.allCases.count }
+    var games: [RentzGame] { scoring.games }
+    var totalDeals: Int { n * games.count }
     var low: Int { Deck.lowestRank(players: n) }
     var leadSuit: Suit? { trick.first?.card.suit }
 
     func available(for p: Int) -> [RentzGame] {
-        RentzGame.allCases.filter { !players[p].chosen.contains($0) }
+        games.filter { !players[p].chosen.contains($0) }
     }
 
     func legalCards(for p: Int) -> [Card] {
@@ -163,6 +224,7 @@ final class RentzEngine: ObservableObject {
     // MARK: Flux
 
     private func startDeal() {
+        RentzScore.current = scoring
         var deck = Deck.make(players: n).shuffled()
         for i in players.indices {
             players[i].hand = []

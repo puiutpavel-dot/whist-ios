@@ -13,6 +13,9 @@ struct RentzMenuView: View {
     @AppStorage("rentz.games") private var gamesPlayed = 0
     @AppStorage("rentz.wins") private var gamesWon = 0
     @AppStorage("rentz.best") private var bestScore = 0
+    @AppStorage("rentz.name") private var playerName = ""
+    @AppStorage("rentz.scoring") private var styleRaw = RentzScoring.Style.classic.rawValue
+    @AppStorage("rentz.eighth") private var eighthRaw = RentzGame.whist.rawValue
     @State private var playing = false
     @State private var showRules = false
 
@@ -28,9 +31,33 @@ struct RentzMenuView: View {
                     }
                     VStack(alignment: .leading, spacing: 18) {
                         Text(L("w.menu.settings")).font(Theme.display(22)).foregroundStyle(Theme.ink)
+                        label(L("r.menu.name"))
+                        TextField(L("name.you"), text: $playerName)
+                            .font(Theme.font(17, .semibold)).foregroundStyle(Theme.ink)
+                            .textInputAutocapitalization(.words).autocorrectionDisabled()
+                            .submitLabel(.done)
+                            .padding(.horizontal, 14).padding(.vertical, 12)
+                            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Theme.soft))
+                        Divider().overlay(Theme.line)
                         label(L("w.menu.players"))
                         Pills(options: [3, 4, 5, 6], selection: $playerCount) { "\($0)" }
-                        Text(L("r.menu.playersLine", playerCount - 1, playerCount * RentzGame.allCases.count))
+                        Text(L("r.menu.deckLine", playerCount, playerCount * 8, rankName(Deck.lowestRank(players: playerCount)),
+                               playerCount * 8))
+                            .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Divider().overlay(Theme.line)
+                        label(L("r.menu.scoring"))
+                        Pills(options: RentzScoring.Style.allCases.map(\.rawValue), selection: $styleRaw) {
+                            L("r.scoring.\($0)")
+                        }
+                        Text(scoring.games.first!.short(scoring))
+                            .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
+                        Divider().overlay(Theme.line)
+                        label(L("r.menu.eighth"))
+                        Pills(options: [RentzGame.whist.rawValue, RentzGame.totalsPlus.rawValue], selection: $eighthRaw) {
+                            L("r.game.\($0)")
+                        }
+                        Text((RentzGame(rawValue: eighthRaw) ?? .whist).short(scoring))
                             .font(Theme.font(13, .medium)).foregroundStyle(Theme.muted)
                         Divider().overlay(Theme.line)
                         label(L("w.menu.speed"))
@@ -50,13 +77,22 @@ struct RentzMenuView: View {
             }
         }
         .fullScreenCover(isPresented: $playing) {
-            RentzGameView(players: playerCount, speed: speed) { won, score in
+            RentzGameView(players: playerCount, speed: speed, name: playerName, scoring: scoring) { won, score in
                 gamesPlayed += 1
                 if won { gamesWon += 1 }
                 bestScore = max(bestScore, score)
             }
         }
-        .sheet(isPresented: $showRules) { RentzRulesView() }
+        .sheet(isPresented: $showRules) { RentzRulesView(scoring: scoring) }
+    }
+
+    private var scoring: RentzScoring {
+        RentzScoring(style: RentzScoring.Style(rawValue: styleRaw) ?? .classic,
+                     eighth: RentzGame(rawValue: eighthRaw) == .totalsPlus ? .totalsPlus : .whist)
+    }
+
+    private func rankName(_ r: Int) -> String {
+        switch r { case 11: return "J"; case 12: return "Q"; case 13: return "K"; case 14: return "A"; default: return "\(r)" }
     }
 
     private var hero: some View {
@@ -114,8 +150,9 @@ struct RentzGameView: View {
     @State private var confirmQuit = false
     @State private var reported = false
 
-    init(players: Int, speed: Double, onFinish: @escaping (Bool, Int) -> Void) {
-        _engine = StateObject(wrappedValue: RentzEngine(players: players, speed: speed))
+    init(players: Int, speed: Double, name: String = "", scoring: RentzScoring = RentzScoring(),
+         onFinish: @escaping (Bool, Int) -> Void) {
+        _engine = StateObject(wrappedValue: RentzEngine(players: players, speed: speed, name: name, scoring: scoring))
         self.onFinish = onFinish
     }
 
@@ -312,7 +349,7 @@ struct RentzChoosePanel: View {
         VStack(spacing: compact ? 8 : 10) {
             Text(L("r.choose.title")).font(Theme.display(24)).foregroundStyle(Theme.ink)
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)], spacing: 8) {
-                ForEach(RentzGame.allCases) { g in
+                ForEach(engine.games) { g in
                     let ok = open.contains(g)
                     Button {
                         Haptics.tap()
@@ -575,7 +612,7 @@ struct RentzScoreboardView: View {
                             HStack(spacing: 6) {
                                 Text(p.name).font(Theme.font(14, .bold)).foregroundStyle(Theme.ink)
                                     .frame(width: 64, alignment: .leading).lineLimit(1)
-                                ForEach(RentzGame.allCases) { g in
+                                ForEach(engine.games) { g in
                                     Image(systemName: g.icon).font(.system(size: 12, weight: .bold))
                                         .foregroundStyle(p.chosen.contains(g) ? Color.black : Theme.muted)
                                         .frame(maxWidth: .infinity, minHeight: 26)
@@ -644,6 +681,7 @@ struct RentzScoreboardView: View {
 
 struct RentzRulesView: View {
     @Environment(\.dismiss) private var dismiss
+    var scoring = RentzScore.current
 
     var body: some View {
         NavigationStack {
@@ -651,8 +689,8 @@ struct RentzRulesView: View {
                 VStack(spacing: 14) {
                     rule("person.3.fill", L("r.rules.basics.t"), L("r.rules.basics.x"))
                     rule("hand.tap.fill", L("r.rules.play.t"), L("r.rules.play.x"))
-                    ForEach(RentzGame.allCases) { g in
-                        rule(g.icon, g.name, L("r.rules.\(g.rawValue)"))
+                    ForEach(scoring.games) { g in
+                        rule(g.icon, g.name, g.rules(scoring))
                     }
                     rule("trophy.fill", L("r.rules.end.t"), L("r.rules.end.x"))
                     rule("book.closed.fill", L("w.r11.t"), L("r.rules.history"))

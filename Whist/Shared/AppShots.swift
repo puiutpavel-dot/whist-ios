@@ -80,9 +80,12 @@ enum AppShots {
         var games = 0, steps = 0
         var errors: [String] = []
         func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
+        let variants = RentzScoring.Style.allCases.flatMap { st in
+            [RentzGame.whist, .totalsPlus].map { RentzScoring(style: st, eighth: $0) }
+        }
         for players in 3...6 {
-            for _ in 0..<30 {
-                let e = RentzEngine(players: players)
+            for k in 0..<32 {
+                let e = RentzEngine(players: players, scoring: variants[k % variants.count])
                 let done = e.fastForward(maxSteps: 100_000) { g in
                     steps += 1
                     _ = RentzBot.chooseGameTip(engine: g)
@@ -95,7 +98,7 @@ enum AppShots {
                 games += 1
                 if !done { fail("neterminat: \(players)p, jocul \(e.dealIndex), \(e.game?.rawValue ?? "-")") }
                 if e.history.count != e.totalDeals { fail("istoric \(e.history.count) ≠ \(e.totalDeals)") }
-                for p in e.players where p.chosen.count != RentzGame.allCases.count {
+                for p in e.players where p.chosen.count != e.games.count {
                     fail("\(p.name) a ales \(p.chosen.count) jocuri")
                 }
                 for r in e.history where r.game == .rentz {
@@ -103,9 +106,16 @@ enum AppShots {
                         fail("Renț: locuri greșite \(r.deltas)")
                     }
                 }
-                for r in e.history where r.game == .tricks {
+                for r in e.history where r.game == .tricks || r.game == .whist {
                     let sum = r.deltas.reduce(0, +)
-                    if sum != 8 * RentzScore.trickMinus { fail("Levate: suma \(sum)") }
+                    let want = 8 * (r.game == .tricks ? RentzScore.trickMinus : RentzScore.trickPlus)
+                    if sum != want { fail("\(r.game.rawValue): suma \(sum) ≠ \(want)") }
+                }
+                for r in e.history where r.game == .totals || r.game == .totalsPlus {
+                    let s = e.scoring, suit = 15 - e.low
+                    let full = s.kingOfHearts + 4 * s.queen + suit * s.diamond + 8 * s.trickMinus
+                    let sum = r.deltas.reduce(0, +)
+                    if sum != (r.game == .totals ? full : -full) { fail("\(r.game.rawValue): suma \(sum)") }
                 }
             }
         }

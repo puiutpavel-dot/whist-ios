@@ -11657,6 +11657,53 @@
         }
       }
     },
+    "r.game.totalsPlus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale Plus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totals Plus"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles Plus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale Plus"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale Plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totales Plus"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Összes plusz"
+          }
+        }
+      }
+    },
     "r.game.tricks": {
       "extractionState": "manual",
       "localizations": {
@@ -11751,6 +11798,53 @@
         }
       }
     },
+    "r.menu.deckLine": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld jucători: pachet de %2$ld cărți (%3$@–A), mijlocul la Renț este J, %4$ld runde"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld players: %2$ld-card deck (%3$@–A), the Rentz rows start at J, %4$ld deals"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld Spieler: %2$ld Karten (%3$@–A), Rentz-Reihen ab dem Buben, %4$ld Runden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld joueurs : jeu de %2$ld cartes (%3$@–A), rangées du Rentz à partir du valet, %4$ld donnes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld giocatori: mazzo da %2$ld carte (%3$@–A), le file del Rentz partono dal fante, %4$ld mani"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld jugadores: baraja de %2$ld cartas (%3$@–A), las filas del Rentz empiezan en la sota, %4$ld manos"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld játékos: %2$ld lapos pakli (%3$@–A), a Rentz sorai a bubitól indulnak, %4$ld leosztás"
+          }
+        }
+      }
+    },
     "r.menu.eightGames": {
       "extractionState": "manual",
       "localizations": {
@@ -11798,6 +11892,100 @@
         }
       }
     },
+    "r.menu.eighth": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al optulea joc"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eighth game"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achtes Spiel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Huitième jeu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ottavo gioco"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Octavo juego"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyolcadik játék"
+          }
+        }
+      }
+    },
+    "r.menu.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Numele tău"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your name"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Name"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre nom"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo nome"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu nombre"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A neved"
+          }
+        }
+      }
+    },
     "r.menu.playersLine": {
       "extractionState": "manual",
       "localizations": {
@@ -11841,6 +12029,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Te + %1$ld ellenfél · %2$ld leosztás"
+          }
+        }
+      }
+    },
+    "r.menu.scoring": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punctaj"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scoring"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barème"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punteggio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntuación"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pontozás"
           }
         }
       }
@@ -12039,43 +12274,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare carte de caro luată în levate: −30."
+            "value": "Fiecare carte de caro luată în levate: −%ld."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each diamond you take in tricks: −30."
+            "value": "Each diamond you take in tricks: −%ld."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jedes Karo in deinen Stichen: −30."
+            "value": "Jedes Karo in deinen Stichen: −%ld."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque carreau pris dans vos plis : −30."
+            "value": "Chaque carreau pris dans vos plis : −%ld."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni carta di quadri presa: −30."
+            "value": "Ogni carta di quadri presa: −%ld."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada diamante en tus bazas: −30."
+            "value": "Cada diamante en tus bazas: −%ld."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden elvitt káró: −30."
+            "value": "Minden elvitt káró: −%ld."
           }
         }
       }
@@ -12227,43 +12462,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cine ia popa de inimă roșie (K♥) pierde 200 de puncte. Mâna se termină imediat ce a ieșit."
+            "value": "Cine ia popa de inimă roșie (K♥) pierde %ld de puncte. Mâna se termină imediat ce a ieșit."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Whoever takes the king of hearts loses 200 points. The hand ends as soon as it's been played."
+            "value": "Whoever takes the king of hearts loses %ld points. The hand ends as soon as it's been played."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wer den Herzkönig nimmt, verliert 200 Punkte. Die Runde endet, sobald er gefallen ist."
+            "value": "Wer den Herzkönig nimmt, verliert %ld Punkte. Die Runde endet, sobald er gefallen ist."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Qui prend le roi de cœur perd 200 points. La donne s'arrête dès qu'il est tombé."
+            "value": "Qui prend le roi de cœur perd %ld points. La donne s'arrête dès qu'il est tombé."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chi prende il re di cuori perde 200 punti. La mano finisce appena è uscito."
+            "value": "Chi prende il re di cuori perde %ld punti. La mano finisce appena è uscito."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quien se lleve el rey de corazones pierde 200 puntos. La mano termina en cuanto sale."
+            "value": "Quien se lleve el rey de corazones pierde %ld puntos. La mano termina en cuanto sale."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aki elviszi a kőr királyt, 200 pontot veszít. A leosztás véget ér, amint kijött."
+            "value": "Aki elviszi a kőr királyt, %ld pontot veszít. A leosztás véget ér, amint kijött."
           }
         }
       }
@@ -12368,43 +12603,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare damă luată în levate: −40. Mâna se termină când au ieșit toate damele."
+            "value": "Fiecare damă luată în levate: −%ld. Mâna se termină când au ieșit toate damele."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each queen you take in tricks: −40. The hand ends when all queens have been played."
+            "value": "Each queen you take in tricks: −%ld. The hand ends when all queens have been played."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jede Dame in deinen Stichen: −40. Die Runde endet, wenn alle Damen gefallen sind."
+            "value": "Jede Dame in deinen Stichen: −%ld. Die Runde endet, wenn alle Damen gefallen sind."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque dame prise dans vos plis : −40. La donne s'arrête quand toutes les dames sont tombées."
+            "value": "Chaque dame prise dans vos plis : −%ld. La donne s'arrête quand toutes les dames sont tombées."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni donna presa: −40. La mano finisce quando sono uscite tutte le donne."
+            "value": "Ogni donna presa: −%ld. La mano finisce quando sono uscite tutte le donne."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada dama en tus bazas: −40. La mano termina cuando han salido todas las damas."
+            "value": "Cada dama en tus bazas: −%ld. La mano termina cuando han salido todas las damas."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden elvitt dáma: −40. A leosztás véget ér, ha minden dáma kijött."
+            "value": "Minden elvitt dáma: −%ld. A leosztás véget ér, ha minden dáma kijött."
           }
         }
       }
@@ -12415,43 +12650,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se pun cărți pe masă pe rânduri, câte unul pentru fiecare culoare. Un rând începe cu valetul, apoi crește în sus (dama, popa, asul) și în jos (10, 9…). Poți pune un valet sau o carte lângă capătul unui rând. Dacă n-ai ce pune, treci. Asul îți dă încă o mutare, iar cea mai mică carte îl face pe următorul să stea o tură. Locurile: 400, 200, 100, 50, 25 de puncte; ultimul ia 0."
+            "value": "Se pun cărți pe masă pe rânduri, câte unul pentru fiecare culoare. Un rând începe cu valetul, apoi crește în sus (dama, popa, asul) și în jos (10, 9…). Poți pune un valet sau o carte lângă capătul unui rând. Dacă n-ai ce pune, treci. Asul îți dă încă o mutare, iar cea mai mică carte îl face pe următorul să stea o tură. Locurile: %1$ld, %2$ld, %3$ld, %4$ld, %5$ld de puncte; ultimul ia 0."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cards are laid in rows, one per suit. A row starts with the jack and grows up (queen, king, ace) and down (10, 9…). You may play a jack or a card next to either end of a row; if you can't, you pass. An ace gives you another move, and the lowest card makes the next player miss a turn. Places score 400, 200, 100, 50, 25; last place gets 0."
+            "value": "Cards are laid in rows, one per suit. A row starts with the jack and grows up (queen, king, ace) and down (10, 9…). You may play a jack or a card next to either end of a row; if you can't, you pass. An ace gives you another move, and the lowest card makes the next player miss a turn. Places score %1$ld, %2$ld, %3$ld, %4$ld, %5$ld; last place gets 0."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Karten werden in Reihen ausgelegt, eine pro Farbe. Eine Reihe beginnt mit dem Buben und wächst nach oben (Dame, König, Ass) und nach unten (10, 9…). Du legst einen Buben oder eine Karte an ein Reihenende, sonst passt du. Ein Ass gibt einen weiteren Zug, die niedrigste Karte lässt den Nächsten aussetzen. Plätze: 400, 200, 100, 50, 25; der Letzte 0."
+            "value": "Die Karten werden in Reihen ausgelegt, eine pro Farbe. Eine Reihe beginnt mit dem Buben und wächst nach oben (Dame, König, Ass) und nach unten (10, 9…). Du legst einen Buben oder eine Karte an ein Reihenende, sonst passt du. Ein Ass gibt einen weiteren Zug, die niedrigste Karte lässt den Nächsten aussetzen. Plätze: %1$ld, %2$ld, %3$ld, %4$ld, %5$ld; der Letzte 0."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les cartes sont posées en rangées, une par couleur. Une rangée commence par le valet et s'étend vers le haut (dame, roi, as) et vers le bas (10, 9…). On pose un valet ou une carte au bout d'une rangée, sinon on passe. Un as donne un coup de plus, la plus petite carte fait passer son tour au suivant. Places : 400, 200, 100, 50, 25 ; le dernier 0."
+            "value": "Les cartes sont posées en rangées, une par couleur. Une rangée commence par le valet et s'étend vers le haut (dame, roi, as) et vers le bas (10, 9…). On pose un valet ou une carte au bout d'une rangée, sinon on passe. Un as donne un coup de plus, la plus petite carte fait passer son tour au suivant. Places : %1$ld, %2$ld, %3$ld, %4$ld, %5$ld ; le dernier 0."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le carte si dispongono in file, una per seme. Una fila parte dal fante e cresce verso l'alto (donna, re, asso) e verso il basso (10, 9…). Puoi mettere un fante o una carta accanto a un'estremità; se non puoi, passi. L'asso dà un'altra mossa, la carta più bassa fa saltare il turno al successivo. Posti: 400, 200, 100, 50, 25; l'ultimo 0."
+            "value": "Le carte si dispongono in file, una per seme. Una fila parte dal fante e cresce verso l'alto (donna, re, asso) e verso il basso (10, 9…). Puoi mettere un fante o una carta accanto a un'estremità; se non puoi, passi. L'asso dà un'altra mossa, la carta più bassa fa saltare il turno al successivo. Posti: %1$ld, %2$ld, %3$ld, %4$ld, %5$ld; l'ultimo 0."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Las cartas se colocan en filas, una por palo. Una fila empieza con la sota y crece hacia arriba (dama, rey, as) y hacia abajo (10, 9…). Puedes poner una sota o una carta junto a un extremo; si no puedes, pasas. El as da otro movimiento y la carta más baja hace que el siguiente pierda turno. Puestos: 400, 200, 100, 50, 25; el último 0."
+            "value": "Las cartas se colocan en filas, una por palo. Una fila empieza con la sota y crece hacia arriba (dama, rey, as) y hacia abajo (10, 9…). Puedes poner una sota o una carta junto a un extremo; si no puedes, pasas. El as da otro movimiento y la carta más baja hace que el siguiente pierda turno. Puestos: %1$ld, %2$ld, %3$ld, %4$ld, %5$ld; el último 0."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "A lapok sorokba kerülnek, színenként egy sorba. A sor a bubival indul, és felfelé (dáma, király, ász) és lefelé (10, 9…) nő. Bubit vagy egy sor végéhez illő lapot tehetsz; ha nem tudsz, passzolsz. Az ász újabb lépést ad, a legkisebb lap miatt a következő kimarad. Helyezések: 400, 200, 100, 50, 25; az utolsó 0."
+            "value": "A lapok sorokba kerülnek, színenként egy sorba. A sor a bubival indul, és felfelé (dáma, király, ász) és lefelé (10, 9…) nő. Bubit vagy egy sor végéhez illő lapot tehetsz; ha nem tudsz, passzolsz. Az ász újabb lépést ad, a legkisebb lap miatt a következő kimarad. Helyezések: %1$ld, %2$ld, %3$ld, %4$ld, %5$ld; az utolsó 0."
           }
         }
       }
@@ -12462,43 +12697,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cine ia zecele de treflă câștigă 200 de puncte. Mâna se termină imediat ce a ieșit."
+            "value": "Cine ia zecele de treflă câștigă %ld de puncte. Mâna se termină imediat ce a ieșit."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Whoever takes the ten of clubs wins 200 points. The hand ends as soon as it's been played."
+            "value": "Whoever takes the ten of clubs wins %ld points. The hand ends as soon as it's been played."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wer die Kreuz-Zehn nimmt, bekommt 200 Punkte. Die Runde endet, sobald sie gefallen ist."
+            "value": "Wer die Kreuz-Zehn nimmt, bekommt %ld Punkte. Die Runde endet, sobald sie gefallen ist."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Qui prend le dix de trèfle gagne 200 points. La donne s'arrête dès qu'il est tombé."
+            "value": "Qui prend le dix de trèfle gagne %ld points. La donne s'arrête dès qu'il est tombé."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chi prende il dieci di fiori vince 200 punti. La mano finisce appena è uscito."
+            "value": "Chi prende il dieci di fiori vince %ld punti. La mano finisce appena è uscito."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quien se lleve el diez de tréboles gana 200 puntos. La mano termina en cuanto sale."
+            "value": "Quien se lleve el diez de tréboles gana %ld puntos. La mano termina en cuanto sale."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aki elviszi a treff tízest, 200 pontot nyer. A leosztás véget ér, amint kijött."
+            "value": "Aki elviszi a treff tízest, %ld pontot nyer. A leosztás véget ér, amint kijött."
           }
         }
       }
@@ -12597,49 +12832,96 @@
         }
       }
     },
+    "r.rules.totalsPlus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ca la Totale, dar toate valorile sunt cu plus: popa roșu, damele, carourile și levatele aduc puncte. Acum vrei să iei cât mai mult."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Like Totals, but every value is positive: the king of hearts, queens, diamonds and tricks all score for you. Now you want to take as much as possible."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie „Alles“, aber alle Werte sind positiv: Herzkönig, Damen, Karos und Stiche bringen Punkte. Jetzt willst du möglichst viel nehmen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comme Totale, mais toutes les valeurs sont positives : roi de cœur, dames, carreaux et plis rapportent des points. Cette fois, prenez le plus possible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come Totale, ma tutti i valori sono positivi: re di cuori, donne, quadri e prese danno punti. Ora vuoi prendere il più possibile."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como Totales, pero todos los valores son positivos: el rey de corazones, las damas, los diamantes y las bazas suman. Ahora quieres llevarte lo máximo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mint az Összes, de minden érték pozitív: a kőr király, a dámák, a kárók és az ütések pontot érnek. Most minél többet akarsz vinni."
+          }
+        }
+      }
+    },
     "r.rules.tricks": {
       "extractionState": "manual",
       "localizations": {
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare levată luată: −50. Scopul e să iei cât mai puține."
+            "value": "Fiecare levată luată: −%ld. Scopul e să iei cât mai puține."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each trick you take: −50. Take as few as you can."
+            "value": "Each trick you take: −%ld. Take as few as you can."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Stich: −50. Mach so wenige wie möglich."
+            "value": "Jeder Stich: −%ld. Mach so wenige wie möglich."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque pli : −50. Faites-en le moins possible."
+            "value": "Chaque pli : −%ld. Faites-en le moins possible."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni presa: −50. Fanne il meno possibile."
+            "value": "Ogni presa: −%ld. Fanne il meno possibile."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada baza: −50. Haz las menos posibles."
+            "value": "Cada baza: −%ld. Haz las menos posibles."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden ütés: −50. Vigyél minél kevesebbet."
+            "value": "Minden ütés: −%ld. Vigyél minél kevesebbet."
           }
         }
       }
@@ -12650,43 +12932,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare levată luată: +50. Acum vrei cât mai multe."
+            "value": "Fiecare levată luată: +%ld. Acum vrei cât mai multe."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each trick you take: +50. Now you want as many as possible."
+            "value": "Each trick you take: +%ld. Now you want as many as possible."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Stich: +50. Jetzt willst du möglichst viele."
+            "value": "Jeder Stich: +%ld. Jetzt willst du möglichst viele."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque pli : +50. Cette fois, faites-en le plus possible."
+            "value": "Chaque pli : +%ld. Cette fois, faites-en le plus possible."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni presa: +50. Ora ne vuoi il più possibile."
+            "value": "Ogni presa: +%ld. Ora ne vuoi il più possibile."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada baza: +50. Ahora quieres todas las que puedas."
+            "value": "Cada baza: +%ld. Ahora quieres todas las que puedas."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden ütés: +50. Most minél többet akarsz."
+            "value": "Minden ütés: +%ld. Most minél többet akarsz."
           }
         }
       }
@@ -12785,49 +13067,143 @@
         }
       }
     },
+    "r.scoring.casino": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casino −100"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaszinó −100"
+          }
+        }
+      }
+    },
+    "r.scoring.classic": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clasic −300"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic −300"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klassisch −300"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classique −300"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classico −300"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clásico −300"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasszikus −300"
+          }
+        }
+      }
+    },
     "r.short.diamonds": {
       "extractionState": "manual",
       "localizations": {
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare caro luat: −30"
+            "value": "Fiecare caro luat: −%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each diamond taken: −30"
+            "value": "Each diamond taken: −%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jedes genommene Karo: −30"
+            "value": "Jedes genommene Karo: −%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque carreau pris : −30"
+            "value": "Chaque carreau pris : −%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni quadri preso: −30"
+            "value": "Ogni quadri preso: −%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada diamante ganado: −30"
+            "value": "Cada diamante ganado: −%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden elvitt káró: −30"
+            "value": "Minden elvitt káró: −%ld"
           }
         }
       }
@@ -12838,43 +13214,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nu lua popa de inimă roșie: −200"
+            "value": "Nu lua popa de inimă roșie: −%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Don't take the K♥: −200"
+            "value": "Don't take the K♥: −%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nimm den Herzkönig nicht: −200"
+            "value": "Nimm den Herzkönig nicht: −%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ne prenez pas le R♥ : −200"
+            "value": "Ne prenez pas le R♥ : −%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Non prendere il K♥: −200"
+            "value": "Non prendere il K♥: −%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "No te lleves el K♥: −200"
+            "value": "No te lleves el K♥: −%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ne vidd el a kőr királyt: −200"
+            "value": "Ne vidd el a kőr királyt: −%ld"
           }
         }
       }
@@ -12885,43 +13261,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare damă luată: −40"
+            "value": "Fiecare damă luată: −%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each queen taken: −40"
+            "value": "Each queen taken: −%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jede genommene Dame: −40"
+            "value": "Jede genommene Dame: −%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque dame prise : −40"
+            "value": "Chaque dame prise : −%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni donna presa: −40"
+            "value": "Ogni donna presa: −%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada dama ganada: −40"
+            "value": "Cada dama ganada: −%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden elvitt dáma: −40"
+            "value": "Minden elvitt dáma: −%ld"
           }
         }
       }
@@ -12979,43 +13355,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cine ia zecele de treflă: +200"
+            "value": "Cine ia zecele de treflă: +%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Whoever takes the 10♣: +200"
+            "value": "Whoever takes the 10♣: +%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wer die Kreuz-Zehn nimmt: +200"
+            "value": "Wer die Kreuz-Zehn nimmt: +%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Qui prend le 10♣ : +200"
+            "value": "Qui prend le 10♣ : +%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chi prende il 10♣: +200"
+            "value": "Chi prende il 10♣: +%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quien gane el 10♣: +200"
+            "value": "Quien gane el 10♣: +%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aki elviszi a treff tízest: +200"
+            "value": "Aki elviszi a treff tízest: +%ld"
           }
         }
       }
@@ -13067,49 +13443,96 @@
         }
       }
     },
+    "r.short.totalsPlus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale, dar cu plus: iei tot ce poți"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totals in reverse: take all you can"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles, aber positiv: nimm so viel du kannst"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale à l'envers : prenez tout ce que vous pouvez"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale al contrario: prendi tutto ciò che puoi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totales al revés: llévate todo lo que puedas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fordított Összes: vigyél, amennyit csak tudsz"
+          }
+        }
+      }
+    },
     "r.short.tricks": {
       "extractionState": "manual",
       "localizations": {
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare levată luată: −50"
+            "value": "Fiecare levată luată: −%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each trick taken: −50"
+            "value": "Each trick taken: −%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Stich: −50"
+            "value": "Jeder Stich: −%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque pli : −50"
+            "value": "Chaque pli : −%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni presa: −50"
+            "value": "Ogni presa: −%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada baza: −50"
+            "value": "Cada baza: −%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden ütés: −50"
+            "value": "Minden ütés: −%ld"
           }
         }
       }
@@ -13120,43 +13543,43 @@
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiecare levată luată: +50"
+            "value": "Fiecare levată luată: +%ld"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each trick taken: +50"
+            "value": "Each trick taken: +%ld"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Stich: +50"
+            "value": "Jeder Stich: +%ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque pli : +50"
+            "value": "Chaque pli : +%ld"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni presa: +50"
+            "value": "Ogni presa: +%ld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada baza: +50"
+            "value": "Cada baza: +%ld"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden ütés: +50"
+            "value": "Minden ütés: +%ld"
           }
         }
       }

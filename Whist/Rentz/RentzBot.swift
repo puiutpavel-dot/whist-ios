@@ -37,6 +37,8 @@ enum RentzBot {
         case .totals:
             return expectedValue(.tricks, hand: hand, engine: e) + expectedValue(.queens, hand: hand, engine: e)
                 + expectedValue(.diamonds, hand: hand, engine: e) + expectedValue(.kingOfHearts, hand: hand, engine: e)
+        case .totalsPlus:
+            return -expectedValue(.totals, hand: hand, engine: e)
         case .tenOfClubs:
             let hasTen = hand.contains(where: RentzScore.isTenOfClubs)
             let higherClubs = hand.filter { $0.suit == .clubs && $0.rank > 10 }.count
@@ -66,7 +68,7 @@ enum RentzBot {
         let legal = e.legalCards(for: p)
         guard !legal.isEmpty, let g = e.game else { return nil }
         if g == .rentz { return rentzCard(legal, p: p, engine: e) }
-        if g == .whist { return trickCard(legal, wantsTricks: true, engine: e) }
+        if g.wantsTricks { return trickCard(legal, wantsTricks: true, engine: e) }
         if g == .tenOfClubs { return tenOfClubsCard(legal, engine: e) }
         return avoidCard(legal, game: g, engine: e)
     }
@@ -74,9 +76,9 @@ enum RentzBot {
     /// Cât de „periculoasă” e o carte în jocul dat (cât te poate costa dacă o iei).
     static func danger(_ c: Card, game: RentzGame) -> Int {
         var d = 0
-        if (game == .kingOfHearts || game == .totals) && RentzScore.isKingOfHearts(c) { d += 200 }
-        if (game == .queens || game == .totals) && c.rank == 12 { d += 40 }
-        if (game == .diamonds || game == .totals) && c.suit == .diamonds { d += 30 }
+        if (game == .kingOfHearts || game == .totals) && RentzScore.isKingOfHearts(c) { d += -RentzScore.kingOfHearts }
+        if (game == .queens || game == .totals) && c.rank == 12 { d += -RentzScore.queen }
+        if (game == .diamonds || game == .totals) && c.suit == .diamonds { d += -RentzScore.diamond }
         return d
     }
 
