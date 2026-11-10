@@ -162,7 +162,7 @@ R = {
 
 H = {
     # ---------- Meniul principal ----------
-    "hub.title": ("JOCURI DE CĂRȚI", "CARD GAMES", "KARTENSPIELE", "JEUX DE CARTES", "GIOCHI DI CARTE", "JUEGOS DE CARTAS", "KÁRTYAJÁTÉKOK"),
+    "hub.title": ('JOCURI ROMÂNEȘTI', 'ROMANIAN GAMES', 'RUMÄNISCHE SPIELE', 'JEUX ROUMAINS', 'GIOCHI RUMENI', 'JUEGOS RUMANOS', 'ROMÁN JÁTÉKOK'),
     "hub.subtitle": ("Clasicele românești, la o singură masă", "Romanian classics at one table", "Rumänische Klassiker an einem Tisch",
                      "Les classiques roumains à une seule table", "I classici rumeni a un solo tavolo", "Los clásicos rumanos en una sola mesa",
                      "Román klasszikusok egy asztalnál"),
@@ -180,12 +180,6 @@ H = {
                        "Nyolc játék egyben: kőr király, dámák, kárók, whist, Rentz…"),
     "hub.play": ("Joacă", "Play", "Spielen", "Jouer", "Gioca", "Jugar", "Játék"),
     "hub.players": ("%ld jucători", "%ld players", "%ld Spieler", "%ld joueurs", "%ld giocatori", "%ld jugadores", "%ld játékos"),
-    "hub.footer": ("Joci singur, împotriva calculatorului. Fără reclame, fără cont, fără date colectate.",
-                   "You play solo against the computer. No ads, no account, no data collected.",
-                   "Du spielst allein gegen den Computer. Keine Werbung, kein Konto, keine Daten.",
-                   "Vous jouez seul contre l'ordinateur. Sans pub, sans compte, sans données collectées.",
-                   "Giochi da solo contro il computer. Niente pubblicità, niente account, nessun dato raccolto.",
-                   "Juegas solo contra el ordenador. Sin anuncios, sin cuenta, sin datos recogidos.",
-                   "Egyedül játszol a gép ellen. Reklám, fiók és adatgyűjtés nélkül."),
+    "hub.footer": ('Cărțile le joci împotriva calculatorului; Avioane și online, prin Game Center. Fără reclame, fără cont, fără date colectate.', 'Card games are played against the computer; Avioane also online, via Game Center. No ads, no account, no data collected.', 'Kartenspiele spielst du gegen den Computer, Avioane auch online über Game Center. Keine Werbung, kein Konto, keine Daten.', "Les jeux de cartes se jouent contre l'ordinateur ; Avioane aussi en ligne, via Game Center. Sans pub, sans compte, sans données collectées.", 'I giochi di carte si giocano contro il computer; Avioane anche online, tramite Game Center. Niente pubblicità, niente account, nessun dato raccolto.', 'Las cartas se juegan contra el ordenador; Avioane también online, con Game Center. Sin anuncios, sin cuenta, sin datos recogidos.', 'A kártyajátékokat a gép ellen játszod, az Avioane-t online is, a Game Centeren át. Reklám, fiók és adatgyűjtés nélkül.'),
     "hub.back": ("Jocuri", "Games", "Spiele", "Jeux", "Giochi", "Juegos", "Játékok"),
 }

@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from strings_whist import W  # noqa: E402
 from strings_rentz import R, H  # noqa: E402
+from strings_castel import C  # noqa: E402
 
 LANGS = ["ro", "en", "de", "fr", "it", "es", "hu"]
 
@@ -695,7 +696,7 @@ S = {
 
 
 def main():
-    for extra in (W, R, H):
+    for extra in (W, R, H, C):
         dup = set(extra) & set(S)
         assert not dup, dup
         S.update(extra)
@@ -712,6 +713,17 @@ def main():
             },
         }
     path = os.path.join(root, "Whist", "Localizable.xcstrings")
+    # cheile scrise direct în catalog (de ex. Avioane, cu chei în engleză) se păstrează
+    kept = 0
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            old = json.load(f).get("strings", {})
+        for key, val in old.items():
+            if key not in out["strings"]:
+                out["strings"][key] = val
+                kept += 1
+    out["strings"] = dict(sorted(out["strings"].items()))
+    print(f"{kept} chei păstrate din catalogul existent")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     print(f"{len(S)} chei × {len(LANGS)} limbi → {path}")

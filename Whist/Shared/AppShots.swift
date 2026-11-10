@@ -18,8 +18,27 @@ enum AppShots {
         case 6, 7, 8: RentzGameView(engine: rentzEngine(for: shot))
         case 9, 10: AvioaneShotScreen(scene: shot == 9 ? "hangar" : "battle")
         case 11, 12: AvioaneShotScreen(scene: shot == 11 ? "home" : "victory") // doar pentru verificări
+        case 13: CastelGameView(engine: castelEngine())
+        case 14:
+            let e = castelEngine()
+            CastelGameView(engine: e, selected: e.legalActions(for: e.human).first { if case .attack = $0 { return true }; return false }?.card)
         default: HubView()
         }
+    }
+
+    /// Castelul la mijlocul rundei: tu la rând, cu o minge în mână și castele pe jumătate ridicate.
+    static func castelEngine() -> CastelEngine {
+        for _ in 0..<200 {
+            let e = CastelEngine(players: 3)
+            let ok = e.fastForward { g in
+                g.phase == .playing && g.current == g.human
+                    && g.players[g.human].castle.count >= 3
+                    && g.players.dropFirst().allSatisfy { $0.castle.count >= 2 }
+                    && g.legalActions(for: g.human).contains { if case .attack = $0 { return true }; return false }
+            }
+            if ok { return e }
+        }
+        return CastelEngine(players: 3)
     }
 
     static func rentzEngine(for shot: Int) -> RentzEngine {
@@ -48,7 +67,7 @@ enum AppShots {
     // MARK: Test de anduranță
 
     static func runStress() {
-        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress()]
+        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress(), castelStress()]
         let ok = lines.allSatisfy { $0.contains(" OK") }
         lines.insert(ok ? "STRESS OK" : "STRESS FAIL", at: 0)
         let text = lines.joined(separator: "\n")
@@ -118,6 +137,37 @@ enum AppShots {
         }
         return errors.isEmpty ? "AVIOANE OK: \(games) jocuri, \(shots) focuri"
                               : "AVIOANE FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
+    }
+
+    private static func castelStress() -> String {
+        var games = 0, rounds = 0
+        var errors: [String] = []
+        func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
+        for players in 2...4 {
+            for diff in CastelDifficulty.allCases {
+                for _ in 0..<20 {
+                    let e = CastelEngine(players: players, difficulty: diff)
+                    let done = e.fastForward(maxSteps: 60_000) { g in
+                        let cards = g.deck.count + g.discardPile.count
+                            + g.players.reduce(0) { $0 + $1.hand.count + $1.castle.count }
+                        if cards != 52 { fail("\(cards) cărți în joc în loc de 52") }
+                        for p in g.players {
+                            for (i, c) in p.castle.enumerated() where !CastelRules.isQueen(c) && CastelRules.value(c) != i + 1 {
+                                fail("\(p.name): nivelul \(i + 1) e \(c.label)")
+                            }
+                            if p.castle.count > CastelRules.levels { fail("castel prea înalt") }
+                        }
+                        if g.phase == .playing && g.legalActions(for: g.current).isEmpty { fail("fără mutări pentru \(g.current)") }
+                        return g.phase == .gameOver
+                    }
+                    games += 1; rounds += e.history.count
+                    if !done { fail("partidă neterminată: \(players)p") }
+                    if !e.players.contains(where: { $0.score >= CastelRules.targetScore }) { fail("nimeni n-a ajuns la \(CastelRules.targetScore)") }
+                }
+            }
+        }
+        return errors.isEmpty ? "CASTEL OK: \(games) partide, \(rounds) runde"
+                              : "CASTEL FAIL: \(games) partide\n" + errors.joined(separator: "\n")
     }
 
     private static func remiStress() -> String {
