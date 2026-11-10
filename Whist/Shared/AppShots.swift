@@ -48,7 +48,7 @@ enum AppShots {
     // MARK: Test de anduranță
 
     static func runStress() {
-        var lines = [WhistShots.runStress(), rentzStress(), remiStress()]
+        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress()]
         let ok = lines.allSatisfy { $0.contains(" OK") }
         lines.insert(ok ? "STRESS OK" : "STRESS FAIL", at: 0)
         let text = lines.joined(separator: "\n")
@@ -92,6 +92,32 @@ enum AppShots {
         }
         return errors.isEmpty ? "RENTZ OK: \(games) jocuri, \(steps) pași"
                               : "RENTZ FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
+    }
+
+    /// Avioane: botul trage pe table aleatorii până doboară toate avioanele (fără tragere de două ori, max 100 de focuri).
+    private static func avioaneStress() -> String {
+        var games = 0, shots = 0
+        var errors: [String] = []
+        for diff in Difficulty.allCases {
+            for _ in 0..<60 {
+                let planes = Board.randomLayout()
+                if !Board.invalidPlaneIDs(planes).isEmpty && errors.count < 20 { errors.append("așezare invalidă") }
+                var board = Board(planes: planes)
+                var n = 0
+                while !board.allDestroyed && n < 100 {
+                    let c = Bot.chooseTarget(on: board, difficulty: diff)
+                    if case .alreadyShot = board.receiveShot(at: c) {
+                        if errors.count < 20 { errors.append("\(diff.rawValue): a tras de două ori în \(c.row),\(c.col)") }
+                        break
+                    }
+                    n += 1
+                }
+                if !board.allDestroyed && errors.count < 20 { errors.append("\(diff.rawValue): joc neterminat după \(n) focuri") }
+                games += 1; shots += n
+            }
+        }
+        return errors.isEmpty ? "AVIOANE OK: \(games) jocuri, \(shots) focuri"
+                              : "AVIOANE FAIL: \(games) jocuri\n" + errors.joined(separator: "\n")
     }
 
     private static func remiStress() -> String {
