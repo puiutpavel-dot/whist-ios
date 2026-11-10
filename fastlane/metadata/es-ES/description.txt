@@ -1,4 +1,4 @@
-Cuatro clásicos rumanos en una sola app: Whist, Rummy de fichas (Remi etalat), Rentz y Avioane. Las cartas se juegan solo contra el ordenador, cuando quieras, sin conexión; Avioane también online con un amigo.
+Cinco clásicos rumanos en una sola app: Whist, Rummy de fichas (Remi etalat), Rentz, Avioane y El Castillo (Castelul). Las cartas se juegan solo contra el ordenador, cuando quieras, sin conexión; Avioane también online con un amigo.
 
 WHIST
 • Apuestas exactamente tus bazas; el que reparte no puede cerrar la suma.
@@ -21,6 +21,12 @@ AVIOANE (AVIONES)
 • Agua, Tocado o Derribado; un disparo en el morro derriba el avión al instante.
 • 1, 2 o 3 aviones por jugador.
 • Contra el bot (3 niveles) u online con un amigo o un rival aleatorio mediante Game Center.
+
+EL CASTILLO (CASTELUL)
+• El juego de patio rumano con la torre de piedras y la pelota, convertido en juego de cartas.
+• Construye tu castillo del As al 7; las pelotas (8, 9, 10) derriban el piso de arriba del mismo color.
+• Las sotas bloquean, las damas sustituyen cualquier piso, los reyes dan escudo.
+• 2–4 jugadores, rivales en 3 niveles, un consejo en cada turno.
 
 SIN ANUNCIOS, SIN CUENTA
 No se recogen datos. Sin apuestas ni dinero, real o virtual.

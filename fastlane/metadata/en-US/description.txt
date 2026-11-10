@@ -1,4 +1,4 @@
-Four Romanian classics in one app: Whist, tile Rummy (Remi etalat), Rentz and Avioane. Play the card games solo against the computer, anytime, offline; play Avioane online with a friend too.
+Five Romanian classics in one app: Whist, tile Rummy (Remi etalat), Rentz, Avioane and Castelul (The Castle). Play the card games solo against the computer, anytime, offline; play Avioane online with a friend too.
 
 WHIST
 • Bid exactly how many tricks you'll take; the dealer can't make the bids add up.
@@ -21,6 +21,12 @@ AVIOANE (PLANES)
 • Water, Hit or Destroyed; a hit on the nose downs a plane instantly.
 • 1, 2 or 3 planes per player.
 • Against the bot (3 levels) or online with a friend or a random opponent via Game Center.
+
+THE CASTLE (CASTELUL)
+• The Romanian playground game with a stone tower and a ball, turned into a card game.
+• Build your castle from Ace to 7; balls (8, 9, 10) knock down a top level of the same colour.
+• Jacks block, Queens stand in for any level, Kings raise a shield.
+• 2–4 players, opponents on 3 levels, a tip every turn.
 
 NO ADS, NO ACCOUNT
 No data collected. No betting or money, real or virtual.

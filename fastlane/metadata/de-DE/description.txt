@@ -1,4 +1,4 @@
-Vier rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz und Avioane. Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
+Fünf rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz, Avioane und Die Burg (Castelul). Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
 
 WHIST
 • Sag genau deine Stiche an; der Geber darf die Summe nicht schließen.
@@ -21,6 +21,12 @@ AVIOANE (FLUGZEUGE)
 • Wasser, Treffer oder Zerstört; ein Treffer in die Nase holt ein Flugzeug sofort runter.
 • 1, 2 oder 3 Flugzeuge pro Spieler.
 • Gegen den Bot (3 Stufen) oder online mit Freunden oder zufälligen Gegnern über Game Center.
+
+DIE BURG (CASTELUL)
+• Das rumänische Hofspiel mit Steinturm und Ball, als Kartenspiel.
+• Baue deine Burg vom Ass bis zur 7; Bälle (8, 9, 10) werfen die oberste Ebene gleicher Farbe um.
+• Buben blocken, Damen ersetzen jede Ebene, Könige geben einen Schild.
+• 2–4 Spieler, Gegner in 3 Stufen, ein Tipp in jedem Zug.
 
 KEINE WERBUNG, KEIN KONTO
 Keine Daten. Keine Wetten, kein Geld – weder echt noch virtuell.

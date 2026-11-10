@@ -1,4 +1,4 @@
-Négy román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz és Avioane. A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
+Öt román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz, Avioane és A vár (Castelul). A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
 
 WHIST
 • Pontosan bemondod az ütéseidet; az osztó nem zárhatja az összeget.
@@ -21,6 +21,12 @@ AVIOANE (REPÜLŐK)
 • Víz, Talált vagy Lelőve; az orrba mért találat azonnal lehozza a repülőt.
 • Játékosonként 1, 2 vagy 3 repülő.
 • A bot ellen (3 szint) vagy online, baráttal vagy véletlen ellenféllel, a Game Centeren át.
+
+A VÁR (CASTELUL)
+• A kőtornyos, labdás román udvari játék kártyás változata.
+• Építsd fel a várad ásztól 7-ig; a labdák (8, 9, 10) ledöntik az azonos színű legfelső szintet.
+• A bubi véd, a dáma bármelyik szintet helyettesíti, a király pajzsot ad.
+• 2–4 játékos, 3 nehézségi szint, tanács minden körben.
 
 REKLÁM ÉS FIÓK NÉLKÜL
 Nincs adatgyűjtés. Nincs fogadás vagy pénz, sem valódi, sem virtuális.

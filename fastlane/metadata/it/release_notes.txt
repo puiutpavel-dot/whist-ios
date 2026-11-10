@@ -1,3 +1,4 @@
-Novità: Avioane (Aerei), il classico dei banchi di scuola, è ora il quarto gioco dell'app — contro il bot o online tramite Game Center.
-• Scegli 1, 2 o 3 aerei per giocatore.
-• Il menu principale ora ha quattro giochi.
+Novità della 2.1:
+• Avioane (Aerei), il classico dei banchi di scuola: contro il bot o online tramite Game Center.
+• Il Castello: il gioco da cortile rumeno, ora con le carte.
+• Il menu principale ora ha cinque giochi.

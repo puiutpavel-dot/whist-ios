@@ -1,3 +1,4 @@
-Noutate: Avioane, clasicul din bancă, e acum al patrulea joc din aplicație — contra botului sau online, prin Game Center.
-• Alegi 1, 2 sau 3 avioane de fiecare jucător.
-• Meniul principal are acum patru jocuri.
+Noutăți în 2.1:
+• Avioane, clasicul din bancă: contra botului sau online, prin Game Center.
+• Castelul: jocul de curte cu turnul și mingea, adaptat la cărți.
+• Meniul principal are acum cinci jocuri.

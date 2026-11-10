@@ -1,8 +1,10 @@
-Version 2.1 adds a fourth game, "Avioane" (Planes), to this app. Avioane was previously submitted as a separate app ("Avioane: Jocul Clasic"); following the 4.3 guidance it is now a game mode of this single app, and the separate app will not be resubmitted.
+Version 2.1 adds two games to this app: "Avioane" (Planes) and "Castelul" (The Castle). Avioane was previously submitted as a separate app ("Avioane: Jocul Clasic"); following the 4.3 guidance it is now a game mode of this single app, and the separate app will not be resubmitted.
 
 How to test Avioane: on the main screen tap the AVIOANE card.
 - Against the bot: choose 1, 2 or 3 planes and a difficulty, tap "Play vs. Bot", place the planes (drag to move, tap to rotate), tap "Ready for battle!", then tap squares on the attack radar to fire.
 - Online (optional): "Play online" uses Game Center matchmaking (invite a friend or Auto-Match). It requires a second device signed in to Game Center; the bot mode covers all of the game's features.
+
+How to test The Castle (Castelul): on the main screen tap the CASTELUL card, then "New game". Tap a card in your hand to see what you can do with it (build, shield or discard); for a ball card (8, 9, 10) tap an opponent's highlighted castle. The tip line under the table suggests a move every turn. It is single player against computer opponents, offline.
 
 The card games (Whist, Tile Rummy, Rentz) are unchanged: single player against computer opponents, offline.
 No account (other than optional Game Center), no ads, no in-app purchases, no real-money or simulated gambling. The app runs on iPad in iPhone compatibility mode; all screens were checked on iPad Air 11-inch and iPhone SE. Languages: Romanian, English, German, French, Italian, Spanish, Hungarian (follows the device language).

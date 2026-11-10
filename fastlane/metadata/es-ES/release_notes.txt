@@ -1,3 +1,4 @@
-Novedad: Avioane (Aviones), el clásico del pupitre, es ahora el cuarto juego de la app: contra el bot u online mediante Game Center.
-• Elige 1, 2 o 3 aviones por jugador.
-• El menú principal tiene ahora cuatro juegos.
+Novedades de la 2.1:
+• Avioane (Aviones), el clásico del pupitre: contra el bot u online mediante Game Center.
+• El Castillo: el juego de patio rumano, ahora con cartas.
+• El menú principal tiene ahora cinco juegos.

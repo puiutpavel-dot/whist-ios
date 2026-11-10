@@ -1,4 +1,4 @@
-Quattro classici rumeni in un'unica app: Whist, Ramino con tessere (Remi etalat), Rentz e Avioane. I giochi di carte si giocano da soli contro il computer, quando vuoi, offline; Avioane anche online con un amico.
+Cinque classici rumeni in un'unica app: Whist, Ramino con tessere (Remi etalat), Rentz, Avioane e Il Castello (Castelul). I giochi di carte si giocano da soli contro il computer, quando vuoi, offline; Avioane anche online con un amico.
 
 WHIST
 • Dichiari esattamente le prese; il mazziere non può chiudere la somma.
@@ -21,6 +21,12 @@ AVIOANE (AEREI)
 • Acqua, Colpito o Distrutto; un colpo sul muso abbatte subito l'aereo.
 • 1, 2 o 3 aerei per giocatore.
 • Contro il bot (3 livelli) o online con un amico o un avversario casuale tramite Game Center.
+
+IL CASTELLO (CASTELUL)
+• Il gioco da cortile rumeno con la torre di sassi e la palla, in versione carte.
+• Costruisci il castello dall'Asso al 7; le palle (8, 9, 10) abbattono il piano in cima dello stesso colore.
+• I fanti parano, le donne sostituiscono qualsiasi piano, i re danno uno scudo.
+• 2–4 giocatori, avversari su 3 livelli, un consiglio a ogni turno.
 
 NIENTE PUBBLICITÀ, NIENTE ACCOUNT
 Nessun dato raccolto. Nessuna scommessa né denaro, reale o virtuale.

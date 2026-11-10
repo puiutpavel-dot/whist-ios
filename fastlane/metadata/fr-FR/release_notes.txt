@@ -1,3 +1,4 @@
-Nouveau : Avioane (Avions), le classique des bancs d'école, devient le quatrième jeu de l'app — contre le bot ou en ligne via Game Center.
-• Choisissez 1, 2 ou 3 avions par joueur.
-• Le menu principal compte désormais quatre jeux.
+Nouveautés de la 2.1 :
+• Avioane (Avions), le classique des bancs d'école : contre le bot ou en ligne via Game Center.
+• Le Château : le jeu de cour roumain, désormais avec des cartes.
+• Le menu principal compte maintenant cinq jeux.

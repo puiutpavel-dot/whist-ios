@@ -1,3 +1,4 @@
-New: Avioane (Planes), the school-desk classic, is now the fourth game in the app — against the bot or online via Game Center.
-• Choose 1, 2 or 3 planes per player.
-• The main menu now has four games.
+New in 2.1:
+• Avioane (Planes), the school-desk classic: against the bot or online via Game Center.
+• The Castle: the Romanian playground game, now with cards.
+• The main menu now has five games.

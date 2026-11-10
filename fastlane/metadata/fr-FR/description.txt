@@ -1,4 +1,4 @@
-Quatre classiques roumains dans une seule app : Whist, Rami aux tuiles (Remi etalat), Rentz et Avioane. Les jeux de cartes se jouent seul contre l'ordinateur, à tout moment, hors ligne ; Avioane aussi en ligne avec un ami.
+Cinq classiques roumains dans une seule app : Whist, Rami aux tuiles (Remi etalat), Rentz, Avioane et Le Château (Castelul). Les jeux de cartes se jouent seul contre l'ordinateur, à tout moment, hors ligne ; Avioane aussi en ligne avec un ami.
 
 WHIST
 • Annoncez exactement vos plis ; le donneur ne peut pas fermer la somme.
@@ -21,6 +21,12 @@ AVIOANE (AVIONS)
 • Eau, Touché ou Détruit ; un tir dans le nez abat l'avion aussitôt.
 • 1, 2 ou 3 avions par joueur.
 • Contre le bot (3 niveaux) ou en ligne avec un ami ou un adversaire au hasard via Game Center.
+
+LE CHÂTEAU (CASTELUL)
+• Le jeu de cour roumain avec une tour de pierres et une balle, en version cartes.
+• Bâtissez votre château de l'As au 7 ; les balles (8, 9, 10) abattent l'étage du haut de même couleur.
+• Les valets bloquent, les dames remplacent n'importe quel étage, les rois donnent un bouclier.
+• 2 à 4 joueurs, adversaires sur 3 niveaux, un conseil à chaque tour.
 
 SANS PUB, SANS COMPTE
 Aucune donnée collectée. Ni paris ni argent, réel ou virtuel.

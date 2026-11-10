@@ -1,3 +1,4 @@
-Újdonság: az Avioane (Repülők), az iskolapad klasszikusa, mostantól az alkalmazás negyedik játéka – a bot ellen vagy online, a Game Centeren át.
-• Játékosonként 1, 2 vagy 3 repülő választható.
-• A főmenüben most négy játék van.
+Újdonságok a 2.1-ben:
+• Avioane (Repülők), az iskolapad klasszikusa: a bot ellen vagy online, a Game Centeren át.
+• A vár: a román udvari játék, most kártyával.
+• A főmenüben most öt játék van.
