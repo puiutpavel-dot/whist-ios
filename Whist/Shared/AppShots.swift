@@ -22,6 +22,8 @@ enum AppShots {
         case 14:
             let e = castelEngine()
             CastelGameView(engine: e, selected: e.legalActions(for: e.human).first { if case .attack = $0 { return true }; return false }?.card)
+        case 15: IdeaView()                     // doar pentru verificări
+        case 16: RentzMenuView()                // doar pentru verificări
         default: HubView()
         }
     }

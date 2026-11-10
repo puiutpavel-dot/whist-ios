@@ -37,6 +37,7 @@ enum CardGame: String, Hashable, CaseIterable, Identifiable {
 
 struct HubView: View {
     @State private var path: [CardGame] = []
+    @State private var showIdea = false
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -56,6 +57,10 @@ struct HubView: View {
                                 .buttonStyle(TileButtonStyle())
                         }
 
+                        Button { showIdea = true } label: { IdeaTile() }
+                            .buttonStyle(TileButtonStyle())
+                            .padding(.top, 4)
+
                         Text(L("hub.footer"))
                             .font(Theme.font(12, .medium)).foregroundStyle(Theme.muted)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -71,6 +76,7 @@ struct HubView: View {
                 if path.last != .avioane { path = [.avioane] }
             }
             .toolbar(.hidden, for: .navigationBar)
+            .sheet(isPresented: $showIdea) { IdeaView() }
             .navigationDestination(for: CardGame.self) { g in
                 Group {
                     switch g {

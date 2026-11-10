@@ -68,6 +68,8 @@ jobs:
         env:
           # la „capturi” doar română și engleză, ca să consume mai puține minute
           SPECS: ${{ inputs.actiune == 'capturi' && 'ro:ro:ro_RO en-US:en:en_US' || '' }}
+          # la „capturi” doar ecranele de verificat (meniu, Renț, Propune un joc, meniul Renț)
+          SHOTS: ${{ inputs.actiune == 'capturi' && '1 6 15 16' || '' }}
         run: bash scripts/ci/screenshots.sh
 
       - name: Miniaturi în jurnal (previzualizare)
