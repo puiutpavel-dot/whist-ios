@@ -211,6 +211,7 @@ final class CastelEngine: ObservableObject {
                     discardPile.append(j)
                     lastEvent = L("c.event.blocked", target, name)
                     lastAttack = (p, t, true)
+                    drawCard(for: t)   // cine a blocat își completează mâna
                 } else if let fallen = players[t].castle.popLast() {
                     discardPile.append(fallen)
                     lastEvent = L("c.event.hit", name, target, players[t].castle.count)

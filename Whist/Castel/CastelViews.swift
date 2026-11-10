@@ -148,8 +148,10 @@ struct CastelGameView: View {
                 VStack(spacing: compact ? 8 : 12) {
                     topBar
                     opponents
+                        .padding(10)
+                        .frame(maxHeight: .infinity)
+                        .background(TableFelt())
                     tableCenter
-                    Spacer(minLength: 0)
                     myCastle
                     actionPanel
                     CastelHandView(engine: engine, selected: $selected)
@@ -203,7 +205,7 @@ struct CastelGameView: View {
     }
 
     private var opponents: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             ForEach(engine.players.dropFirst()) { p in
                 let targetable = selected.map { CastelRules.isBall($0) && engine.canAttack(p.id, with: $0) } ?? false
                 CastelOpponentView(player: p, engine: engine, targetable: myTurn && targetable)
@@ -244,8 +246,9 @@ struct CastelGameView: View {
             }
             Spacer(minLength: 0)
         }
-        .padding(12)
-        .background(TableFelt())
+        .padding(.horizontal, 12).padding(.vertical, 8)
+        .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Theme.surface))
+        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Theme.line, lineWidth: 1))
         .animation(.spring(response: 0.3), value: engine.discardPile.count)
     }
 
@@ -268,7 +271,7 @@ struct CastelGameView: View {
                 Text(L("w.pts.short", me.score)).font(Theme.font(20, .heavy)).foregroundStyle(Theme.primary)
             }
             Spacer(minLength: 0)
-            CastleRow(castle: me.castle, cardWidth: 34, highlightNext: myTurn && selected.map { isBuild($0) } == true)
+            CastleRow(castle: me.castle, cardWidth: 40, highlightNext: myTurn && selected.map { isBuild($0) } == true)
         }
         .padding(.horizontal, 4)
     }
@@ -363,45 +366,83 @@ struct CastelOpponentView: View {
     let player: CastelPlayer
     @ObservedObject var engine: CastelEngine
     let targetable: Bool
+    @Environment(\.compactLayout) private var compact
 
     var body: some View {
         let isTurn = engine.current == player.id && engine.phase == .playing
         let hit = engine.lastAttack.map { $0.to == player.id } ?? false
-        VStack(spacing: 5) {
-            HStack(spacing: 6) {
-                AvatarView(name: player.name, index: player.id, size: 26)
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(verbatim: player.name).font(Theme.font(13, .bold)).foregroundStyle(Theme.ink).lineLimit(1)
-                    Text(L("w.pts.short", player.score)).font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
-                }
-                Spacer(minLength: 0)
+        let w: CGFloat = compact ? 34 : 42
+        VStack(spacing: 6) {
+            ZStack(alignment: .topTrailing) {
+                AvatarView(name: player.name, index: player.id, size: 30)
+                    .overlay(Circle().strokeBorder(Theme.gold, lineWidth: isTurn ? 3 : 0).padding(-3))
                 if player.shielded {
-                    Image(systemName: "shield.fill").font(.system(size: 12, weight: .bold)).foregroundStyle(Theme.gold)
+                    Image(systemName: "shield.fill").font(.system(size: 11, weight: .black)).foregroundStyle(.black)
+                        .frame(width: 18, height: 18).background(Circle().fill(Theme.gold)).offset(x: 8, y: -5)
                 }
             }
-            CastleRow(castle: player.castle, cardWidth: 18)
-                .frame(height: 40)
-            HStack(spacing: 3) {
+            Text(verbatim: player.name).font(Theme.font(13, .bold)).foregroundStyle(Theme.ink).lineLimit(1)
+            Spacer(minLength: 0)
+            CastleTower(castle: player.castle, cardWidth: w, shielded: player.shielded)
+            HStack(spacing: 4) {
+                Text("\(player.castle.count)/\(CastelRules.levels)").font(Theme.font(12, .heavy)).foregroundStyle(Theme.ink)
+                Text("·").foregroundStyle(Theme.muted)
                 Image(systemName: "rectangle.portrait.on.rectangle.portrait").font(.system(size: 9, weight: .bold))
-                Text("\(player.hand.count)").font(Theme.font(11, .bold))
-                Text("·").font(Theme.font(11, .bold))
-                Text("\(player.castle.count)/\(CastelRules.levels)").font(Theme.font(11, .bold))
+                    .foregroundStyle(Theme.muted)
+                Text("\(player.hand.count)").font(Theme.font(12, .bold)).foregroundStyle(Theme.muted)
             }
-            .foregroundStyle(Theme.muted)
+            Text(L("w.pts.short", player.score)).font(Theme.font(11, .semibold)).foregroundStyle(Theme.muted)
         }
-        .padding(8)
-        .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(isTurn ? Theme.raised : Theme.surface))
-        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+        .padding(.vertical, 10).padding(.horizontal, 6)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(RoundedRectangle(cornerRadius: 18, style: .continuous).fill(isTurn ? Theme.raised.opacity(0.9) : Theme.surface.opacity(0.75)))
+        .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous)
             .strokeBorder(targetable ? Theme.accent : (isTurn ? Theme.gold : Theme.line), lineWidth: targetable ? 2.5 : (isTurn ? 1.5 : 1)))
-        .overlay(alignment: .topTrailing) {
+        .overlay(alignment: .top) {
             if targetable {
-                Image(systemName: "scope").font(.system(size: 14, weight: .black)).foregroundStyle(.white)
-                    .padding(5).background(Circle().fill(Theme.accent)).offset(x: 4, y: -6)
+                Label(L("c.act.target"), systemImage: "scope")
+                    .font(Theme.font(11, .heavy)).foregroundStyle(.white)
+                    .padding(.horizontal, 8).padding(.vertical, 4)
+                    .background(Capsule().fill(Theme.accent)).offset(y: -10)
             }
         }
-        .scaleEffect(hit ? 0.96 : 1)
-        .animation(.spring(response: 0.25, dampingFraction: 0.5), value: engine.discardPile.count)
+        .rotationEffect(.degrees(hit ? -2 : 0))
+        .animation(.spring(response: 0.25, dampingFraction: 0.4), value: engine.discardPile.count)
+    }
+}
+
+/// Castelul ca turn: As jos, 7 sus; locurile goale sunt conturate.
+struct CastleTower: View {
+    let castle: [Card]
+    var cardWidth: CGFloat = 40
+    var shielded = false
+    var body: some View {
+        let step = cardWidth * 0.42
+        ZStack(alignment: .bottom) {
+            ForEach(0..<CastelRules.levels, id: \.self) { i in
+                Group {
+                    if i < castle.count {
+                        CardView(card: castle[i], width: cardWidth)
+                            .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity),
+                                                    removal: .scale(scale: 0.3).combined(with: .opacity)))
+                    } else {
+                        RoundedRectangle(cornerRadius: cardWidth * 0.14, style: .continuous)
+                            .strokeBorder(Theme.line, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            .frame(width: cardWidth, height: cardWidth * 1.42)
+                    }
+                }
+                .offset(y: -CGFloat(i) * step)
+                .zIndex(Double(i))
+            }
+        }
+        .frame(width: cardWidth + 8, height: cardWidth * 1.42 + step * CGFloat(CastelRules.levels - 1), alignment: .bottom)
+        .overlay {
+            if shielded {
+                RoundedRectangle(cornerRadius: cardWidth * 0.3, style: .continuous)
+                    .stroke(Theme.gold.opacity(0.8), lineWidth: 2).padding(-6)
+            }
+        }
+        .animation(.spring(response: 0.35, dampingFraction: 0.75), value: castle.count)
     }
 }
 

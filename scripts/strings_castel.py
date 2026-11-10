@@ -41,6 +41,7 @@ C = {
     "c.act.build": ("Construiește", "Build", "Bauen", "Construire", "Costruisci", "Construir", "Építés"),
     "c.act.shield": ("Scut", "Shield", "Schild", "Bouclier", "Scudo", "Escudo", "Pajzs"),
     "c.act.discard": ("Aruncă", "Discard", "Ablegen", "Défausser", "Scarta", "Descartar", "Eldobás"),
+    "c.act.target": ("ȚINTĂ", "TARGET", "ZIEL", "CIBLE", "BERSAGLIO", "OBJETIVO", "CÉLPONT"),
     "c.act.pickTarget": ("Atinge castelul pe care îl ataci", "Tap the castle you want to hit", "Tippe auf die Burg, die du triffst",
                          "Touchez le château à viser", "Tocca il castello da colpire", "Toca el castillo que quieres derribar",
                          "Koppints a várra, amit célzol"),
