@@ -45,7 +45,7 @@ xcodebuild -exportArchive -archivePath "$OUT_DIR/Whist.xcarchive" -exportPath "$
   -exportOptionsPlist "$OUT_DIR/ExportOptions.plist" "${AUTH[@]}" 2>&1 | tee "$OUT_DIR/export.log" | tail -40
 grep -qE "EXPORT SUCCEEDED|Upload succeeded|Uploaded" "$OUT_DIR/export.log" || { echo "Exportul / urcarea a eșuat"; exit 1; }
 rm -f "$KEY"
-IPA=$(find "$OUT_DIR/export" -name "*.ipa" | head -1)
+IPA=$(find "$OUT_DIR/export" -name "*.ipa" 2>/dev/null | head -1 || true)
 if [ -n "$IPA" ]; then
   mkdir -p "$OUT_DIR/ipa" && (cd "$OUT_DIR/ipa" && unzip -q -o "$IPA")
   echo "Drepturi în build-ul final:"; codesign -d --entitlements :- "$OUT_DIR/ipa/Payload/Whist.app" 2>/dev/null | grep -A1 game-center || echo "ATENȚIE: fără Game Center"
