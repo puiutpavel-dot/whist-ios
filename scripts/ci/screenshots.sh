@@ -12,7 +12,8 @@ xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifi
 # notificările de sistem de după prima pornire („Ready for Apple Intelligence” etc.) trec înainte de capturi
 xcrun simctl launch "$UDID" "$BUNDLE_ID" -shot 1; sleep 60; xcrun simctl terminate "$UDID" "$BUNDLE_ID" || true
 OUT="$PWD/fastlane/screenshots"; rm -rf "$OUT"; mkdir -p "$OUT_DIR/screenshots"
-for SPEC in ro:ro:ro_RO en-US:en:en_US de-DE:de:de_DE fr-FR:fr:fr_FR it:it:it_IT es-ES:es:es_ES hu:hu:hu_HU; do
+SPECS="${SPECS:-ro:ro:ro_RO en-US:en:en_US de-DE:de:de_DE fr-FR:fr:fr_FR it:it:it_IT es-ES:es:es_ES hu:hu:hu_HU}"
+for SPEC in $SPECS; do
   IFS=: read -r DIR LANG REGION <<< "$SPEC"
   mkdir -p "$OUT/$DIR"
   I=0

@@ -64,6 +64,9 @@ jobs:
 
       - name: Capturi App Store (10 ecrane × 7 limbi)
         if: inputs.actiune == 'app-store' || inputs.actiune == 'capturi'
+        env:
+          # la „capturi” doar română și engleză, ca să consume mai puține minute
+          SPECS: ${{ inputs.actiune == 'capturi' && 'ro:ro:ro_RO en-US:en:en_US' || '' }}
         run: bash scripts/ci/screenshots.sh
 
       - name: Miniaturi în jurnal (previzualizare)
