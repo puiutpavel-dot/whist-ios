@@ -1,0 +1,96 @@
+# Build iOS pe GitHub Actions (înlocuiește Codemagic).
+# Pornire: GitHub → Actions → „iOS” → Run workflow → alegi acțiunea.
+#   verificare  – compilează pentru simulator și rulează testul de anduranță
+#   testflight  – verificare + build semnat urcat în TestFlight
+#   app-store   – testflight + capturi în 7 limbi + fișa din App Store (texte, capturi, „Ce e nou”)
+# Trimiterea la App Review rămâne manuală (sau o face Claude, după confirmare).
+#
+# Secrete necesare (Settings → Secrets and variables → Actions):
+#   ASC_KEY_ID, ASC_ISSUER_ID, ASC_PRIVATE_KEY (conținutul fișierului AuthKey_XXXX.p8, cheie cu rol Admin)
+name: iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      actiune:
+        description: Ce rulez
+        type: choice
+        options: [verificare, testflight, app-store]
+        default: verificare
+
+concurrency:
+  group: ios
+  cancel-in-progress: false
+
+env:
+  BUNDLE_ID: ro.draghicioiu.whist
+  APP_VERSION: "2.1"
+  OUT_DIR: ${{ github.workspace }}/ci-out
+  ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+  ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+  ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+  APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.ASC_KEY_ID }}
+  APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+  APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Xcode (cea mai nouă versiune de pe mașină)
+        run: |
+          XC=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
+          sudo xcode-select -s "$XC"
+          xcodebuild -version
+
+      - name: Verifică secretele
+        if: inputs.actiune != 'verificare'
+        run: |
+          missing=""
+          [ -n "$ASC_KEY_ID" ] || missing="$missing ASC_KEY_ID"
+          [ -n "$ASC_ISSUER_ID" ] || missing="$missing ASC_ISSUER_ID"
+          [ -n "$ASC_PRIVATE_KEY" ] || missing="$missing ASC_PRIVATE_KEY"
+          [ -z "$missing" ] || { echo "::error::Lipsesc secretele:$missing"; exit 1; }
+
+      - name: Build pentru simulator
+        run: bash scripts/ci/sim_build.sh
+
+      - name: Test de anduranță
+        run: bash scripts/ci/stress.sh
+
+      - name: Capturi App Store (10 ecrane × 7 limbi)
+        if: inputs.actiune == 'app-store'
+        run: bash scripts/ci/screenshots.sh
+
+      - uses: actions/setup-python@v5
+        if: inputs.actiune != 'verificare'
+        with:
+          python-version: "3.12"
+
+      - name: App Store Connect — echipă, Game Center, număr de build
+        if: inputs.actiune != 'verificare'
+        run: |
+          pip install -q pyjwt cryptography
+          python scripts/asc_prepare.py
+
+      - name: Arhivă semnată + urcare în TestFlight
+        if: inputs.actiune != 'verificare'
+        run: bash scripts/ci/archive_upload.sh
+
+      - name: Fișa din App Store (texte + capturi + Ce e nou)
+        if: inputs.actiune == 'app-store'
+        run: python scripts/asc_listing.py
+
+      - name: Capturi și jurnale
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rezultate-${{ inputs.actiune }}-${{ github.run_number }}
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            ci-out/screenshots/*.png
+            ci-out/*.log
