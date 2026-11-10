@@ -27,7 +27,18 @@ if ! grep -q "ARCHIVE SUCCEEDED" "$OUT_DIR/archive.log"; then
     archive 2>&1 | tee "$OUT_DIR/archive.log" | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
   grep -q "ARCHIVE SUCCEEDED" "$OUT_DIR/archive.log" || { echo "Arhivarea a eșuat"; grep -E "error:" "$OUT_DIR/archive.log" | sort -u | head -50; exit 1; }
 fi
-echo "Drepturi în arhivă:"; codesign -d --entitlements :- "$OUT_DIR/Whist.xcarchive/Products/Applications/Whist.app" 2>/dev/null || true
+APP="$OUT_DIR/Whist.xcarchive/Products/Applications/Whist.app"
+# Arhiva nesemnată nu poartă drepturile (Game Center). Le punem cu o semnătură ad-hoc făcută direct cu codesign;
+# la export, semnarea din cloud a Apple preia drepturile din aplicația arhivată.
+if ! codesign -d --entitlements :- "$APP" 2>/dev/null | grep -q game-center; then
+  ENT="$OUT_DIR/ent.plist"
+  cp Config/Whist.entitlements "$ENT"
+  /usr/libexec/PlistBuddy -c "Add :application-identifier string $TEAM_ID.${BUNDLE_ID:-ro.draghicioiu.whist}" "$ENT" 2>/dev/null || true
+  /usr/libexec/PlistBuddy -c "Add :com.apple.developer.team-identifier string $TEAM_ID" "$ENT" 2>/dev/null || true
+  find "$APP" -depth \( -name "*.framework" -o -name "*.dylib" -o -name "*.appex" \) -exec codesign --force --sign - {} \; 2>/dev/null || true
+  codesign --force --sign - --entitlements "$ENT" --generate-entitlement-der "$APP"
+fi
+echo "Drepturi în arhivă:"; codesign -d --entitlements :- "$APP" 2>/dev/null || true
 
 cat > "$OUT_DIR/ExportOptions.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
