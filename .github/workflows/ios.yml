@@ -1,6 +1,7 @@
 # Build iOS pe GitHub Actions (înlocuiește Codemagic).
 # Pornire: GitHub → Actions → „iOS” → Run workflow → alegi acțiunea.
 #   verificare  – compilează pentru simulator și rulează testul de anduranță
+#   capturi     – verificare + capturile în 7 limbi (fără urcare; se văd în jurnal și în „Artifacts”)
 #   testflight  – verificare + build semnat urcat în TestFlight
 #   app-store   – testflight + capturi în 7 limbi + fișa din App Store (texte, capturi, „Ce e nou”)
 # Trimiterea la App Review rămâne manuală (sau o face Claude, după confirmare).
@@ -15,7 +16,7 @@ on:
       actiune:
         description: Ce rulez
         type: choice
-        options: [verificare, testflight, app-store]
+        options: [verificare, capturi, testflight, app-store]
         default: verificare
 
 concurrency:
@@ -47,7 +48,7 @@ jobs:
           xcodebuild -version
 
       - name: Verifică secretele
-        if: inputs.actiune != 'verificare'
+        if: inputs.actiune == 'testflight' || inputs.actiune == 'app-store'
         run: |
           missing=""
           [ -n "$ASC_KEY_ID" ] || missing="$missing ASC_KEY_ID"
@@ -62,22 +63,32 @@ jobs:
         run: bash scripts/ci/stress.sh
 
       - name: Capturi App Store (10 ecrane × 7 limbi)
-        if: inputs.actiune == 'app-store'
+        if: inputs.actiune == 'app-store' || inputs.actiune == 'capturi'
         run: bash scripts/ci/screenshots.sh
 
+      - name: Miniaturi în jurnal (previzualizare)
+        if: inputs.actiune == 'app-store' || inputs.actiune == 'capturi'
+        run: |
+          mkdir -p /tmp/thumbs
+          for f in ci-out/screenshots/ro_*.png ci-out/screenshots/en-US_*.png; do
+            n=$(basename "$f" .png)
+            sips -s format jpeg -s formatOptions 55 --resampleWidth 260 "$f" --out "/tmp/thumbs/$n.jpg" >/dev/null
+            echo "THUMB:$n:$(base64 -i "/tmp/thumbs/$n.jpg" | tr -d '\n')"
+          done
+
       - uses: actions/setup-python@v5
-        if: inputs.actiune != 'verificare'
+        if: inputs.actiune == 'testflight' || inputs.actiune == 'app-store'
         with:
           python-version: "3.12"
 
       - name: App Store Connect — echipă, Game Center, număr de build
-        if: inputs.actiune != 'verificare'
+        if: inputs.actiune == 'testflight' || inputs.actiune == 'app-store'
         run: |
           pip install -q pyjwt cryptography
           python scripts/asc_prepare.py
 
       - name: Arhivă semnată + urcare în TestFlight
-        if: inputs.actiune != 'verificare'
+        if: inputs.actiune == 'testflight' || inputs.actiune == 'app-store'
         run: bash scripts/ci/archive_upload.sh
 
       - name: Fișa din App Store (texte + capturi + Ce e nou)
