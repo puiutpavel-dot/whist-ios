@@ -1,13 +1,13 @@
 """Textele pentru Macao. Ordinea: ro, en, de, fr, it, es, hu."""
 
 M = {
-    "hub.macao.desc": ("Scapă primul de cărți. 2 și 3 dau de tras, Jokerul și mai mult. Nu uita să spui „Macao!”",
-                       "Be first to shed your cards. 2s and 3s make them draw, Jokers even more. Don't forget to call “Macao!”",
-                       "Werde deine Karten zuerst los. 2 und 3 lassen ziehen, Joker noch mehr. Vergiss nicht „Macao!“",
-                       "Débarrassez-vous de vos cartes en premier. Les 2 et 3 font piocher, les Jokers encore plus. N'oubliez pas « Macao ! »",
-                       "Liberati per primo delle carte. 2 e 3 fanno pescare, i Jolly ancora di più. Non dimenticare «Macao!»",
-                       "Quédate sin cartas el primero. Los 2 y 3 hacen robar, los comodines aún más. No olvides decir «¡Macao!»",
-                       "Szabadulj meg elsőként a lapjaidtól. A 2-es és 3-as húzat, a Joker még többet. Ne felejtsd: „Macao!”"),
+    "hub.macao.desc": ("Scapă primul de cărți. 2, 3 și Jokerii dau de tras. Nu uita: „Macao!”",
+                       "Shed your cards first. 2s, 3s and Jokers make them draw. Don't forget: “Macao!”",
+                       "Werde deine Karten zuerst los. 2, 3 und Joker lassen ziehen. Sag „Macao!“",
+                       "Posez toutes vos cartes en premier. 2, 3 et Jokers font piocher. « Macao ! »",
+                       "Resta per primo senza carte. 2, 3 e Jolly fanno pescare. Di' «Macao!»",
+                       "Quédate sin cartas el primero. 2, 3 y comodines hacen robar. «¡Macao!»",
+                       "Fogyjanak el elsőként a lapjaid. A 2-es, 3-as és a Joker húzat. „Macao!”"),
 
     # ---------- Meniu ----------
     "m.menu.tagline": ("Jocul de cărți al copilăriei", "The card game of Romanian childhoods", "Das Kartenspiel der Kindheit",

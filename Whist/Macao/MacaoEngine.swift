@@ -447,8 +447,8 @@ enum MacaoBot {
         var best: (cards: [Card], score: Int)? = nil
         for first in legal {
             let same = hand.filter { $0.rank == first.rank && $0 != first }
-            // Jokerii și cărțile care schimbă culoarea se joacă pe rând; restul, toate deodată.
-            let single = MacaoRules.isJoker(first) || e.isChanger(first)
+            // Jokerii, cărțile care schimbă culoarea și cea care oprește tragerea se joacă pe rând; restul, toate deodată.
+            let single = MacaoRules.isJoker(first) || e.isChanger(first) || (e.isStopper(first) && e.pendingDraw > 0)
             var group = [first]
             if !single {
                 let rest = hand.filter { !same.contains($0) && $0 != first }
@@ -465,7 +465,8 @@ enum MacaoBot {
             } else if e.isChanger(first) {
                 score = 15
             } else if MacaoRules.drawValue(first) > 0 {
-                score = (danger ? 80 : 42) + group.count * 6
+                // la o pedeapsă deja pe masă, o dau mai departe înainte să o opresc
+                score = (danger ? 80 : (e.pendingDraw > 0 ? 64 : 42)) + group.count * 6
             } else if e.isSkipper(first) {
                 score = (danger ? 70 : 46) + group.count * 4
             } else if e.isStopper(first) && e.pendingDraw > 0 {

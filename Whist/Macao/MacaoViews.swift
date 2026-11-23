@@ -529,7 +529,8 @@ struct MacaoOpponentView: View {
             ZStack {
                 ForEach(0..<shown, id: \.self) { i in
                     CardBackView(width: w, emblem: "M")
-                        .rotationEffect(.degrees((Double(i) - Double(shown - 1) / 2) * 9), anchor: .bottom)
+                        .rotationEffect(.degrees((Double(i) - Double(shown - 1) / 2) * 10), anchor: .bottom)
+                        .offset(x: (CGFloat(i) - CGFloat(shown - 1) / 2) * w * 0.16)
                 }
             }
             .frame(height: w * 1.42 + 8)
