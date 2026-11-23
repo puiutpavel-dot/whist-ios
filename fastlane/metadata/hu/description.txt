@@ -1,4 +1,4 @@
-Öt román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz, Avioane és A vár (Castelul). A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
+Hat román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz, Macao, Avioane és A vár (Castelul). A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
 
 WHIST
 • Pontosan bemondod az ütéseidet; az osztó nem zárhatja az összeget.
@@ -26,6 +26,13 @@ A VÁR (CASTELUL)
 • A kőtornyos, labdás román udvari játék kártyás változata.
 • Építsd fel a várad ásztól 7-ig; a labdák (8, 9, 10) ledöntik az azonos színű legfelső szintet.
 • A bubi véd, a dáma bármelyik szintet helyettesíti, a király pajzsot ad.
+• 2–4 játékos, 3 nehézségi szint, tanács minden körben.
+
+MACAO
+• A román gyerekkor kártyajátéka: szabadulj meg elsőként a lapjaidtól, színre színt vagy értékre értéket téve.
+• A 2-es és 3-as húzat, a Jokerek 5 és 10 lapot; a büntetések összeadódnak és továbbmennek.
+• Válassz házszabályt: az ász vagy a 7-es vált színt, mellette a kimaradás és a húzást megállító lap.
+• Koppints a „MACAO!” gombra, ha egy lapod marad; ha elfelejted, 5 lapot húzol.
 • 2–4 játékos, 3 nehézségi szint, tanács minden körben.
 
 REKLÁM ÉS FIÓK NÉLKÜL

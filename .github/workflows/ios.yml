@@ -26,7 +26,7 @@ concurrency:
 
 env:
   BUNDLE_ID: ro.draghicioiu.whist
-  APP_VERSION: "2.1"
+  APP_VERSION: "2.2"
   OUT_DIR: ${{ github.workspace }}/ci-out
   ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
   ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
@@ -68,8 +68,8 @@ jobs:
         env:
           # la „capturi” doar română și engleză, ca să consume mai puține minute
           SPECS: ${{ inputs.actiune == 'capturi' && 'ro:ro:ro_RO en-US:en:en_US' || '' }}
-          # la „capturi” doar ecranele de verificat (meniu, Renț, Propune un joc, meniul Renț)
-          SHOTS: ${{ inputs.actiune == 'capturi' && '1 6 15 16' || '' }}
+          # la „capturi” doar ecranele de verificat (meniu, Macao ×2, meniul Macao)
+          SHOTS: ${{ inputs.actiune == 'capturi' && '1 17 18 19' || '' }}
         run: bash scripts/ci/screenshots.sh
 
       - name: Miniaturi în jurnal (previzualizare)

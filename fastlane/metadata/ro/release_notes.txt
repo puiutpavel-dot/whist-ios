@@ -1,4 +1,4 @@
-Noutăți în 2.1:
-• Avioane, clasicul din bancă: contra botului sau online, prin Game Center.
-• Castelul: jocul de curte cu turnul și mingea, adaptat la cărți.
-• Meniul principal are acum cinci jocuri.
+Noutăți în 2.2:
+• Macao: jocul de cărți al copilăriei, cu Jokeri, „stai o tură” și butonul „MACAO!”.
+• Alegi varianta de acasă: Asul sau 7 schimbă culoarea.
+• Meniul principal are acum șase jocuri.

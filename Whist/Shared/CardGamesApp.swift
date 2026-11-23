@@ -31,7 +31,7 @@ struct CardGamesApp: App {
 // MARK: - Meniul principal
 
 enum CardGame: String, Hashable, CaseIterable, Identifiable {
-    case whist, remi, rentz, avioane, castel
+    case whist, remi, rentz, macao, avioane, castel
     var id: String { rawValue }
 }
 
@@ -85,6 +85,7 @@ struct HubView: View {
                     case .rentz: RentzMenuView()
                     case .avioane: AvioaneRootView()
                     case .castel: CastelMenuView()
+                    case .macao: MacaoMenuView()
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
@@ -113,6 +114,7 @@ private struct GameTile: View {
         case .rentz: return [Theme.violet, Color(hex: 0x3B2E9E), Color(hex: 0x17123F)]
         case .avioane: return [Color(hex: 0x1D5C8C), Color(hex: 0x0E2F4D), Color(hex: 0x06131F)]
         case .castel: return Theme.castleGradient
+        case .macao: return Theme.macaoGradient
         }
     }
     private var title: String {
@@ -122,6 +124,7 @@ private struct GameTile: View {
         case .rentz: return "RENȚ"
         case .avioane: return "AVIOANE"
         case .castel: return L("c.title")
+        case .macao: return "MACAO"
         }
     }
     private var desc: String { L("hub.\(game.rawValue).desc") }
@@ -130,7 +133,7 @@ private struct GameTile: View {
         case .whist, .rentz: return "3–6"
         case .remi: return "2–4"
         case .avioane: return "1–2"
-        case .castel: return "2–4"
+        case .castel, .macao: return "2–4"
         }
     }
 
@@ -209,6 +212,8 @@ private struct GameTile: View {
             AvioaneTileArt()
         case .castel:
             CastleTowerArt(levels: 5, cardWidth: 40).rotationEffect(.degrees(4))
+        case .macao:
+            MacaoFanArt(cardWidth: 50).offset(x: -10, y: 8)
         }
     }
 }
