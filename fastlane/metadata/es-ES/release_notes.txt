@@ -1,4 +1,4 @@
-Novedades de la 2.1:
-• Avioane (Aviones), el clásico del pupitre: contra el bot u online mediante Game Center.
-• El Castillo: el juego de patio rumano, ahora con cartas.
-• El menú principal tiene ahora cinco juegos.
+Novedades de la 2.2:
+• Macao: el juego de cartas de la infancia rumana, con comodines, «pierdes un turno» y el aviso «¡MACAO!».
+• Elige las reglas de casa: el As o el 7 cambia el palo.
+• El menú principal tiene ahora seis juegos.

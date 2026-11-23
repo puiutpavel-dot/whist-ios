@@ -1,4 +1,4 @@
-Novità della 2.1:
-• Avioane (Aerei), il classico dei banchi di scuola: contro il bot o online tramite Game Center.
-• Il Castello: il gioco da cortile rumeno, ora con le carte.
-• Il menu principale ora ha cinque giochi.
+Novità della 2.2:
+• Macao: il gioco di carte dell'infanzia rumena, con Jolly, «salta il turno» e l'annuncio «MACAO!».
+• Scegli le regole di casa: l'Asso o il 7 cambia il seme.
+• Il menu principale ora ha sei giochi.

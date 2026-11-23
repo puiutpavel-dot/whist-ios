@@ -1,4 +1,4 @@
-Neu in 2.1:
-• Avioane (Flugzeuge), der Klassiker von der Schulbank: gegen den Bot oder online über Game Center.
-• Die Burg: das rumänische Hofspiel, jetzt mit Karten.
-• Das Hauptmenü hat jetzt fünf Spiele.
+Neu in 2.2:
+• Macao: das Ablegespiel der rumänischen Kindheit, mit Jokern, Aussetzen und der Ansage „MACAO!“.
+• Hausregeln zur Wahl: Ass oder 7 wünscht die Farbe.
+• Das Hauptmenü hat jetzt sechs Spiele.

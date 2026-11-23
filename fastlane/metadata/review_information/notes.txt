@@ -1,4 +1,8 @@
-Version 2.1 adds two games to this app: "Avioane" (Planes) and "Castelul" (The Castle). Avioane was previously submitted as a separate app ("Avioane: Jocul Clasic"); following the 4.3 guidance it is now a game mode of this single app, and the separate app will not be resubmitted.
+Version 2.2 adds one more game mode to this app: "Macao". Despite the name, it has nothing to do with casinos or gambling: Macao is the traditional Romanian family shedding card game (similar to Crazy Eights / Mau-Mau), where the first player to get rid of all cards wins the round. There are no bets, chips, coins or money of any kind.
+
+How to test Macao: on the main screen tap the MACAO card, then "New game". Tap a card in your hand that matches the suit or rank of the card on the table (playable cards are raised), then tap "Play card"; tap further cards of the same rank to play them together. If nothing fits, tap "Draw a card". When you are down to one card, a gold "MACAO!" button appears for a few seconds. The tip line suggests a move every turn. It is single player against computer opponents, offline.
+
+Version 2.1 added "Avioane" (Planes) and "Castelul" (The Castle). Avioane was previously submitted as a separate app ("Avioane: Jocul Clasic"); following the 4.3 guidance it is a game mode of this single app, and the separate app will not be resubmitted.
 
 How to test Avioane: on the main screen tap the AVIOANE card.
 - Against the bot: choose 1, 2 or 3 planes and a difficulty, tap "Play vs. Bot", place the planes (drag to move, tap to rotate), tap "Ready for battle!", then tap squares on the attack radar to fire.
@@ -6,5 +10,5 @@ How to test Avioane: on the main screen tap the AVIOANE card.
 
 How to test The Castle (Castelul): on the main screen tap the CASTELUL card, then "New game". Tap a card in your hand to see what you can do with it (build, shield or discard); for a ball card (8, 9, 10) tap an opponent's highlighted castle. The tip line under the table suggests a move every turn. It is single player against computer opponents, offline.
 
-The card games (Whist, Tile Rummy, Rentz) are unchanged: single player against computer opponents, offline.
+The other card games (Whist, Tile Rummy, Rentz) are unchanged: single player against computer opponents, offline.
 No account (other than optional Game Center), no ads, no in-app purchases, no real-money or simulated gambling. The app runs on iPad in iPhone compatibility mode; all screens were checked on iPad Air 11-inch and iPhone SE. Languages: Romanian, English, German, French, Italian, Spanish, Hungarian (follows the device language).

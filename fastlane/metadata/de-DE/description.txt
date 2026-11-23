@@ -1,4 +1,4 @@
-Fünf rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz, Avioane und Die Burg (Castelul). Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
+Sechs rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz, Macao, Avioane und Die Burg (Castelul). Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
 
 WHIST
 • Sag genau deine Stiche an; der Geber darf die Summe nicht schließen.
@@ -26,6 +26,13 @@ DIE BURG (CASTELUL)
 • Das rumänische Hofspiel mit Steinturm und Ball, als Kartenspiel.
 • Baue deine Burg vom Ass bis zur 7; Bälle (8, 9, 10) werfen die oberste Ebene gleicher Farbe um.
 • Buben blocken, Damen ersetzen jede Ebene, Könige geben einen Schild.
+• 2–4 Spieler, Gegner in 3 Stufen, ein Tipp in jedem Zug.
+
+MACAO
+• Das Ablegespiel aus jeder rumänischen Kindheit (ähnlich Mau-Mau): Werde deine Karten zuerst los, Farbe auf Farbe oder Wert auf Wert.
+• 2 und 3 lassen den Nächsten ziehen, Joker 5 und 10; Strafen addieren sich und wandern weiter.
+• Hausregeln zur Wahl: Ass oder 7 wünscht die Farbe, dazu Aussetzen und Stoppkarte.
+• Tippe auf „MACAO!“, wenn du nur noch eine Karte hast; vergisst du es, ziehst du 5.
 • 2–4 Spieler, Gegner in 3 Stufen, ein Tipp in jedem Zug.
 
 KEINE WERBUNG, KEIN KONTO

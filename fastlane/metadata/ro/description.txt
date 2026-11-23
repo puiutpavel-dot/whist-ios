@@ -1,4 +1,4 @@
-Cinci jocuri românești, în aceeași aplicație: Whist, Remi etalat, Renț, Avioane și Castelul. Jocurile de cărți le joci împotriva calculatorului, oricând și fără internet; Avioane și online, cu un prieten.
+Șase jocuri românești, în aceeași aplicație: Whist, Remi etalat, Renț, Macao, Avioane și Castelul. Jocurile de cărți le joci împotriva calculatorului, oricând și fără internet; Avioane și online, cu un prieten.
 
 WHIST
 • Licitezi exact câte levate iei; ultimul nu poate închide suma.
@@ -26,6 +26,13 @@ CASTELUL
 • Jocul de curte cu turnul de pietre și mingea, adaptat la cărți.
 • Îți ridici castelul de la As la 7; mingile (8, 9, 10) dărâmă nivelul de sus de aceeași culoare.
 • Valetul blochează, Dama ține loc de orice nivel, Popa pune scut.
+• 2–4 jucători, adversari pe 3 niveluri, sfat la fiecare tură.
+
+MACAO
+• Jocul de cărți al copilăriei: scapi primul de cărți, punând aceeași culoare sau aceeași valoare.
+• 2 și 3 dau de tras, Jokerii 5 și 10; pedepsele se adună și trec mai departe.
+• Alegi varianta de acasă: Asul sau 7 schimbă culoarea; „stai o tură” și cartea care oprește tragerea.
+• Butonul „MACAO!” când rămâi cu o carte; dacă uiți, tragi 5.
 • 2–4 jucători, adversari pe 3 niveluri, sfat la fiecare tură.
 
 FĂRĂ RECLAME, FĂRĂ CONT

@@ -3,7 +3,7 @@ import SwiftUI
 /// Capturile din App Store (`-shot N -AppleLanguages "(de)"`) și testul de anduranță (`-stress`).
 /// 1 meniul · 2 Whist: licitația cu sfat · 3 Whist: levată · 4 Remi: masa · 5 Remi: etalare sugerată
 /// 6 Renț: alegerea jocului · 7 Renț: levată la Dame · 8 Renț: rândurile din Renț
-/// 9 Avioane: hangarul · 10 Avioane: bătălia
+/// 9 Avioane: hangarul · 10 Avioane: bătălia · 13, 14 Castelul · 17 Macao: masa · 18 Macao: cărți alese · 19 meniul Macao
 @MainActor
 enum AppShots {
     static var shot: Int? { WhistShots.shot }
@@ -24,6 +24,11 @@ enum AppShots {
             CastelGameView(engine: e, selected: e.legalActions(for: e.human).first { if case .attack = $0 { return true }; return false }?.card)
         case 15: IdeaView()                     // doar pentru verificări
         case 16: RentzMenuView()                // doar pentru verificări
+        case 17: MacaoGameView(engine: macaoEngine(pending: true))
+        case 18:
+            let e = macaoEngine(pending: false)
+            MacaoGameView(engine: e, selected: macaoPick(e))
+        case 19: MacaoMenuView()                // doar pentru verificări
         default: HubView()
         }
     }
@@ -41,6 +46,32 @@ enum AppShots {
             if ok { return e }
         }
         return CastelEngine(players: 3)
+    }
+
+    /// Macao la mijlocul rundei: tu la rând; cu `pending`, ai de răspuns la un 2 sau 3 și ai cu ce.
+    static func macaoEngine(pending: Bool) -> MacaoEngine {
+        for _ in 0..<300 {
+            let e = MacaoEngine(settings: MacaoSettings(players: 4))
+            let ok = e.fastForward { g in
+                guard g.phase == .playing, g.current == g.human, g.turnCount >= 6 else { return false }
+                let hand = g.players[g.human].hand
+                guard (5...8).contains(hand.count), g.players.dropFirst().allSatisfy({ (2...7).contains($0.hand.count) }) else { return false }
+                if pending { return g.pendingDraw > 0 && !g.playable(for: g.human).isEmpty }
+                return g.pendingDraw == 0 && g.pendingSkip == 0 && macaoPick(g).count >= 2
+            }
+            if ok { return e }
+        }
+        return MacaoEngine(settings: MacaoSettings(players: 4))
+    }
+
+    /// Două cărți de aceeași valoare care pot fi puse împreună (fără cele care cer alegerea culorii).
+    static func macaoPick(_ e: MacaoEngine) -> [Card] {
+        let hand = e.players[e.human].hand
+        for first in e.playable(for: e.human) where !MacaoRules.isJoker(first) && !e.isChanger(first) {
+            let same = hand.filter { $0.rank == first.rank && $0 != first }
+            if !same.isEmpty { return [first] + same }
+        }
+        return []
     }
 
     static func rentzEngine(for shot: Int) -> RentzEngine {
@@ -69,7 +100,7 @@ enum AppShots {
     // MARK: Test de anduranță
 
     static func runStress() {
-        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress(), castelStress()]
+        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress(), castelStress(), macaoStress()]
         let ok = lines.allSatisfy { $0.contains(" OK") }
         lines.insert(ok ? "STRESS OK" : "STRESS FAIL", at: 0)
         let text = lines.joined(separator: "\n")
@@ -180,6 +211,44 @@ enum AppShots {
         }
         return errors.isEmpty ? "CASTEL OK: \(games) partide, \(rounds) runde"
                               : "CASTEL FAIL: \(games) partide\n" + errors.joined(separator: "\n")
+    }
+
+    private static func macaoStress() -> String {
+        var games = 0, rounds = 0, steps = 0
+        var errors: [String] = []
+        func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
+        for players in 2...4 {
+            for variant in MacaoVariant.allCases {
+                for diff in MacaoDifficulty.allCases {
+                    for k in 0..<12 {
+                        let target = [1, 3, 5][k % 3]
+                        let e = MacaoEngine(settings: MacaoSettings(players: players, variant: variant, targetWins: target, difficulty: diff))
+                        let done = e.fastForward(maxSteps: 400_000) { g in
+                            steps += 1
+                            let cards = g.deck.count + g.discardPile.count + g.players.reduce(0) { $0 + $1.hand.count }
+                            if cards != MacaoRules.deckSize { fail("\(cards) cărți în joc în loc de \(MacaoRules.deckSize)") }
+                            if g.discardPile.isEmpty { fail("teanc gol") }
+                            if g.pendingDraw > 0 && g.pendingSkip > 0 { fail("pedeapsă dublă") }
+                            if g.phase == .playing {
+                                if g.players[g.current].waits > 0 { fail("la rând e cineva care stă") }
+                                if g.players.contains(where: { $0.hand.isEmpty }) { fail("mână goală în timpul rundei") }
+                                for c in g.playable(for: g.current) where !g.isLegal([c], for: g.current) { fail("carte permisă, dar refuzată") }
+                                if g.current == g.human, case .play(let cs, let suit) = MacaoBot.choose(for: g.human, engine: g, mistakes: false) {
+                                    if !g.isLegal(cs, for: g.human) { fail("sfat nepermis") }
+                                    if g.needsSuit(cs) && suit == nil { fail("sfat fără culoare") }
+                                }
+                            }
+                            return g.phase == .gameOver
+                        }
+                        games += 1; rounds += e.history.count
+                        if !done { fail("partidă neterminată: \(players)p") }
+                        if e.players.map(\.roundsWon).max() != target { fail("nimeni n-a ajuns la \(target) runde") }
+                    }
+                }
+            }
+        }
+        return errors.isEmpty ? "MACAO OK: \(games) partide, \(rounds) runde, \(steps) mutări"
+                              : "MACAO FAIL: \(games) partide\n" + errors.joined(separator: "\n")
     }
 
     private static func remiStress() -> String {

@@ -1,4 +1,4 @@
-New in 2.1:
-• Avioane (Planes), the school-desk classic: against the bot or online via Game Center.
-• The Castle: the Romanian playground game, now with cards.
-• The main menu now has five games.
+New in 2.2:
+• Macao: the shedding card game of Romanian childhoods, with Jokers, skip-a-turn and the “MACAO!” call.
+• Pick your house rules: the Ace or the 7 changes the suit.
+• The main menu now has six games.

@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from strings_whist import W  # noqa: E402
 from strings_rentz import R, H  # noqa: E402
 from strings_castel import C  # noqa: E402
+from strings_macao import M  # noqa: E402
 
 LANGS = ["ro", "en", "de", "fr", "it", "es", "hu"]
 
@@ -696,7 +697,7 @@ S = {
 
 
 def main():
-    for extra in (W, R, H, C):
+    for extra in (W, R, H, C, M):
         dup = set(extra) & set(S)
         assert not dup, dup
         S.update(extra)

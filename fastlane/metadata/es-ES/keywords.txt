@@ -1,1 +1,1 @@
-whist,rummy,rentz,aviones,avioane,fichas,bazas,cartas,rumano,barbu,comodín
+whist,rummy,rentz,macao,aviones,avioane,fichas,bazas,cartas,rumano,barbu,comodín
