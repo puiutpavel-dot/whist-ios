@@ -1,4 +1,8 @@
-Version 2.2 adds one more game mode to this app: "Macao". Despite the name, it has nothing to do with casinos or gambling: Macao is the traditional Romanian family shedding card game (similar to Crazy Eights / Mau-Mau), where the first player to get rid of all cards wins the round. There are no bets, chips, coins or money of any kind.
+Version 2.3 adds one more game mode to this app: "Canasta", the classic rummy-style card game (two decks, four Jokers, melds of same-rank cards, canastas of seven). It is single player against computer opponents (with a computer partner in the four-player mode), offline. There are no bets, chips, coins or money of any kind.
+
+How to test Canasta: on the main screen tap the CANASTA card, then "New game". On your turn tap "Draw" (or "Take the pile" when it is enabled). Select three or more cards of the same rank in your hand and tap "Meld"; to add cards to one of your melds, select them and tap that meld. To end your turn, select one card and tap "Discard". The gold line above the buttons suggests a move at every step, and "Undo" takes back the melds of the current turn.
+
+Version 2.2 added "Macao". Despite the name, it has nothing to do with casinos or gambling: Macao is the traditional Romanian family shedding card game (similar to Crazy Eights / Mau-Mau), where the first player to get rid of all cards wins the round. There are no bets, chips, coins or money of any kind.
 
 How to test Macao: on the main screen tap the MACAO card, then "New game". Tap a card in your hand that matches the suit or rank of the card on the table (playable cards are raised), then tap "Play card"; tap further cards of the same rank to play them together. If nothing fits, tap "Draw a card". When you are down to one card, a gold "MACAO!" button appears for a few seconds. The tip line suggests a move every turn. It is single player against computer opponents, offline.
 

@@ -1,4 +1,4 @@
-Neu in 2.2:
-• Macao: das Ablegespiel der rumänischen Kindheit, mit Jokern, Aussetzen und der Ansage „MACAO!“.
-• Hausregeln zur Wahl: Ass oder 7 wünscht die Farbe.
-• Das Hauptmenü hat jetzt sechs Spiele.
+Neu in 2.3:
+• Canasta: der Klassiker mit zwei Blättern, Jokern, roten Dreien und Canastas aus sieben Karten.
+• Zu zweit, zu dritt oder zu viert mit Partner.
+• Das Hauptmenü hat jetzt sieben Spiele.

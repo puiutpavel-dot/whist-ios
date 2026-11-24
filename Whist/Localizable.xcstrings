@@ -9354,6 +9354,53 @@
         }
       }
     },
+    "hub.canasta.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etalezi cărți de aceeași valoare și strângi canaste de șapte. Cu Jokeri și treiari roșii."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meld cards of the same rank and build canastas of seven. With Jokers and red threes."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lege gleiche Werte aus und sammle Canastas aus sieben Karten. Mit Jokern und roten Dreien."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étalez des cartes de même valeur et formez des canastas de sept. Jokers et trois rouges."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cala carte dello stesso valore e forma canaste da sette. Con Jolly e tre rossi."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baja cartas del mismo valor y forma canastas de siete. Con comodines y treses rojos."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rakj ki azonos értékű lapokat, és gyűjts hétlapos canastákat. Jokerekkel és piros hármasokkal."
+          }
+        }
+      }
+    },
     "hub.castel.desc": {
       "extractionState": "manual",
       "localizations": {
@@ -10760,6 +10807,2967 @@
           "stringUnit": {
             "state": "translated",
             "value": "Javasolj egy játékot"
+          }
+        }
+      }
+    },
+    "k.act.discard": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aruncă"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discard"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ablegen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défausser"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scarta"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descartar"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eldobás"
+          }
+        }
+      }
+    },
+    "k.act.draw": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draw"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziehen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piocher"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pesca"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Robar"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Húzás"
+          }
+        }
+      }
+    },
+    "k.act.meld": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etalează"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auslegen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étaler"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cala"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bajar"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirakás"
+          }
+        }
+      }
+    },
+    "k.act.take": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ia teancul (%ld)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take the pile (%ld)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel nehmen (%ld)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendre la pile (%ld)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prendi il pozzo (%ld)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tomar el pozo (%ld)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talon felvétele (%ld)"
+          }
+        }
+      }
+    },
+    "k.act.undo": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anulează"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deshacer"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vissza"
+          }
+        }
+      }
+    },
+    "k.event.discarded": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: aruncat %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: discarded %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: abgelegt %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ : défaussé %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: scartato %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: descartó %2$@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: eldobta: %2$@"
+          }
+        }
+      }
+    },
+    "k.event.drew": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: a tras o carte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: drew a card"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: Karte gezogen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : carte piochée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ha pescato"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: robó una carta"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: húzott egy lapot"
+          }
+        }
+      }
+    },
+    "k.event.melded": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: etalat %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: melded %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: ausgelegt %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ : étalé %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: calato %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: bajó %2$@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: kirakta: %2$@"
+          }
+        }
+      }
+    },
+    "k.event.out": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: runda e închisă!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: went out!"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ausgemacht!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : manche terminée !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ha chiuso!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ¡cerró la ronda!"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: lezárta a kört!"
+          }
+        }
+      }
+    },
+    "k.event.stockOut": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pachetul s-a terminat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The stock ran out."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Stapel ist aufgebraucht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le talon est épuisé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tallone è finito."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se acabó el mazo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elfogyott a pakli."
+          }
+        }
+      }
+    },
+    "k.event.took": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: a luat teancul (%2$ld cărți)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: took the pile (%2$ld cards)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: Stapel genommen (%2$ld Karten)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ : pile prise (%2$ld cartes)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: ha preso il pozzo (%2$ld carte)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: tomó el pozo (%2$ld cartas)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: felvette a talont (%2$ld lap)"
+          }
+        }
+      }
+    },
+    "k.hint.wild": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atinge o etalare de-a ta ca să adaugi cărțile alese."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap one of your melds to add the selected cards."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf eine deiner Meldungen, um die Karten anzulegen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez une de vos combinaisons pour y ajouter les cartes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca una tua combinazione per aggiungere le carte scelte."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una de tus combinaciones para añadir las cartas."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppints egy saját kirakásodra, hogy hozzáadd a lapokat."
+          }
+        }
+      }
+    },
+    "k.menu.mode2": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu contra unui adversar · %ld cărți în mână"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You against one opponent · %ld cards each"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du gegen einen Gegner · %ld Karten auf der Hand"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous contre un adversaire · %ld cartes en main"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu contro un avversario · %ld carte in mano"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tú contra un rival · %ld cartas en mano"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te egy ellenfél ellen · %ld lap kézben"
+          }
+        }
+      }
+    },
+    "k.menu.mode3": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiecare pentru el · %ld cărți în mână"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyone for themselves · %ld cards each"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeder für sich · %ld Karten auf der Hand"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacun pour soi · %ld cartes en main"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ognuno per sé · %ld carte in mano"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada uno por su cuenta · %ld cartas en mano"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mindenki magának · %ld lap kézben"
+          }
+        }
+      }
+    },
+    "k.menu.mode4": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "În echipă cu %1$@ · %2$ld cărți în mână"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partnered with %1$@ · %2$ld cards each"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Team mit %1$@ · %2$ld Karten auf der Hand"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En équipe avec %1$@ · %2$ld cartes en main"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In coppia con %1$@ · %2$ld carte in mano"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En pareja con %1$@ · %2$ld cartas en mano"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Csapatban vele: %1$@ · %2$ld lap kézben"
+          }
+        }
+      }
+    },
+    "k.menu.tagline": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Două pachete, patru Jokeri și canaste de șapte cărți"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two decks, four Jokers and canastas of seven"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Blätter, vier Joker und Canastas aus sieben Karten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux jeux, quatre Jokers et des canastas de sept cartes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due mazzi, quattro Jolly e canaste da sette carte"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos barajas, cuatro comodines y canastas de siete cartas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Két pakli, négy Joker és hétlapos canasták"
+          }
+        }
+      }
+    },
+    "k.menu.target": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puncte pentru victorie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points to win"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkte zum Sieg"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points pour gagner"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punti per vincere"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos para ganar"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Győzelemhez kellő pont"
+          }
+        }
+      }
+    },
+    "k.min": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prima etalare: %ld p"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "first meld: %ld pts"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erstmeldung: %ld P."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "première pose : %ld pts"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prima calata: %ld p."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primera bajada: %ld p."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "első kirakás: %ld p"
+          }
+        }
+      }
+    },
+    "k.minProgress": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima etalare: %1$ld din %2$ld puncte. Mai etalează sau anulează."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First meld: %1$ld of %2$ld points. Meld more or undo."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erstmeldung: %1$ld von %2$ld Punkten. Lege mehr aus oder nimm zurück."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Première pose : %1$ld sur %2$ld points. Étalez encore ou annulez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima calata: %1$ld su %2$ld punti. Cala ancora o annulla."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primera bajada: %1$ld de %2$ld puntos. Baja más o deshaz."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Első kirakás: %1$ld / %2$ld pont. Rakj ki még, vagy vond vissza."
+          }
+        }
+      }
+    },
+    "k.noMelds": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nimic etalat încă"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nothing melded yet"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "noch nichts ausgelegt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rien d'étalé pour l'instant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ancora niente in tavola"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nada bajado todavía"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "még nincs kirakott lap"
+          }
+        }
+      }
+    },
+    "k.partner": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "partener"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "partner"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partner"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "partenaire"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compagno"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compañero"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "partner"
+          }
+        }
+      }
+    },
+    "k.r.canasta.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canasta"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The canasta"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Canasta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La canasta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La canasta"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La canasta"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A canasta"
+          }
+        }
+      }
+    },
+    "k.r.canasta.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O etalare de șapte cărți sau mai multe. Curată (fără Jokeri și doiari, cu chenar roșu) aduce 500 de puncte, amestecată (chenar negru) 300."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A meld of seven or more cards. A natural one (no Jokers or twos, red border) is worth 500 points, a mixed one (black border) 300."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Meldung aus sieben oder mehr Karten. Eine echte (ohne Joker und Zweien, roter Rand) bringt 500 Punkte, eine gemischte (schwarzer Rand) 300."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une combinaison de sept cartes ou plus. Pure (sans Jokers ni deux, bord rouge), elle vaut 500 points ; mixte (bord noir), 300."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una combinazione di sette o più carte. Pulita (senza Jolly né due, bordo rosso) vale 500 punti, mista (bordo nero) 300."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una combinación de siete cartas o más. Limpia (sin comodines ni doses, borde rojo) vale 500 puntos; mixta (borde negro), 300."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hét vagy több lapból álló kirakás. A tiszta (Joker és kettes nélkül, piros kerettel) 500 pontot ér, a vegyes (fekete kerettel) 300-at."
+          }
+        }
+      }
+    },
+    "k.r.cards.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cărțile"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The cards"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Karten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les cartes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le carte"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las cartas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lapok"
+          }
+        }
+      }
+    },
+    "k.r.cards.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 cărți: două pachete și patru Jokeri. În doi primești 15 cărți, în trei 13, iar în patru (două echipe) 11. Valori: Joker 50, As și 2 câte 20, de la K la 8 câte 10, de la 7 la 4 câte 5."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 cards: two decks and four Jokers. With two players you get 15 cards, with three 13, with four (two teams) 11. Values: Joker 50, Ace and 2 are 20 each, King to 8 are 10 each, 7 to 4 are 5 each."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 Karten: zwei Blätter und vier Joker. Zu zweit bekommst du 15 Karten, zu dritt 13, zu viert (zwei Teams) 11. Werte: Joker 50, Ass und 2 je 20, König bis 8 je 10, 7 bis 4 je 5."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 cartes : deux jeux et quatre Jokers. À deux, vous recevez 15 cartes, à trois 13, à quatre (deux équipes) 11. Valeurs : Joker 50, As et 2 valent 20, du Roi au 8 valent 10, du 7 au 4 valent 5."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 carte: due mazzi e quattro Jolly. In due ricevi 15 carte, in tre 13, in quattro (due coppie) 11. Valori: Jolly 50, Asso e 2 valgono 20, dal Re all'8 valgono 10, dal 7 al 4 valgono 5."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 cartas: dos barajas y cuatro comodines. Con dos jugadores recibes 15 cartas, con tres 13, con cuatro (dos parejas) 11. Valores: comodín 50, As y 2 valen 20, del Rey al 8 valen 10, del 7 al 4 valen 5."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "108 lap: két pakli és négy Joker. Ketten 15 lapot kapsz, hárman 13-at, négyen (két csapat) 11-et. Értékek: Joker 50, ász és 2-es 20, királytól 8-asig 10, 7-estől 4-esig 5."
+          }
+        }
+      }
+    },
+    "k.r.goal.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scopul"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The goal"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Ziel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le but"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo scopo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El objetivo"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A cél"
+          }
+        }
+      }
+    },
+    "k.r.goal.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strângi puncte etalând cărți de aceeași valoare și făcând canaste. Câștigă cine ajunge primul la punctajul ales din meniu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score points by melding cards of the same rank and building canastas. The first side to reach the target chosen in the menu wins."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du sammelst Punkte, indem du Karten gleichen Werts auslegst und Canastas bildest. Wer zuerst die im Menü gewählte Punktzahl erreicht, gewinnt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marquez des points en étalant des cartes de même valeur et en formant des canastas. Le premier camp à atteindre le total choisi dans le menu gagne."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai punti calando carte dello stesso valore e formando canaste. Vince chi raggiunge per primo il punteggio scelto nel menu."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumas puntos bajando cartas del mismo valor y formando canastas. Gana quien llega primero a la puntuación elegida en el menú."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pontokat azonos értékű lapok kirakásával és canasták gyűjtésével szerzel. Az nyer, aki előbb éri el a menüben választott pontszámot."
+          }
+        }
+      }
+    },
+    "k.r.melds.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etalările"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Melds"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meldungen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les combinaisons"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le combinazioni"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las combinaciones"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirakások"
+          }
+        }
+      }
+    },
+    "k.r.melds.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O etalare are cel puțin trei cărți de aceeași valoare, de la 4 la As. Nu există suite. Fiecare echipă are o singură etalare din fiecare valoare și o poate completa oricând. Ca să adaugi cărți, le alegi și atingi etalarea."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A meld is at least three cards of the same rank, from 4 to Ace. There are no runs. Each side has one meld per rank and can extend it at any time. To add cards, select them and tap the meld."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Meldung hat mindestens drei Karten gleichen Werts, von 4 bis Ass. Reihen gibt es nicht. Jede Seite hat pro Wert eine Meldung und kann sie jederzeit erweitern. Zum Anlegen wählst du Karten und tippst auf die Meldung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une combinaison compte au moins trois cartes de même valeur, du 4 à l'As. Il n'y a pas de suites. Chaque camp a une seule combinaison par valeur et peut la compléter à tout moment. Pour ajouter des cartes, choisissez-les et touchez la combinaison."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una combinazione ha almeno tre carte dello stesso valore, dal 4 all'Asso. Non esistono scale. Ogni parte ha una sola combinazione per valore e può allungarla quando vuole. Per aggiungere carte, sceglile e tocca la combinazione."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una combinación tiene al menos tres cartas del mismo valor, del 4 al As. No hay escaleras. Cada bando tiene una combinación por valor y puede ampliarla cuando quiera. Para añadir cartas, elígelas y toca la combinación."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egy kirakás legalább három azonos értékű lapból áll, 4-estől ászig. Sor nincs. Minden oldalnak értékenként egy kirakása lehet, és bármikor bővítheti. Lapok hozzáadásához jelöld ki őket, és koppints a kirakásra."
+          }
+        }
+      }
+    },
+    "k.r.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunt regulile clasice, ușor simplificate: se trage o singură carte pe tură, iar când iei teancul pentru prima etalare, etalarea cu cartea de deasupra trebuie să atingă singură minimul."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These are the classic rules, slightly simplified: you draw one card per turn, and when you take the pile for your first meld, the meld with the top card must reach the minimum on its own."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es gelten die klassischen Regeln, leicht vereinfacht: Pro Zug wird eine Karte gezogen, und wer den Stapel für die Erstmeldung nimmt, muss mit der Meldung der obersten Karte allein das Minimum erreichen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce sont les règles classiques, légèrement simplifiées : on pioche une seule carte par tour, et quand vous prenez la pile pour votre première pose, la combinaison avec la carte du dessus doit atteindre seule le minimum."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sono le regole classiche, leggermente semplificate: si pesca una carta per turno e, quando prendi il pozzo per la prima calata, la combinazione con la carta in cima deve raggiungere da sola il minimo."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son las reglas clásicas, algo simplificadas: se roba una carta por turno y, cuando tomas el pozo para tu primera bajada, la combinación con la carta de arriba debe alcanzar sola el mínimo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezek a klasszikus szabályok, kissé egyszerűsítve: körönként egy lapot húzol, és ha az első kirakáshoz veszed fel a talont, a felső lappal készült kirakásnak egyedül kell elérnie a minimumot."
+          }
+        }
+      }
+    },
+    "k.r.open.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima etalare"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The first meld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erstmeldung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La première pose"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La prima calata"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La primera bajada"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az első kirakás"
+          }
+        }
+      }
+    },
+    "k.r.open.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima etalare a echipei într-o rundă trebuie să adune destule puncte din cărți: 50 cât ai sub 1500 de puncte, 90 până la 3000, 120 peste, și doar 15 dacă ești pe minus. Poți pune mai multe etalări în aceeași tură; dacă nu ajungi la minim, apeși „Anulează”."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your side's first meld in a round must add up to enough card points: 50 while you have under 1500 points, 90 up to 3000, 120 above, and only 15 if you are below zero. You can lay several melds in the same turn; if you fall short, tap “Undo”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die erste Meldung deiner Seite in einer Runde muss genug Kartenpunkte haben: 50 bei unter 1500 Punkten, 90 bis 3000, 120 darüber und nur 15 im Minus. Du kannst im selben Zug mehrere Meldungen legen; reicht es nicht, tippst du „Zurück“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La première pose de votre camp dans une manche doit totaliser assez de points de cartes : 50 sous 1500 points, 90 jusqu'à 3000, 120 au-delà, et seulement 15 si vous êtes en négatif. Vous pouvez poser plusieurs combinaisons dans le même tour ; si le compte n'y est pas, touchez « Annuler »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La prima calata della tua parte in un round deve raggiungere abbastanza punti di carte: 50 sotto i 1500 punti, 90 fino a 3000, 120 oltre, e solo 15 se sei in negativo. Puoi calare più combinazioni nello stesso turno; se non arrivi al minimo, tocca «Annulla»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La primera bajada de tu bando en una ronda debe sumar suficientes puntos de cartas: 50 con menos de 1500 puntos, 90 hasta 3000, 120 por encima, y solo 15 si estás en negativo. Puedes bajar varias combinaciones en el mismo turno; si no llegas al mínimo, toca «Deshacer»."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az oldalad első kirakásának egy körben elég lappontot kell érnie: 50-et 1500 pont alatt, 90-et 3000-ig, 120-at afölött, és csak 15-öt, ha mínuszban vagy. Egy körben több kirakást is letehetsz; ha nem éred el a minimumot, koppints a „Vissza” gombra."
+          }
+        }
+      }
+    },
+    "k.r.out.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Închiderea"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Going out"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausmachen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminer la manche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La chiusura"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El cierre"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kör lezárása"
+          }
+        }
+      }
+    },
+    "k.r.out.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Închizi runda când rămâi fără cărți, dar numai dacă echipa ta are cel puțin o canastă. Primești 100 de puncte, sau 200 dacă echipa nu avea nimic etalat înainte de tura aceea. Runda se termină și când se termină pachetul."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You go out when you run out of cards, but only if your side has at least one canasta. It earns 100 points, or 200 if your side had nothing melded before that turn. The round also ends when the stock runs out."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du machst aus, wenn du keine Karten mehr hast, aber nur, wenn deine Seite mindestens eine Canasta hat. Das bringt 100 Punkte, oder 200, wenn deine Seite vor diesem Zug nichts ausgelegt hatte. Die Runde endet auch, wenn der Stapel aufgebraucht ist."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous terminez la manche quand vous n'avez plus de cartes, mais seulement si votre camp a au moins une canasta. Cela rapporte 100 points, ou 200 si votre camp n'avait rien étalé avant ce tour. La manche se termine aussi quand le talon est épuisé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiudi il round quando resti senza carte, ma solo se la tua parte ha almeno una canasta. Vale 100 punti, o 200 se la tua parte non aveva calato nulla prima di quel turno. Il round finisce anche quando finisce il tallone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cierras la ronda cuando te quedas sin cartas, pero solo si tu bando tiene al menos una canasta. Vale 100 puntos, o 200 si tu bando no había bajado nada antes de ese turno. La ronda también termina cuando se acaba el mazo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akkor zárod le a kört, ha elfogynak a lapjaid, de csak akkor, ha az oldaladnak van legalább egy canastája. Ez 100 pontot ér, vagy 200-at, ha az oldalad az adott kör előtt semmit sem rakott ki. A kör akkor is véget ér, ha elfogy a pakli."
+          }
+        }
+      }
+    },
+    "k.r.pile.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teancul"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The pile"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Ablagestapel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pozzo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El pozo"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A talon"
+          }
+        }
+      }
+    },
+    "k.r.pile.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poți lua tot teancul dacă ai în mână două cărți la fel cu cea de deasupra. După ce echipa ta a deschis, ajunge și o carte la fel plus un Joker sau un doi, ori o etalare a ta de aceeași valoare. Când în teanc e un Joker sau un doi, teancul e blocat (fulgul de zăpadă) și merge doar cu două cărți la fel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You may take the whole pile if you hold two cards matching the top one. Once your side has opened, one matching card plus a Joker or two is enough, or a meld of yours in that rank. While the pile holds a Joker or a two it is frozen (the snowflake) and only two matching cards will do."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du darfst den ganzen Stapel nehmen, wenn du zwei Karten wie die oberste auf der Hand hast. Hat deine Seite eröffnet, genügt auch eine passende Karte plus Joker oder Zwei oder eine eigene Meldung dieses Werts. Liegt ein Joker oder eine Zwei im Stapel, ist er eingefroren (Schneeflocke) und nur zwei passende Karten zählen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez prendre toute la pile si vous avez en main deux cartes identiques à celle du dessus. Une fois votre camp ouvert, une carte identique plus un Joker ou un deux suffit, ou une de vos combinaisons de cette valeur. Tant que la pile contient un Joker ou un deux, elle est gelée (le flocon) et il faut deux cartes identiques."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puoi prendere tutto il pozzo se hai in mano due carte uguali a quella in cima. Dopo che la tua parte ha aperto, basta una carta uguale più un Jolly o un due, oppure una tua combinazione di quel valore. Finché nel pozzo c'è un Jolly o un due, il pozzo è congelato (il fiocco di neve) e servono due carte uguali."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes tomar todo el pozo si tienes en la mano dos cartas iguales a la de arriba. Cuando tu bando ya ha abierto, basta una carta igual más un comodín o un dos, o una combinación tuya de ese valor. Mientras el pozo tenga un comodín o un dos está congelado (el copo de nieve) y solo valen dos cartas iguales."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az egész talont felveheted, ha a kezedben két, a felsővel egyező lap van. Ha az oldalad már nyitott, elég egy egyező lap és egy Joker vagy kettes, vagy egy saját kirakásod abból az értékből. Amíg a talonban Joker vagy kettes van, a talon be van fagyva (hópehely), és csak két egyező lappal vehető fel."
+          }
+        }
+      }
+    },
+    "k.r.score.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punctajul rundei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scoring a round"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wertung einer Runde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le score d'une manche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il punteggio del round"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La puntuación de la ronda"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kör pontozása"
+          }
+        }
+      }
+    },
+    "k.r.score.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se adună valoarea cărților etalate, canastele, treiarii roșii și închiderea, apoi se scade valoarea cărților rămase în mână."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add the value of the melded cards, the canastas, the red threes and going out, then subtract the value of the cards left in hand."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Addiert werden die Werte der ausgelegten Karten, die Canastas, die roten Dreien und das Ausmachen; abgezogen wird der Wert der Karten auf der Hand."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On additionne la valeur des cartes étalées, les canastas, les trois rouges et la fin de manche, puis on retire la valeur des cartes restées en main."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si sommano il valore delle carte calate, le canaste, i tre rossi e la chiusura, poi si sottrae il valore delle carte rimaste in mano."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se suma el valor de las cartas bajadas, las canastas, los treses rojos y el cierre, y se resta el valor de las cartas que quedan en la mano."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Összeadódik a kirakott lapok értéke, a canasták, a piros hármasok és a lezárás, majd levonódik a kézben maradt lapok értéke."
+          }
+        }
+      }
+    },
+    "k.r.threes.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treiarii"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The threes"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Dreien"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les trois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los treses"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hármasok"
+          }
+        }
+      }
+    },
+    "k.r.threes.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treiarii roșii se pun singuri pe masă și primești altă carte în loc. Fiecare aduce 100 de puncte, toți patru 800; dacă echipa nu etalează nimic până la sfârșitul rundei, punctele se scad. Treiarii negri nu se etalează: aruncați, îl opresc pe următorul să ia teancul."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red threes go to the table on their own and you get a replacement card. Each is worth 100 points, all four 800; if your side has melded nothing by the end of the round, they count against you. Black threes cannot be melded: discarded, they stop the next player from taking the pile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rote Dreien kommen von selbst auf den Tisch, und du bekommst eine Ersatzkarte. Jede bringt 100 Punkte, alle vier 800; hat deine Seite bis zum Rundenende nichts ausgelegt, zählen sie als Minus. Schwarze Dreien werden nicht ausgelegt: Abgelegt sperren sie den Stapel für den nächsten Spieler."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les trois rouges se posent seuls sur la table et vous recevez une carte de remplacement. Chacun vaut 100 points, les quatre 800 ; si votre camp n'a rien étalé à la fin de la manche, ils comptent en négatif. Les trois noirs ne s'étalent pas : défaussés, ils empêchent le joueur suivant de prendre la pile."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tre rossi vanno da soli in tavola e ricevi una carta al loro posto. Ognuno vale 100 punti, tutti e quattro 800; se la tua parte non ha calato nulla a fine round, valgono in negativo. I tre neri non si calano: scartati, impediscono al giocatore successivo di prendere il pozzo."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los treses rojos van solos a la mesa y recibes otra carta. Cada uno vale 100 puntos, los cuatro 800; si tu bando no ha bajado nada al acabar la ronda, restan. Los treses negros no se bajan: descartados, impiden al siguiente tomar el pozo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A piros hármasok maguktól az asztalra kerülnek, és kapsz helyettük másik lapot. Mindegyik 100 pontot ér, mind a négy 800-at; ha az oldalad a kör végéig semmit sem rakott ki, levonásként számítanak. A fekete hármasokat nem lehet kirakni: eldobva megakadályozzák, hogy a következő játékos felvegye a talont."
+          }
+        }
+      }
+    },
+    "k.r.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reguli Canasta"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canasta rules"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canasta-Regeln"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Règles de la Canasta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regole della Canasta"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reglas de la Canasta"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canasta-szabályok"
+          }
+        }
+      }
+    },
+    "k.r.turn.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O tură"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A turn"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Zug"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un tour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un turno"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un turno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egy kör"
+          }
+        }
+      }
+    },
+    "k.r.turn.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tragi o carte din pachet sau iei teancul. Apoi etalezi ce vrei: alegi cărțile din mână și apeși „Etalează”. La sfârșit alegi o carte și apeși „Aruncă”."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draw a card from the stock or take the pile. Then meld what you like: select cards in your hand and tap “Meld”. To finish, select one card and tap “Discard”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du ziehst eine Karte vom Stapel oder nimmst den Ablagestapel. Dann legst du aus, was du möchtest: Karten auf der Hand wählen und „Auslegen“ tippen. Zum Schluss wählst du eine Karte und tippst „Ablegen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piochez une carte ou prenez la pile. Étalez ensuite ce que vous voulez : choisissez des cartes dans votre main et touchez « Étaler ». Pour finir, choisissez une carte et touchez « Défausser »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peschi una carta dal tallone o prendi il pozzo. Poi cali ciò che vuoi: scegli le carte in mano e tocca «Cala». Alla fine scegli una carta e tocca «Scarta»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Robas una carta del mazo o tomas el pozo. Luego bajas lo que quieras: elige cartas de tu mano y toca «Bajar». Para terminar, elige una carta y toca «Descartar»."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Húzol egy lapot a pakliból, vagy felveszed a talont. Utána kirakhatsz: jelöld ki a lapokat a kezedben, és koppints a „Kirakás” gombra. A végén jelölj ki egy lapot, és koppints az „Eldobás” gombra."
+          }
+        }
+      }
+    },
+    "k.r.wild.t": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jokerii și doiarii"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jokers and twos"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joker und Zweien"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jokers et deux"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jolly e due"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comodines y doses"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jokerek és kettesek"
+          }
+        }
+      }
+    },
+    "k.r.wild.x": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Țin locul oricărei cărți. O etalare are cel puțin două cărți adevărate și cel mult trei Jokeri sau doiari."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They stand in for any card. A meld needs at least two natural cards and at most three Jokers or twos."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie ersetzen jede Karte. Eine Meldung braucht mindestens zwei echte Karten und höchstens drei Joker oder Zweien."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ils remplacent n'importe quelle carte. Une combinaison compte au moins deux cartes naturelles et au plus trois Jokers ou deux."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sostituiscono qualsiasi carta. Una combinazione ha almeno due carte vere e al massimo tre Jolly o due."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sustituyen a cualquier carta. Una combinación tiene al menos dos cartas naturales y como mucho tres comodines o doses."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bármelyik lapot helyettesítik. Egy kirakásban legalább két valódi lap és legfeljebb három Joker vagy kettes lehet."
+          }
+        }
+      }
+    },
+    "k.stat.best": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekord"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekord"
+          }
+        }
+      }
+    },
+    "k.sum.canastas": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canaste"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canastas"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canastas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canastas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canaste"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canastas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canasták"
+          }
+        }
+      }
+    },
+    "k.sum.hand": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cărți rămase în mână"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cards left in hand"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karten auf der Hand"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes restées en main"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte rimaste in mano"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartas en la mano"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kézben maradt lapok"
+          }
+        }
+      }
+    },
+    "k.sum.melds": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cărți etalate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Melded cards"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgelegte Karten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes étalées"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte calate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartas bajadas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirakott lapok"
+          }
+        }
+      }
+    },
+    "k.sum.out": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Închidere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Going out"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausmachen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin de manche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiusura"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cierre"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezárás"
+          }
+        }
+      }
+    },
+    "k.sum.out.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: RUNDĂ ÎNCHISĂ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: WENT OUT"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: AUSGEMACHT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : MANCHE FERMÉE"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: HA CHIUSO"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: RONDA CERRADA"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: LEZÁRT KÖR"
+          }
+        }
+      }
+    },
+    "k.sum.red": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treiari roșii"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red threes"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rote Dreien"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trois rouges"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tre rossi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treses rojos"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piros hármasok"
+          }
+        }
+      }
+    },
+    "k.sum.round": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runda"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Round"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Round"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ronda"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kör"
+          }
+        }
+      }
+    },
+    "k.sum.stock.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PACHETUL S-A TERMINAT"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "THE STOCK RAN OUT"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STAPEL AUFGEBRAUCHT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TALON ÉPUISÉ"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TALLONE FINITO"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SE ACABÓ EL MAZO"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ELFOGYOTT A PAKLI"
+          }
+        }
+      }
+    },
+    "k.sum.total": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Összesen"
+          }
+        }
+      }
+    },
+    "k.target": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Până la %ld puncte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First to %ld points"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bis %ld Punkte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jusqu'à %ld points"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fino a %ld punti"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasta %ld puntos"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld pontig"
+          }
+        }
+      }
+    },
+    "k.team.them": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Them"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eux"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loro"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ellos"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ők"
+          }
+        }
+      }
+    },
+    "k.team.us": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noi"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Us"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nosotros"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi"
+          }
+        }
+      }
+    },
+    "k.tip.discard": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "alege și aruncă %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "select and discard %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wähle %@ und lege ab"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "choisissez et défaussez %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "scegli e scarta %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "elige y descarta %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jelöld ki és dobd el: %@"
+          }
+        }
+      }
+    },
+    "k.tip.draw": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "trage o carte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "draw a card"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zieh eine Karte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "piochez une carte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pesca una carta"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "roba una carta"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "húzz egy lapot"
+          }
+        }
+      }
+    },
+    "k.tip.meld": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "etalează %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "meld %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lege %@ aus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "étalez %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cala %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "baja %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rakd ki: %@"
+          }
+        }
+      }
+    },
+    "k.tip.take": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ia teancul"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "take the pile"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nimm den Stapel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prenez la pile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prendi il pozzo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "toma el pozo"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vedd fel a talont"
+          }
+        }
+      }
+    },
+    "k.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANASTA"
           }
         }
       }

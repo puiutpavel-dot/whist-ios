@@ -2,8 +2,8 @@
 # Capturile App Store: 10 ecrane × 7 limbi pe iPhone 6.9" → fastlane/screenshots/<limbă>/NN_jocuri.png
 set -e
 OUT_DIR="${OUT_DIR:-$PWD/ci-out}"; BUNDLE_ID="${BUNDLE_ID:-ro.draghicioiu.whist}"
-# 10 capturi (maximul App Store): meniu, Whist ×2, Remi, Renț, Avioane ×2, Castelul, Macao ×2
-SHOTS="${SHOTS:-1 2 3 4 6 9 10 13 17 18}"
+# 10 capturi (maximul App Store): meniu, Whist ×2, Remi, Renț, Avioane ×2, Castelul, Macao, Canasta
+SHOTS="${SHOTS:-1 2 3 4 6 9 10 13 17 20}"
 bash scripts/ci/simulator.sh
 UDID=$(cat "$OUT_DIR/udid")
 xcrun simctl ui "$UDID" appearance dark

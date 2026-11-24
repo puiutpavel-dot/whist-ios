@@ -1,4 +1,4 @@
-Novedades de la 2.2:
-• Macao: el juego de cartas de la infancia rumana, con comodines, «pierdes un turno» y el aviso «¡MACAO!».
-• Elige las reglas de casa: el As o el 7 cambia el palo.
-• El menú principal tiene ahora seis juegos.
+Novedades de la 2.3:
+• Canasta: el clásico con dos barajas, comodines, treses rojos y canastas de siete cartas.
+• Para dos, tres o cuatro jugadores, con compañero.
+• El menú principal tiene ahora siete juegos.

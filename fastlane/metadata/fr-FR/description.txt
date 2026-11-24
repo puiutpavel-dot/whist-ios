@@ -1,4 +1,4 @@
-Six classiques roumains dans une seule app : Whist, Rami aux tuiles (Remi etalat), Rentz, Macao, Avioane et Le Château (Castelul). Les jeux de cartes se jouent seul contre l'ordinateur, à tout moment, hors ligne ; Avioane aussi en ligne avec un ami.
+Sept classiques aimés en Roumanie dans une seule app : Whist, Rami aux tuiles (Remi etalat), Rentz, Macao, Canasta, Avioane et Le Château (Castelul). Les jeux de cartes se jouent seul contre l'ordinateur, à tout moment, hors ligne ; Avioane aussi en ligne avec un ami.
 
 WHIST
 • Annoncez exactement vos plis ; le donneur ne peut pas fermer la somme.
@@ -34,6 +34,12 @@ MACAO
 • Choisissez vos règles maison : l'As ou le 7 change la couleur, plus les cartes « passe ton tour » et « stop ».
 • Touchez « MACAO ! » quand il vous reste une carte ; en cas d'oubli, vous en piochez 5.
 • 2 à 4 joueurs, adversaires sur 3 niveaux, un conseil à chaque tour.
+
+CANASTA
+• La Canasta classique, avec deux jeux et quatre Jokers : étalez des cartes de même valeur et formez des canastas de sept.
+• Trois rouges, une pile à prendre (et à geler), première pose de 50, 90 ou 120 points.
+• À deux, à trois, ou à quatre avec un partenaire.
+• Jusqu'à 1500, 3000 ou 5000 points ; adversaires sur 3 niveaux, un conseil à chaque étape.
 
 SANS PUB, SANS COMPTE
 Aucune donnée collectée. Ni paris ni argent, réel ou virtuel.
