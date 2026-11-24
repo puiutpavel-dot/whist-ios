@@ -1,0 +1,26 @@
+# Trimite versiunea curentă la App Review. Doar la cerere: Actions → „App Review” → Run workflow.
+# Atașează cel mai nou build procesat al versiunii APP_VERSION și trimite versiunea la Apple.
+name: App Review
+
+on:
+  workflow_dispatch:
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BUNDLE_ID: ro.draghicioiu.whist
+      APP_VERSION: "2.2"
+      APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.ASC_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Trimite la App Review
+        run: |
+          pip install -q pyjwt cryptography
+          python scripts/asc_submit.py
