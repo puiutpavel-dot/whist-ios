@@ -1,4 +1,4 @@
-Hat román klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz, Macao, Avioane és A vár (Castelul). A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
+Hét, Romániában kedvelt klasszikus egy alkalmazásban: Whist, lapkás römi (Remi etalat), Rentz, Macao, Canasta, Avioane és A vár (Castelul). A kártyajátékokat egyedül játszod a gép ellen, bármikor, internet nélkül; az Avioane-t online is, egy baráttal.
 
 WHIST
 • Pontosan bemondod az ütéseidet; az osztó nem zárhatja az összeget.
@@ -34,6 +34,12 @@ MACAO
 • Válassz házszabályt: az ász vagy a 7-es vált színt, mellette a kimaradás és a húzást megállító lap.
 • Koppints a „MACAO!” gombra, ha egy lapod marad; ha elfelejted, 5 lapot húzol.
 • 2–4 játékos, 3 nehézségi szint, tanács minden körben.
+
+CANASTA
+• A klasszikus Canasta két paklival és négy Jokerrel: rakj ki azonos értékű lapokat, és gyűjts hétlapos canastákat.
+• Piros hármasok, felvehető (és befagyasztható) talon, első kirakás 50, 90 vagy 120 ponttal.
+• Ketten, hárman vagy négyen, partnerrel.
+• 1500, 3000 vagy 5000 pontig; 3 nehézségi szint, tanács minden lépésnél.
 
 REKLÁM ÉS FIÓK NÉLKÜL
 Nincs adatgyűjtés. Nincs fogadás vagy pénz, sem valódi, sem virtuális.

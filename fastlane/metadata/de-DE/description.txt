@@ -1,4 +1,4 @@
-Sechs rumänische Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz, Macao, Avioane und Die Burg (Castelul). Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
+Sieben in Rumänien beliebte Klassiker in einer App: Whist, Rommé mit Steinen (Remi etalat), Rentz, Macao, Canasta, Avioane und Die Burg (Castelul). Die Kartenspiele spielst du allein gegen den Computer, jederzeit und offline; Avioane auch online mit Freunden.
 
 WHIST
 • Sag genau deine Stiche an; der Geber darf die Summe nicht schließen.
@@ -34,6 +34,12 @@ MACAO
 • Hausregeln zur Wahl: Ass oder 7 wünscht die Farbe, dazu Aussetzen und Stoppkarte.
 • Tippe auf „MACAO!“, wenn du nur noch eine Karte hast; vergisst du es, ziehst du 5.
 • 2–4 Spieler, Gegner in 3 Stufen, ein Tipp in jedem Zug.
+
+CANASTA
+• Klassisches Canasta mit zwei Blättern und vier Jokern: Lege gleiche Werte aus und sammle Canastas aus sieben Karten.
+• Rote Dreien, ein Ablagestapel zum Aufnehmen (und Einfrieren), Erstmeldung mit 50, 90 oder 120 Punkten.
+• Zu zweit, zu dritt oder zu viert mit Partner.
+• Bis 1500, 3000 oder 5000 Punkte; Gegner in 3 Stufen, ein Tipp bei jedem Schritt.
 
 KEINE WERBUNG, KEIN KONTO
 Keine Daten. Keine Wetten, kein Geld – weder echt noch virtuell.

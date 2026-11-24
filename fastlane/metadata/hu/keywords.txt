@@ -1,1 +1,1 @@
-whist,römi,rentz,macao,repülők,avioane,lapka,ütés,kártya,román,barbu,joker
+whist,römi,rentz,macao,canasta,repülők,avioane,lapka,ütés,kártya,román,barbu,joker

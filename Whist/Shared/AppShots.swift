@@ -3,7 +3,7 @@ import SwiftUI
 /// Capturile din App Store (`-shot N -AppleLanguages "(de)"`) și testul de anduranță (`-stress`).
 /// 1 meniul · 2 Whist: licitația cu sfat · 3 Whist: levată · 4 Remi: masa · 5 Remi: etalare sugerată
 /// 6 Renț: alegerea jocului · 7 Renț: levată la Dame · 8 Renț: rândurile din Renț
-/// 9 Avioane: hangarul · 10 Avioane: bătălia · 13, 14 Castelul · 17 Macao: masa · 18 Macao: cărți alese · 19 meniul Macao
+/// 9 Avioane: hangarul · 10 Avioane: bătălia · 13, 14 Castelul · 17 Macao: masa · 18 Macao: cărți alese · 19 meniul Macao · 20 Canasta: masa · 21 meniul Canasta
 @MainActor
 enum AppShots {
     static var shot: Int? { WhistShots.shot }
@@ -29,6 +29,10 @@ enum AppShots {
             let e = macaoEngine(pending: false)
             MacaoGameView(engine: e, selected: macaoPick(e))
         case 19: MacaoMenuView()                // doar pentru verificări
+        case 20:
+            let e = canastaEngine()
+            CanastaGameView(engine: e, selected: canastaPick(e))
+        case 21: CanastaMenuView()              // doar pentru verificări
         default: HubView()
         }
     }
@@ -46,6 +50,27 @@ enum AppShots {
             if ok { return e }
         }
         return CastelEngine(players: 3)
+    }
+
+    /// Canasta în patru, la mijlocul rundei: e rândul tău, ai tras, iar pe masă sunt etalări de ambele părți.
+    static func canastaEngine() -> CanastaEngine {
+        for _ in 0..<200 {
+            let e = CanastaEngine(settings: CanastaSettings(players: 4))
+            let ok = e.fastForward { g in
+                guard g.phase == .playing, g.current == g.human, g.stage == .play, !g.turnMelded else { return false }
+                guard (7...12).contains(g.players[g.human].hand.count) else { return false }
+                return g.melds[0].count >= 3 && g.melds[1].count >= 2 && g.melds[0].contains(where: \.isCanasta)
+                    && !canastaPick(g).isEmpty
+            }
+            if ok { return e }
+        }
+        return CanastaEngine(settings: CanastaSettings(players: 4))
+    }
+
+    /// Cărțile pe care le-ai etala acum.
+    static func canastaPick(_ e: CanastaEngine) -> [CanastaCard] {
+        guard e.phase == .playing, e.stage == .play, e.current == e.human else { return [] }
+        return CanastaBot.bestMeld(for: e.human, engine: e)?.cards ?? []
     }
 
     /// Macao la mijlocul rundei: tu la rând; cu `pending`, ai de răspuns la un 2 sau 3 și ai cu ce.
@@ -100,7 +125,7 @@ enum AppShots {
     // MARK: Test de anduranță
 
     static func runStress() {
-        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress(), castelStress(), macaoStress()]
+        var lines = [WhistShots.runStress(), rentzStress(), remiStress(), avioaneStress(), castelStress(), macaoStress(), canastaStress()]
         let ok = lines.allSatisfy { $0.contains(" OK") }
         lines.insert(ok ? "STRESS OK" : "STRESS FAIL", at: 0)
         let text = lines.joined(separator: "\n")
@@ -249,6 +274,52 @@ enum AppShots {
         }
         return errors.isEmpty ? "MACAO OK: \(games) partide, \(rounds) runde, \(steps) mutări"
                               : "MACAO FAIL: \(games) partide\n" + errors.joined(separator: "\n")
+    }
+
+    private static func canastaStress() -> String {
+        var games = 0, hands = 0, steps = 0, outs = 0
+        var errors: [String] = []
+        func fail(_ s: String) { if errors.count < 20 { errors.append(s) } }
+        for players in 2...4 {
+            for diff in MacaoDifficulty.allCases {
+                for k in 0..<6 {
+                    let target = [1500, 3000, 5000][k % 3]
+                    let e = CanastaEngine(settings: CanastaSettings(players: players, target: target, difficulty: diff))
+                    let done = e.fastForward(maxSteps: 400_000) { g in
+                        steps += 1
+                        let melded = g.melds.reduce(0) { $0 + $1.reduce(0) { $0 + $1.cards.count } }
+                        let cards = g.stock.count + g.pile.count + melded + g.redThrees.reduce(0) { $0 + $1.count }
+                            + g.players.reduce(0) { $0 + $1.hand.count }
+                        if cards != CanastaRules.deckSize { fail("\(cards) cărți în joc în loc de \(CanastaRules.deckSize)") }
+                        for t in 0..<g.teamCount {
+                            for m in g.melds[t] {
+                                if m.naturals < 2 || m.wilds > CanastaRules.maxWilds || m.cards.count < 3 { fail("etalare greșită la \(m.rank)") }
+                                if m.cards.contains(where: { !$0.isWild && $0.rank != m.rank }) { fail("etalare amestecată") }
+                            }
+                            if Set(g.melds[t].map(\.rank)).count != g.melds[t].count { fail("două etalări de aceeași valoare") }
+                        }
+                        if g.players.contains(where: { $0.hand.contains(where: \.isRedThree) }) { fail("trei roșu în mână") }
+                        if g.phase == .playing {
+                            if g.players[g.current].hand.isEmpty { fail("la rând e cineva fără cărți") }
+                            if g.stage == .play, g.current == g.human,
+                               case .meld(let cs, let r) = CanastaBot.next(for: g.human, engine: g, mistakes: false),
+                               g.meldRank(for: cs, onto: r, by: g.human) == nil { fail("sfat nepermis") }
+                        }
+                        return g.phase == .gameOver
+                    }
+                    games += 1; hands += e.history.count
+                    outs += e.history.filter { $0.out != nil }.count
+                    if !done { fail("partidă neterminată: \(players)p") }
+                    for h in e.history {
+                        if let o = h.out, h.teams[e.team(of: o)].canastaBonus == 0 {
+                            fail("închidere fără canastă")
+                        }
+                    }
+                }
+            }
+        }
+        return errors.isEmpty ? "CANASTA OK: \(games) partide, \(hands) runde (\(outs) închise), \(steps) pași"
+                              : "CANASTA FAIL: \(games) partide\n" + errors.joined(separator: "\n")
     }
 
     private static func remiStress() -> String {

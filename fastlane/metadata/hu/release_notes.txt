@@ -1,4 +1,4 @@
-Újdonságok a 2.2-ben:
-• Macao: a román gyerekkor kártyajátéka, Jokerekkel, kimaradással és a „MACAO!” bemondással.
-• Válassz házszabályt: az ász vagy a 7-es vált színt.
-• A főmenüben most hat játék van.
+Újdonságok a 2.3-ban:
+• Canasta: a klasszikus két paklival, Jokerekkel, piros hármasokkal és hétlapos canastákkal.
+• Ketten, hárman vagy négyen, partnerrel.
+• A főmenüben most hét játék van.

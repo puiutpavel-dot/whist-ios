@@ -1,4 +1,4 @@
-Novità della 2.2:
-• Macao: il gioco di carte dell'infanzia rumena, con Jolly, «salta il turno» e l'annuncio «MACAO!».
-• Scegli le regole di casa: l'Asso o il 7 cambia il seme.
-• Il menu principale ora ha sei giochi.
+Novità della 2.3:
+• Canasta: il classico con due mazzi, Jolly, tre rossi e canaste da sette carte.
+• In due, in tre o in quattro con un compagno.
+• Il menu principale ora ha sette giochi.

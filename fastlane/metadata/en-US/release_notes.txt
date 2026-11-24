@@ -1,4 +1,4 @@
-New in 2.2:
-• Macao: the shedding card game of Romanian childhoods, with Jokers, skip-a-turn and the “MACAO!” call.
-• Pick your house rules: the Ace or the 7 changes the suit.
-• The main menu now has six games.
+New in 2.3:
+• Canasta: the classic with two decks, Jokers, red threes and canastas of seven.
+• Play with two or three players, or four with a partner.
+• The main menu now has seven games.

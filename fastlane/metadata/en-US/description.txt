@@ -1,4 +1,4 @@
-Six Romanian classics in one app: Whist, tile Rummy (Remi etalat), Rentz, Macao, Avioane and Castelul (The Castle). Play the card games solo against the computer, anytime, offline; play Avioane online with a friend too.
+Seven classics loved in Romania in one app: Whist, tile Rummy (Remi etalat), Rentz, Macao, Canasta, Avioane and Castelul (The Castle). Play the card games solo against the computer, anytime, offline; play Avioane online with a friend too.
 
 WHIST
 • Bid exactly how many tricks you'll take; the dealer can't make the bids add up.
@@ -34,6 +34,12 @@ MACAO
 • Pick your house rules: the Ace or the 7 changes the suit, plus skip-a-turn and stop cards.
 • Tap “MACAO!” when you are down to one card; forget and you draw 5.
 • 2–4 players, opponents on 3 levels, a tip every turn.
+
+CANASTA
+• Classic Canasta with two decks and four Jokers: meld cards of the same rank and build canastas of seven.
+• Red threes, a discard pile you can take (and freeze), first melds of 50, 90 or 120 points.
+• Two or three players, or four with a partner.
+• Play to 1500, 3000 or 5000 points; opponents on 3 levels, a tip at every step.
 
 NO ADS, NO ACCOUNT
 No data collected. No betting or money, real or virtual.

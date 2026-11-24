@@ -1,4 +1,4 @@
-Nouveautés de la 2.2 :
-• Macao : le jeu de défausse des enfances roumaines, avec Jokers, « passe ton tour » et l'annonce « MACAO ! ».
-• Choisissez vos règles maison : l'As ou le 7 change la couleur.
-• Le menu principal compte maintenant six jeux.
+Nouveautés de la 2.3 :
+• Canasta : le classique avec deux jeux, Jokers, trois rouges et canastas de sept cartes.
+• À deux, à trois, ou à quatre avec un partenaire.
+• Le menu principal compte maintenant sept jeux.

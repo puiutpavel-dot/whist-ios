@@ -14,6 +14,7 @@ from strings_whist import W  # noqa: E402
 from strings_rentz import R, H  # noqa: E402
 from strings_castel import C  # noqa: E402
 from strings_macao import M  # noqa: E402
+from strings_canasta import K  # noqa: E402
 
 LANGS = ["ro", "en", "de", "fr", "it", "es", "hu"]
 
@@ -697,7 +698,7 @@ S = {
 
 
 def main():
-    for extra in (W, R, H, C, M):
+    for extra in (W, R, H, C, M, K):
         dup = set(extra) & set(S)
         assert not dup, dup
         S.update(extra)
